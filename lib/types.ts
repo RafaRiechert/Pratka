@@ -68,3 +68,7 @@ export interface ApplicationWithCompany extends Application {
 export interface ApplicationWithStudent extends Application {
   student_profiles: StudentProfile;
 }
+
+export interface CompanyListItem extends CompanyProfile {
+  isNew: boolean;
+}
