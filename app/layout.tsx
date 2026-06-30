@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins, Inter } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
 import SiteChrome from "@/components/layout/site-chrome";
@@ -36,11 +37,13 @@ export default function RootLayout({
       className={`${poppins.variable} ${inter.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-navy text-offwhite font-body antialiased">
-        <AuthProvider>
-          <GrainOverlay />
-          <CursorGlow />
-          <SiteChrome>{children}</SiteChrome>
-        </AuthProvider>
+        <MotionConfig reducedMotion="user">
+          <AuthProvider>
+            <GrainOverlay />
+            <CursorGlow />
+            <SiteChrome>{children}</SiteChrome>
+          </AuthProvider>
+        </MotionConfig>
       </body>
     </html>
   );
