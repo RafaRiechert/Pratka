@@ -105,7 +105,7 @@ begin
       '{"provider":"email","providers":["email"]}', '{}',
       '', '', '', ''
     )
-    on conflict (email) do nothing;
+    on conflict do nothing;
 
     insert into public.company_profiles (
       id, company_name, cnpj, corporate_email, contact_name, contact_role, contact_info,

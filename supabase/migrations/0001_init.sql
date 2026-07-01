@@ -52,17 +52,6 @@ create policy "Students can update their own profile"
   on public.student_profiles for update
   using (auth.uid() = id);
 
--- Companies need to read the profile + CV of students who applied to them.
-create policy "Companies can view profiles of their applicants"
-  on public.student_profiles for select
-  using (
-    exists (
-      select 1 from public.applications a
-      where a.student_id = student_profiles.id
-        and a.company_id = auth.uid()
-    )
-  );
-
 -- ---------------------------------------------------------------------------
 -- company_profiles
 -- ---------------------------------------------------------------------------
@@ -142,6 +131,19 @@ create policy "Companies can view applications sent to them"
 create policy "Companies can update status of applications sent to them"
   on public.applications for update
   using (auth.uid() = company_id);
+
+-- Companies need to read the profile + CV of students who applied to them.
+-- Defined here (not alongside student_profiles' other policies) because it
+-- references this table.
+create policy "Companies can view profiles of their applicants"
+  on public.student_profiles for select
+  using (
+    exists (
+      select 1 from public.applications a
+      where a.student_id = student_profiles.id
+        and a.company_id = auth.uid()
+    )
+  );
 
 -- ---------------------------------------------------------------------------
 -- Storage: CV uploads
