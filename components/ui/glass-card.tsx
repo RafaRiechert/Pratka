@@ -15,9 +15,14 @@ export default function GlassCard({
 }) {
   return (
     <motion.div
-      className={cn("glass glass-border-glow rounded-2xl shadow-card", className)}
-      whileHover={interactive ? { y: -6, scale: 1.015 } : undefined}
-      transition={{ type: "spring", stiffness: 220, damping: 18 }}
+      className={cn("panel rounded-[28px] shadow-brutal", className)}
+      whileHover={
+        interactive
+          ? { x: -3, y: -3, rotate: -0.5, boxShadow: "9px 9px 0 0 var(--color-ink)" }
+          : undefined
+      }
+      whileTap={interactive ? { x: 3, y: 3, boxShadow: "0 0 0 0 var(--color-ink)" } : undefined}
+      transition={{ type: "spring", stiffness: 350, damping: 16 }}
     >
       {children}
     </motion.div>

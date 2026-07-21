@@ -22,10 +22,10 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-40">
       <div className="mx-auto mt-4 max-w-7xl px-4">
-        <nav className="glass flex items-center justify-between rounded-2xl px-5 py-3 shadow-card">
+        <nav className="panel flex items-center justify-between rounded-2xl px-5 py-3 shadow-brutal">
           <Link
             href="/"
-            className="font-display text-2xl font-extrabold tracking-tight text-offwhite"
+            className="font-display text-2xl font-extrabold tracking-tight text-ink"
           >
             Pratka
           </Link>
@@ -56,7 +56,7 @@ export default function Navbar() {
           </div>
 
           <button
-            className="text-offwhite lg:hidden"
+            className="text-ink lg:hidden"
             onClick={() => setOpen((o) => !o)}
             aria-label="Abrir menu"
           >
@@ -74,18 +74,18 @@ export default function Navbar() {
             transition={{ duration: 0.2 }}
             className="mx-4 mt-2 lg:hidden"
           >
-            <div className="glass flex flex-col gap-1 rounded-2xl p-4 shadow-card">
+            <div className="panel flex flex-col gap-1 rounded-2xl p-4 shadow-brutal">
               {links.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-offwhite/85 hover:bg-white/5"
+                  className="rounded-lg px-3 py-2.5 text-sm font-bold text-ink/80 hover:bg-ink/5"
                 >
                   {l.label}
                 </Link>
               ))}
-              <div className="mt-2 flex flex-col gap-2 border-t border-white/10 pt-3">
+              <div className="mt-2 flex flex-col gap-2 border-t-2 border-ink/10 pt-3">
                 {user ? (
                   <Button
                     variant="ghost"

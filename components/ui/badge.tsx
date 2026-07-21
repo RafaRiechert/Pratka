@@ -11,7 +11,7 @@ export default function Badge({
   return (
     <span
       className={cn(
-        "glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-offwhite/90 shadow-[0_0_20px_-6px_rgba(123,111,224,0.6)]",
+        "panel -rotate-1 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-bold text-ink shadow-brutal-sm",
         className
       )}
     >
@@ -22,19 +22,20 @@ export default function Badge({
 
 export function Tag({
   children,
-  variant = "lime",
+  variant = "lavender",
   className,
 }: {
   children: ReactNode;
-  variant?: "lime" | "purple";
+  variant?: "lavender" | "pink" | "mint";
   className?: string;
 }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-wide",
-        variant === "lime" && "bg-lime/15 text-lime",
-        variant === "purple" && "bg-purple/20 text-purple-soft",
+        "inline-flex items-center rounded-md border-2 border-ink px-2.5 py-1 text-xs font-extrabold uppercase tracking-wide text-ink shadow-[2px_2px_0_0_var(--color-ink)] transition-transform duration-150 hover:-translate-y-0.5 hover:rotate-1",
+        variant === "lavender" && "bg-lavender",
+        variant === "pink" && "bg-pink",
+        variant === "mint" && "bg-mint",
         className
       )}
     >

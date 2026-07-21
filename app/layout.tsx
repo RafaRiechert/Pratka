@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Inter } from "next/font/google";
+import { Baloo_2, Nunito } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
@@ -7,15 +7,15 @@ import SiteChrome from "@/components/layout/site-chrome";
 import GrainOverlay from "@/components/ui/grain-overlay";
 import CursorGlow from "@/components/ui/cursor-glow";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const baloo = Baloo_2({
+  variable: "--font-baloo",
   subsets: ["latin"],
-  weight: ["600", "700", "800", "900"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
   display: "swap",
 });
@@ -34,9 +34,9 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${poppins.variable} ${inter.variable} h-full`}
+      className={`${baloo.variable} ${nunito.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-navy text-offwhite font-body antialiased">
+      <body className="min-h-full flex flex-col bg-paper text-ink font-body antialiased">
         <MotionConfig reducedMotion="user">
           <AuthProvider>
             <GrainOverlay />

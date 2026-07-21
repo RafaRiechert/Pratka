@@ -39,15 +39,15 @@ export default function HeroOrbs() {
     >
       <motion.div
         style={{ x: x1, y: y1 }}
-        className="absolute -top-32 -left-20 h-[460px] w-[460px] rounded-full bg-purple/35 blur-[110px] animate-float-slow"
+        className="absolute -top-32 -left-20 h-[460px] w-[460px] rounded-full bg-lavender/60 blur-[110px] animate-float-slow"
       />
       <motion.div
         style={{ x: x2, y: y2 }}
-        className="absolute top-10 right-[-140px] h-[380px] w-[380px] rounded-full bg-lime/15 blur-[120px] animate-float-slower"
+        className="absolute top-10 right-[-140px] h-[380px] w-[380px] rounded-full bg-pink/50 blur-[120px] animate-float-slower"
       />
       <motion.div
         style={{ x: x3, y: y3 }}
-        className="absolute bottom-[-200px] left-1/4 h-[500px] w-[500px] rounded-full bg-purple/25 blur-[130px] animate-float-slow"
+        className="absolute bottom-[-200px] left-1/4 h-[500px] w-[500px] rounded-full bg-mint/50 blur-[130px] animate-float-slow"
       />
     </div>
   );

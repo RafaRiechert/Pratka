@@ -31,15 +31,15 @@ export default function CursorGlow() {
   return (
     <motion.div
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-50 h-80 w-80 rounded-full"
+      className="pointer-events-none fixed left-0 top-0 z-50 h-72 w-72 rounded-full"
       style={{
         x: springX,
         y: springY,
         translateX: "-50%",
         translateY: "-50%",
         background:
-          "radial-gradient(circle, rgba(123,111,224,0.16), transparent 70%)",
-        mixBlendMode: "screen",
+          "radial-gradient(circle, rgba(139,105,230,0.14), transparent 70%)",
+        mixBlendMode: "multiply",
       }}
     />
   );

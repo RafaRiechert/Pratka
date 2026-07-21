@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const letters = ["P", "r", "a", "t", "k", "a"];
+const letterColors = ["text-mint", "text-pink", "text-lavender", "text-mint", "text-pink", "text-lavender"];
 
 export default function SplashScreen({ onDone }: { onDone: () => void }) {
   const [visible, setVisible] = useState(true);
@@ -17,14 +18,13 @@ export default function SplashScreen({ onDone }: { onDone: () => void }) {
     <AnimatePresence onExitComplete={onDone}>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-navy"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-ink"
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
           <motion.div
             aria-hidden="true"
-            className="absolute h-2 w-2 rounded-full bg-purple"
-            style={{ boxShadow: "0 0 30px 10px rgba(123,111,224,0.7)" }}
+            className="absolute h-3 w-3 rounded-full border-2 border-paper bg-pink"
             initial={{ x: "-40vw", opacity: 0 }}
             animate={{ x: "40vw", opacity: [0, 1, 1, 0] }}
             transition={{ duration: 1.3, ease: "easeInOut" }}
@@ -33,13 +33,14 @@ export default function SplashScreen({ onDone }: { onDone: () => void }) {
             {letters.map((letter, i) => (
               <motion.span
                 key={`${letter}-${i}`}
-                className="font-display text-5xl font-extrabold text-offwhite sm:text-7xl"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
+                className={`font-display text-5xl font-extrabold sm:text-7xl ${letterColors[i]}`}
+                initial={{ opacity: 0, y: 30, rotate: i % 2 === 0 ? -12 : 12, scale: 0.6 }}
+                animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
                 transition={{
-                  duration: 0.5,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 14,
                   delay: 0.15 + i * 0.08,
-                  ease: [0.16, 1, 0.3, 1],
                 }}
               >
                 {letter}

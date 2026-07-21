@@ -20,7 +20,7 @@ export default function AnimatedSection({
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ type: "spring", stiffness: 90, damping: 18, delay }}
+      transition={{ type: "spring", stiffness: 260, damping: 20, delay }}
     >
       {children}
     </motion.div>
@@ -35,11 +35,12 @@ export const staggerContainer: Variants = {
 };
 
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 24, rotate: -1.5 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 90, damping: 18 },
+    rotate: 0,
+    transition: { type: "spring", stiffness: 260, damping: 18 },
   },
 };
 

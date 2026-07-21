@@ -7,14 +7,11 @@ type Variant = "primary" | "secondary" | "outline" | "ghost" | "danger";
 type Size = "sm" | "md" | "lg";
 
 const variantClasses: Record<Variant, string> = {
-  primary:
-    "bg-lime text-navy-deep hover:bg-lime-dim hover:shadow-glow-lime",
-  secondary: "bg-purple text-offwhite hover:shadow-glow-purple",
-  outline:
-    "border border-purple/50 text-offwhite bg-transparent hover:border-purple hover:shadow-glow-purple",
-  ghost: "bg-transparent text-offwhite hover:bg-white/5",
-  danger:
-    "bg-danger/10 text-danger border border-danger/40 hover:bg-danger/20",
+  primary: "bg-mint border-ink text-ink shadow-brutal",
+  secondary: "bg-lavender border-ink text-ink shadow-brutal",
+  outline: "bg-paper border-ink text-ink shadow-brutal",
+  ghost: "bg-transparent border-transparent text-ink shadow-none hover:bg-ink/5 hover:shadow-none hover:translate-x-0 hover:translate-y-0 active:translate-x-0 active:translate-y-0",
+  danger: "bg-paper border-danger-deep text-danger-deep shadow-[6px_6px_0_0_var(--color-danger-deep)] hover:shadow-[9px_9px_0_0_var(--color-danger-deep)] active:shadow-none",
 };
 
 const sizeClasses: Record<Size, string> = {
@@ -47,7 +44,7 @@ export function Button({
   disabled,
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-xl font-semibold tracking-tight transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none",
+    "inline-flex items-center justify-center gap-2 rounded-full border-[3px] font-display font-bold tracking-tight transition-all duration-150 ease-out hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg active:translate-x-1.5 active:translate-y-1.5 active:shadow-none disabled:opacity-50 disabled:pointer-events-none",
     variantClasses[variant],
     sizeClasses[size],
     className

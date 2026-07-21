@@ -51,13 +51,13 @@ export default function SignupForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Field>
-        {error && <p className="text-sm text-danger">{error}</p>}
+        {error && <p className="text-sm font-bold text-danger-deep">{error}</p>}
         <Button type="submit" disabled={loading} className="w-full">
           {loading ? "Criando conta..." : "Cadastrar"}
         </Button>
-        <p className="text-center text-sm text-offwhite/60">
+        <p className="text-center text-sm text-ink/60">
           Já tem uma conta?{" "}
-          <Link href="/login" className="text-lime hover:underline">
+          <Link href="/login" className="font-bold text-pink-deep hover:underline">
             Entrar
           </Link>
         </p>
