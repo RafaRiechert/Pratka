@@ -1,5 +1,5 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
+import PageHero from "@/components/ui/page-hero";
 import LoginForm from "@/components/auth/login-form";
 
 export const metadata: Metadata = {
@@ -8,8 +8,11 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={null}>
-      <LoginForm />
-    </Suspense>
+    <>
+      <PageHero eyebrow="Bem-vindo de volta" title="Entrar" />
+      <section className="px-6 pb-28">
+        <LoginForm />
+      </section>
+    </>
   );
 }

@@ -1,32 +1,30 @@
 "use client";
 
 import { Filter } from "lucide-react";
+import type { Audience, City, Sector } from "@/lib/types";
 
 export interface FilterState {
-  area: string;
-  city: string;
-  period: string;
-  sector: string;
+  sector: Sector | "";
+  city: City | "";
+  audience: Audience | "";
 }
 
 export const EMPTY_FILTERS: FilterState = {
-  area: "",
-  city: "",
-  period: "",
   sector: "",
+  city: "",
+  audience: "",
 };
 
 export default function CompanyFilters({
-  options,
+  sectors,
+  cities,
+  audiences,
   value,
   onChange,
 }: {
-  options: {
-    areas: string[];
-    cities: string[];
-    periods: string[];
-    sectors: string[];
-  };
+  sectors: Sector[];
+  cities: City[];
+  audiences: Audience[];
   value: FilterState;
   onChange: (next: FilterState) => void;
 }) {
@@ -41,23 +39,27 @@ export default function CompanyFilters({
       </div>
       <select
         className={selectClass}
-        value={value.area}
-        onChange={(e) => onChange({ ...value, area: e.target.value })}
+        value={value.sector}
+        onChange={(e) =>
+          onChange({ ...value, sector: e.target.value as Sector | "" })
+        }
       >
-        <option value="">Área de atuação</option>
-        {options.areas.map((a) => (
-          <option key={a} value={a}>
-            {a}
+        <option value="">Todos os setores</option>
+        {sectors.map((s) => (
+          <option key={s} value={s}>
+            {s}
           </option>
         ))}
       </select>
       <select
         className={selectClass}
         value={value.city}
-        onChange={(e) => onChange({ ...value, city: e.target.value })}
+        onChange={(e) =>
+          onChange({ ...value, city: e.target.value as City | "" })
+        }
       >
-        <option value="">Cidade</option>
-        {options.cities.map((c) => (
+        <option value="">Todas as cidades</option>
+        {cities.map((c) => (
           <option key={c} value={c}>
             {c}
           </option>
@@ -65,29 +67,19 @@ export default function CompanyFilters({
       </select>
       <select
         className={selectClass}
-        value={value.period}
-        onChange={(e) => onChange({ ...value, period: e.target.value })}
+        value={value.audience}
+        onChange={(e) =>
+          onChange({ ...value, audience: e.target.value as Audience | "" })
+        }
       >
-        <option value="">Período</option>
-        {options.periods.map((p) => (
-          <option key={p} value={p}>
-            {p}
+        <option value="">Todos os públicos</option>
+        {audiences.map((a) => (
+          <option key={a} value={a}>
+            {a}
           </option>
         ))}
       </select>
-      <select
-        className={selectClass}
-        value={value.sector}
-        onChange={(e) => onChange({ ...value, sector: e.target.value })}
-      >
-        <option value="">Setor</option>
-        {options.sectors.map((s) => (
-          <option key={s} value={s}>
-            {s}
-          </option>
-        ))}
-      </select>
-      {(value.area || value.city || value.period || value.sector) && (
+      {(value.sector || value.city || value.audience) && (
         <button
           onClick={() => onChange(EMPTY_FILTERS)}
           className="text-sm text-offwhite/50 underline-offset-2 hover:text-lime hover:underline"

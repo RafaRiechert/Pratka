@@ -21,9 +21,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Pratka — Todas as vagas de summer. Um só lugar.",
+  title: "Pratka — Seu summer internship começa aqui.",
   description:
-    "A Pratka conecta universitários brasileiros às melhores empresas com programas de summer internship.",
+    "O único lugar onde você encontra todos os programas de summer internship do Brasil, com link direto para se candidatar.",
 };
 
 export default function RootLayout({

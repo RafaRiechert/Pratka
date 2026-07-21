@@ -5,8 +5,9 @@ import { motion } from "framer-motion";
 import SplashScreen from "@/components/home/splash-screen";
 import Hero from "@/components/home/hero";
 import StatsBar from "@/components/home/stats-bar";
-import AboutSection from "@/components/home/about-section";
-import AudienceSection from "@/components/home/audience-section";
+import HowItWorks from "@/components/home/how-it-works";
+import CompanyListing from "@/components/home/company-listing";
+import ProblemSolution from "@/components/home/problem-solution";
 import FinalCta from "@/components/home/final-cta";
 
 const SPLASH_KEY = "pratka_splash_shown";
@@ -40,8 +41,9 @@ export default function Home() {
         >
           <Hero />
           <StatsBar />
-          <AboutSection />
-          <AudienceSection />
+          <HowItWorks />
+          <CompanyListing />
+          <ProblemSolution />
           <FinalCta />
         </motion.div>
       )}

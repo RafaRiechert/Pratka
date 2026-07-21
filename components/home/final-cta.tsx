@@ -9,21 +9,16 @@ export default function FinalCta() {
       <GradientOrbs />
       <AnimatedSection className="relative z-10 mx-auto max-w-3xl px-6 text-center">
         <h2 className="font-display text-4xl font-extrabold tracking-tight text-offwhite sm:text-5xl">
-          Pronto para dar o <span className="text-gradient-lime">próximo passo</span>?
+          Conhece uma empresa que oferece summer e{" "}
+          <span className="text-gradient-lime">não está aqui</span>?
         </h2>
         <p className="mt-5 text-lg text-offwhite/65">
-          Crie sua conta gratuitamente e comece agora — seja você um
-          estudante ou uma empresa.
+          Nos mande uma mensagem e a gente inclui.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Magnetic>
-            <Button href="/cadastro/aluno" size="lg">
-              Sou estudante
-            </Button>
-          </Magnetic>
-          <Magnetic>
-            <Button href="/cadastro/empresa" variant="outline" size="lg">
-              Sou empresa
+            <Button href="mailto:contato@pratka.com.br?subject=Sugest%C3%A3o%20de%20empresa" size="lg">
+              Sugerir empresa
             </Button>
           </Magnetic>
         </div>

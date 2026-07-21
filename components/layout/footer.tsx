@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Camera, Briefcase, Send } from "lucide-react";
 
 const footerLinks = [
-  { href: "/quem-somos-nos", label: "Quem somos nós" },
-  { href: "/como-funciona", label: "Como funciona" },
-  { href: "/problema-solucao", label: "Problema & Solução" },
-  { href: "/empresas", label: "Empresas" },
+  { href: "/#empresas", label: "Empresas" },
+  { href: "/#como-funciona", label: "Como funciona" },
+  { href: "/#problema-solucao", label: "Problema & Solução" },
+  { href: "/sobre", label: "Sobre" },
 ];
 
 const socials = [
@@ -24,8 +24,7 @@ export default function Footer() {
               Pratka
             </span>
             <p className="mt-3 max-w-xs text-sm text-offwhite/60">
-              Conectando universitários brasileiros às melhores empresas com
-              programas de summer internship.
+              Feito no Brasil para universitários brasileiros.
             </p>
           </div>
 

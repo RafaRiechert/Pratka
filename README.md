@@ -1,14 +1,19 @@
 # Pratka
 
-"Handshake for Brazil" — connects university students to companies offering
-summer internship programs.
+Um catálogo com todas as empresas do Brasil que oferecem programas de
+summer internship para undergrads, com link direto para a página de
+inscrição de cada uma. A Pratka não intermedia a candidatura — é um site
+de display.
 
 ## Tech stack
 
 - Next.js 16 (App Router) + TypeScript
 - Tailwind CSS v4
-- Supabase (Postgres + Auth + Storage)
 - Framer Motion, Lucide React
+- Todos os dados das empresas são estáticos (`lib/companies.ts`) — não há
+  banco de dados de empresas/candidaturas
+- Supabase Auth — apenas para o login/cadastro básico de usuário
+  (e-mail + senha). Não desbloqueia nenhuma funcionalidade extra ainda.
 
 ## Getting started
 
@@ -17,20 +22,20 @@ npm install
 cp .env.local.example .env.local
 ```
 
-Then set up Supabase (see `supabase/README.md`) and fill in `.env.local`
-with your project's URL, anon key, and service role key.
+Preencha `.env.local` com a URL e a anon key do seu projeto Supabase
+(Project Settings -> API). O site funciona sem isso configurado — só o
+login/cadastro fica desativado.
+
+No painel do Supabase, em Authentication -> Providers -> Email, desative
+"Confirm email" para que o cadastro funcione sem verificação por e-mail.
 
 ```bash
 npm run dev
 ```
 
-The app runs without Supabase configured (degrades to logged-out/empty
-states), but auth, applications, and the admin panel need it connected.
+## Adicionando ou editando empresas
 
-## Admin panel
-
-Hidden at `/admin` (not linked from the navbar). Login is a hardcoded
-credential check (not a Supabase user) — see `lib/admin-auth.ts`.
+Edite o array em `lib/companies.ts`.
 
 ## Scripts
 

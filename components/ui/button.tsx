@@ -29,6 +29,7 @@ interface ButtonProps {
   className?: string;
   children: React.ReactNode;
   href?: string;
+  external?: boolean;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   disabled?: boolean;
@@ -40,6 +41,7 @@ export function Button({
   className,
   children,
   href,
+  external = false,
   type = "button",
   onClick,
   disabled,
@@ -51,9 +53,23 @@ export function Button({
     className
   );
 
+  if (href && external) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={classes}
+        onClick={onClick}
+      >
+        {children}
+      </a>
+    );
+  }
+
   if (href) {
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} className={classes} onClick={onClick}>
         {children}
       </Link>
     );

@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 import GlassCard from "@/components/ui/glass-card";
 import { Field, Input } from "@/components/ui/input";
 
-export default function LoginForm() {
+export default function SignupForm() {
   const router = useRouter();
-  const { signIn } = useAuth();
+  const { signUp } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -20,10 +20,10 @@ export default function LoginForm() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    const { error } = await signIn(email, password);
+    const { error } = await signUp(email, password);
     setLoading(false);
     if (error) {
-      setError("Não foi possível entrar. Verifique seu e-mail e senha.");
+      setError(error);
       return;
     }
     router.push("/");
@@ -46,19 +46,19 @@ export default function LoginForm() {
             type="password"
             required
             minLength={6}
-            autoComplete="current-password"
+            autoComplete="new-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </Field>
         {error && <p className="text-sm text-danger">{error}</p>}
         <Button type="submit" disabled={loading} className="w-full">
-          {loading ? "Entrando..." : "Entrar"}
+          {loading ? "Criando conta..." : "Cadastrar"}
         </Button>
         <p className="text-center text-sm text-offwhite/60">
-          Ainda não tem conta?{" "}
-          <Link href="/cadastro" className="text-lime hover:underline">
-            Cadastre-se
+          Já tem uma conta?{" "}
+          <Link href="/login" className="text-lime hover:underline">
+            Entrar
           </Link>
         </p>
       </form>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
+import { ArrowDown, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import Badge from "@/components/ui/badge";
 import Magnetic from "@/components/ui/magnetic";
@@ -20,12 +20,12 @@ export default function Hero() {
         >
           <Badge>
             <Sparkles size={14} className="text-lime" />
-            Startup brasileira • Summer internship
+            O guia definitivo de summer internships no Brasil
           </Badge>
         </motion.div>
 
         <h1 className="mt-8 font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-offwhite sm:text-6xl lg:text-[80px]">
-          <AnimatedWords text="Todas as vagas de summer." />
+          <AnimatedWords text="Seu summer internship" />
           <br />
           <motion.span
             className="text-gradient-lime inline-block"
@@ -34,7 +34,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
             style={{ textShadow: "0 0 40px rgba(200,255,0,0.35)" }}
           >
-            Um só lugar.
+            começa aqui.
           </motion.span>
         </h1>
 
@@ -44,8 +44,9 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1 }}
         >
-          Conectamos universitários brasileiros às melhores empresas com
-          programas de summer internship.
+          O único lugar onde você encontra todos os programas de summer
+          internship do Brasil para universitários, com link direto para se
+          candidatar.
         </motion.p>
 
         <motion.div
@@ -55,13 +56,9 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 1.15 }}
         >
           <Magnetic>
-            <Button href="/cadastro/aluno" size="lg">
-              Sou estudante
-            </Button>
-          </Magnetic>
-          <Magnetic>
-            <Button href="/cadastro/empresa" variant="outline" size="lg">
-              Sou empresa
+            <Button href="/#empresas" size="lg">
+              Ver programas
+              <ArrowDown size={18} />
             </Button>
           </Magnetic>
         </motion.div>

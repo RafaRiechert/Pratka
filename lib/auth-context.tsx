@@ -2,116 +2,64 @@
 
 import {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useState,
+  type ReactNode,
 } from "react";
 import type { User } from "@supabase/supabase-js";
-import { createClient } from "@/lib/supabase/client";
-import type { CompanyProfile, StudentProfile } from "@/lib/types";
-
-type UserType = "aluno" | "empresa" | null;
+import { supabase } from "@/lib/supabase/client";
 
 interface AuthContextValue {
   user: User | null;
-  userType: UserType;
-  studentProfile: StudentProfile | null;
-  companyProfile: CompanyProfile | null;
   loading: boolean;
-  refreshProfile: () => Promise<void>;
+  signUp: (email: string, password: string) => Promise<{ error: string | null }>;
+  signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [supabase] = useState(() => createClient());
+const NOT_CONFIGURED = "Autenticação não configurada.";
+
+export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [userType, setUserType] = useState<UserType>(null);
-  const [studentProfile, setStudentProfile] = useState<StudentProfile | null>(null);
-  const [companyProfile, setCompanyProfile] = useState<CompanyProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const loadProfile = useCallback(
-    async (currentUser: User | null) => {
-      if (!currentUser) {
-        setStudentProfile(null);
-        setCompanyProfile(null);
-        setUserType(null);
-        return;
-      }
-      const metaType = currentUser.user_metadata?.user_type as
-        | UserType
-        | undefined;
-
-      if (metaType === "empresa") {
-        const { data } = await supabase
-          .from("company_profiles")
-          .select("*")
-          .eq("id", currentUser.id)
-          .maybeSingle();
-        setCompanyProfile(data as CompanyProfile | null);
-        setStudentProfile(null);
-        setUserType("empresa");
-      } else {
-        const { data } = await supabase
-          .from("student_profiles")
-          .select("*")
-          .eq("id", currentUser.id)
-          .maybeSingle();
-        setStudentProfile(data as StudentProfile | null);
-        setCompanyProfile(null);
-        setUserType("aluno");
-      }
-    },
-    [supabase]
-  );
-
   useEffect(() => {
-    let mounted = true;
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!mounted) return;
-      setUser(session?.user ?? null);
-      loadProfile(session?.user ?? null).finally(() => {
-        if (mounted) setLoading(false);
-      });
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
+    supabase.auth.getSession().then(({ data }) => {
+      setUser(data.session?.user ?? null);
+      setLoading(false);
     });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
-      loadProfile(session?.user ?? null);
     });
+    return () => listener.subscription.unsubscribe();
+  }, []);
 
-    return () => {
-      mounted = false;
-      subscription.unsubscribe();
-    };
-  }, [supabase, loadProfile]);
+  async function signUp(email: string, password: string) {
+    if (!supabase) return { error: NOT_CONFIGURED };
+    const { error } = await supabase.auth.signUp({ email, password });
+    return { error: error?.message ?? null };
+  }
 
-  const refreshProfile = useCallback(async () => {
-    await loadProfile(user);
-  }, [user, loadProfile]);
+  async function signIn(email: string, password: string) {
+    if (!supabase) return { error: NOT_CONFIGURED };
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    return { error: error?.message ?? null };
+  }
 
-  const signOut = useCallback(async () => {
+  async function signOut() {
+    if (!supabase) return;
     await supabase.auth.signOut();
-  }, [supabase]);
+  }
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        userType,
-        studentProfile,
-        companyProfile,
-        loading,
-        refreshProfile,
-        signOut,
-      }}
-    >
+    <AuthContext.Provider value={{ user, loading, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

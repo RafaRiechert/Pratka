@@ -9,18 +9,15 @@ import { Button } from "@/components/ui/button";
 import NavLink from "@/components/layout/nav-link";
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/quem-somos-nos", label: "Quem somos nós" },
-  { href: "/como-funciona", label: "Como funciona" },
-  { href: "/problema-solucao", label: "Problema & Solução" },
-  { href: "/empresas", label: "Empresas" },
+  { href: "/#empresas", label: "Empresas" },
+  { href: "/#como-funciona", label: "Como funciona" },
+  { href: "/#problema-solucao", label: "Problema & Solução" },
+  { href: "/sobre", label: "Sobre" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const { user, userType, signOut } = useAuth();
-
-  const profileHref = userType === "empresa" ? "/perfil/empresa" : "/perfil/aluno";
+  const { user, signOut } = useAuth();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40">
@@ -39,7 +36,6 @@ export default function Navbar() {
                 {l.label}
               </NavLink>
             ))}
-            {user && <NavLink href={profileHref}>Perfil</NavLink>}
           </div>
 
           <div className="hidden items-center gap-3 lg:flex">
@@ -89,15 +85,6 @@ export default function Navbar() {
                   {l.label}
                 </Link>
               ))}
-              {user && (
-                <Link
-                  href={profileHref}
-                  onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-offwhite/85 hover:bg-white/5"
-                >
-                  Perfil
-                </Link>
-              )}
               <div className="mt-2 flex flex-col gap-2 border-t border-white/10 pt-3">
                 {user ? (
                   <Button
@@ -112,10 +99,10 @@ export default function Navbar() {
                   </Button>
                 ) : (
                   <>
-                    <Button href="/login" variant="outline" size="sm">
+                    <Button href="/login" variant="outline" size="sm" onClick={() => setOpen(false)}>
                       Entrar
                     </Button>
-                    <Button href="/cadastro" variant="primary" size="sm">
+                    <Button href="/cadastro" variant="primary" size="sm" onClick={() => setOpen(false)}>
                       Cadastrar
                     </Button>
                   </>
