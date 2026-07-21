@@ -28,10 +28,10 @@ export default function CompanyListing() {
   return (
     <section id="empresas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
       <AnimatedSection className="mx-auto max-w-2xl text-center">
-        <h2 className="font-display text-4xl font-extrabold tracking-tight text-offwhite sm:text-5xl">
+        <h2 className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
           Programas de Summer Internship no Brasil
         </h2>
-        <p className="mt-5 text-lg text-offwhite/65">
+        <p className="mt-5 text-lg text-mist">
           Todas as empresas que oferecem oportunidades de verão para
           universitários, atualizadas e com link direto.
         </p>
@@ -48,9 +48,9 @@ export default function CompanyListing() {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="glass flex flex-col items-center gap-3 rounded-3xl px-8 py-20 text-center">
-          <Building2 size={28} className="text-offwhite/30" />
-          <p className="text-offwhite/60">
+        <div className="panel flex flex-col items-center gap-3 rounded-lg px-8 py-20 text-center">
+          <Building2 size={28} className="text-mist-2" />
+          <p className="text-mist">
             Nenhuma empresa encontrada com esses filtros.
           </p>
         </div>

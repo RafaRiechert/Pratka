@@ -6,7 +6,7 @@ import { animate, useInView, useReducedMotion } from "framer-motion";
 export default function CountUp({
   value,
   suffix = "",
-  duration = 1.6,
+  duration = 0.9,
 }: {
   value: number;
   suffix?: string;

@@ -2,11 +2,10 @@ export default function GradientOrbs({ className }: { className?: string }) {
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none absolute inset-0 overflow-hidden ${className ?? ""}`}
+      className={`pointer-events-none absolute inset-0 overflow-hidden bg-grid-dark opacity-40 ${className ?? ""}`}
     >
-      <div className="absolute -top-24 -left-24 h-[420px] w-[420px] rounded-full bg-purple/30 blur-[100px] animate-float-slow" />
-      <div className="absolute top-1/3 right-[-120px] h-[360px] w-[360px] rounded-full bg-lime/10 blur-[110px] animate-float-slower" />
-      <div className="absolute bottom-[-160px] left-1/3 h-[480px] w-[480px] rounded-full bg-purple/20 blur-[120px] animate-float-slow" />
+      <span className="absolute left-[12%] top-[20%] h-2 w-2 -translate-x-1/2 -translate-y-1/2 animate-pulse-dot rounded-full bg-signal" />
+      <span className="absolute right-[16%] bottom-[24%] h-1.5 w-1.5 translate-x-1/2 translate-y-1/2 animate-pulse-dot rounded-full bg-signal [animation-delay:0.6s]" />
     </div>
   );
 }

@@ -14,26 +14,26 @@ export default function CompanyCard({
   return (
     <GlassCard interactive className="flex h-full flex-col gap-5 p-6">
       <div>
-        <h3 className="font-display text-lg font-bold text-offwhite">
+        <h3 className="font-display text-lg font-bold text-ink">
           {company.name}
         </h3>
         <div className="mt-2 flex flex-wrap gap-1.5">
-          <Tag variant="lime">{company.sector}</Tag>
-          <Tag variant="purple">{company.type}</Tag>
+          <Tag variant="neutral">{company.sector}</Tag>
+          <Tag variant="outline">{company.type}</Tag>
         </div>
       </div>
 
-      <p className="text-sm leading-relaxed text-offwhite/65">
+      <p className="text-sm leading-relaxed text-mist">
         {company.shortDescription}
       </p>
 
-      <div className="space-y-2 text-sm text-offwhite/60">
+      <div className="space-y-2 text-sm text-mist">
         <div className="flex items-center gap-2">
-          <MapPin size={15} className="shrink-0 text-offwhite/40" />
+          <MapPin size={15} className="shrink-0 text-mist-2" />
           <span className="truncate">{company.cities.join(", ")}</span>
         </div>
         <div className="flex items-center gap-2">
-          <Users2 size={15} className="shrink-0 text-offwhite/40" />
+          <Users2 size={15} className="shrink-0 text-mist-2" />
           <span className="truncate">{company.target}</span>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Magnetic({
   children,
-  strength = 0.35,
+  strength = 0.3,
 }: {
   children: ReactNode;
   strength?: number;
@@ -30,7 +30,7 @@ export default function Magnetic({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{ x: pos.x, y: pos.y }}
-      transition={{ type: "spring", stiffness: 150, damping: 12, mass: 0.3 }}
+      transition={{ type: "spring", stiffness: 320, damping: 18, mass: 0.2 }}
       className="inline-block"
     >
       {children}

@@ -22,12 +22,13 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-40">
       <div className="mx-auto mt-4 max-w-7xl px-4">
-        <nav className="glass flex items-center justify-between rounded-2xl px-5 py-3 shadow-card">
+        <nav className="panel flex items-center justify-between rounded-lg px-5 py-3 shadow-card">
           <Link
             href="/"
-            className="font-display text-2xl font-extrabold tracking-tight text-offwhite"
+            className="flex items-center gap-1.5 font-display text-2xl font-bold tracking-tight text-ink"
           >
             Pratka
+            <span className="h-2 w-2 rounded-full bg-signal" aria-hidden="true" />
           </Link>
 
           <div className="hidden items-center gap-0.5 lg:flex">
@@ -56,7 +57,7 @@ export default function Navbar() {
           </div>
 
           <button
-            className="text-offwhite lg:hidden"
+            className="text-ink lg:hidden"
             onClick={() => setOpen((o) => !o)}
             aria-label="Abrir menu"
           >
@@ -68,24 +69,24 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.15 }}
             className="mx-4 mt-2 lg:hidden"
           >
-            <div className="glass flex flex-col gap-1 rounded-2xl p-4 shadow-card">
+            <div className="panel flex flex-col gap-1 rounded-lg p-4 shadow-card">
               {links.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-offwhite/85 hover:bg-white/5"
+                  className="rounded-md px-3 py-2.5 font-mono text-xs font-medium uppercase tracking-wide text-ink/80 hover:bg-paper-2"
                 >
                   {l.label}
                 </Link>
               ))}
-              <div className="mt-2 flex flex-col gap-2 border-t border-white/10 pt-3">
+              <div className="mt-2 flex flex-col gap-2 border-t border-line pt-3">
                 {user ? (
                   <Button
                     variant="ghost"

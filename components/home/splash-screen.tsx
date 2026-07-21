@@ -9,7 +9,7 @@ export default function SplashScreen({ onDone }: { onDone: () => void }) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(false), 1300);
+    const timer = setTimeout(() => setVisible(false), 1050);
     return () => clearTimeout(timer);
   }, []);
 
@@ -17,34 +17,31 @@ export default function SplashScreen({ onDone }: { onDone: () => void }) {
     <AnimatePresence onExitComplete={onDone}>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-navy"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-ink"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3 }}
         >
-          <motion.div
-            aria-hidden="true"
-            className="absolute h-2 w-2 rounded-full bg-purple"
-            style={{ boxShadow: "0 0 30px 10px rgba(123,111,224,0.7)" }}
-            initial={{ x: "-40vw", opacity: 0 }}
-            animate={{ x: "40vw", opacity: [0, 1, 1, 0] }}
-            transition={{ duration: 1.3, ease: "easeInOut" }}
-          />
-          <div className="flex">
+          <div className="flex items-center font-mono text-5xl font-semibold text-paper sm:text-7xl">
             {letters.map((letter, i) => (
               <motion.span
                 key={`${letter}-${i}`}
-                className="font-display text-5xl font-extrabold text-offwhite sm:text-7xl"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{
-                  duration: 0.5,
-                  delay: 0.15 + i * 0.08,
-                  ease: [0.16, 1, 0.3, 1],
+                  duration: 0.05,
+                  delay: 0.1 + i * 0.06,
                 }}
               >
                 {letter}
               </motion.span>
             ))}
+            <motion.span
+              aria-hidden="true"
+              className="animate-blink ml-1 inline-block h-[0.85em] w-[0.14em] translate-y-[0.05em] bg-signal"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.1 }}
+            />
           </div>
         </motion.div>
       )}

@@ -8,13 +8,14 @@ type Size = "sm" | "md" | "lg";
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-lime text-navy-deep hover:bg-lime-dim hover:shadow-glow-lime",
-  secondary: "bg-purple text-offwhite hover:shadow-glow-purple",
+    "bg-signal text-paper border border-signal hover:bg-signal-2 hover:border-signal-2 hover:-translate-y-[1px]",
+  secondary:
+    "bg-ink text-paper border border-ink hover:bg-ink-2 hover:-translate-y-[1px]",
   outline:
-    "border border-purple/50 text-offwhite bg-transparent hover:border-purple hover:shadow-glow-purple",
-  ghost: "bg-transparent text-offwhite hover:bg-white/5",
+    "border border-ink/25 text-ink bg-transparent hover:border-signal hover:text-signal",
+  ghost: "bg-transparent text-ink hover:bg-paper-2",
   danger:
-    "bg-danger/10 text-danger border border-danger/40 hover:bg-danger/20",
+    "bg-transparent text-danger border border-danger/40 hover:bg-danger/10",
 };
 
 const sizeClasses: Record<Size, string> = {
@@ -47,7 +48,7 @@ export function Button({
   disabled,
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-xl font-semibold tracking-tight transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none",
+    "inline-flex items-center justify-center gap-2 rounded-md font-display font-semibold tracking-tight transition-all duration-150 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.97] disabled:opacity-40 disabled:pointer-events-none disabled:translate-y-0",
     variantClasses[variant],
     sizeClasses[size],
     className
