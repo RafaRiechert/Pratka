@@ -17,14 +17,14 @@ export default function SplashScreen({ onDone }: { onDone: () => void }) {
     <AnimatePresence onExitComplete={onDone}>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-navy"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-ink"
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
           <motion.div
             aria-hidden="true"
-            className="absolute h-2 w-2 rounded-full bg-purple"
-            style={{ boxShadow: "0 0 30px 10px rgba(123,111,224,0.7)" }}
+            className="absolute h-2 w-2 rounded-full bg-gold"
+            style={{ boxShadow: "0 0 30px 10px rgba(255,182,39,0.7)" }}
             initial={{ x: "-40vw", opacity: 0 }}
             animate={{ x: "40vw", opacity: [0, 1, 1, 0] }}
             transition={{ duration: 1.3, ease: "easeInOut" }}
@@ -33,7 +33,7 @@ export default function SplashScreen({ onDone }: { onDone: () => void }) {
             {letters.map((letter, i) => (
               <motion.span
                 key={`${letter}-${i}`}
-                className="font-display text-5xl font-extrabold text-offwhite sm:text-7xl"
+                className="font-display text-5xl font-extrabold text-cream sm:text-7xl"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{

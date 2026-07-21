@@ -38,8 +38,8 @@ export default function CursorGlow() {
         translateX: "-50%",
         translateY: "-50%",
         background:
-          "radial-gradient(circle, rgba(123,111,224,0.16), transparent 70%)",
-        mixBlendMode: "screen",
+          "radial-gradient(circle, rgba(255,90,31,0.14), transparent 70%)",
+        mixBlendMode: "multiply",
       }}
     />
   );

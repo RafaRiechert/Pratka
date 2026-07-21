@@ -22,14 +22,14 @@ export default function SobrePage() {
 
       <section className="mx-auto max-w-3xl px-6 pb-16">
         <AnimatedSection className="mb-8">
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-offwhite sm:text-3xl">
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
             Sobre
           </h2>
         </AnimatedSection>
         <div className="space-y-6">
           {sobreParagraphs.map((p, i) => (
             <AnimatedSection key={i} delay={i * 0.05}>
-              <p className="text-lg leading-relaxed text-offwhite/80">{p}</p>
+              <p className="text-lg leading-relaxed text-ink/80">{p}</p>
             </AnimatedSection>
           ))}
         </div>
@@ -37,14 +37,14 @@ export default function SobrePage() {
 
       <section className="mx-auto max-w-3xl px-6 pb-28">
         <AnimatedSection className="mb-8">
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-offwhite sm:text-3xl">
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
             Quem somos nós
           </h2>
         </AnimatedSection>
         <div className="space-y-6">
           {quemSomosParagraphs.map((p, i) => (
             <AnimatedSection key={i} delay={i * 0.05}>
-              <p className="text-lg leading-relaxed text-offwhite/80">{p}</p>
+              <p className="text-lg leading-relaxed text-ink/80">{p}</p>
             </AnimatedSection>
           ))}
         </div>

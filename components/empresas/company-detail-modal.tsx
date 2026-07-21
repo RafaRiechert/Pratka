@@ -24,7 +24,7 @@ export default function CompanyDetailModal({
         >
           <motion.div
             aria-hidden="true"
-            className="absolute inset-0 bg-navy-deep/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-ink/70 backdrop-blur-sm"
             onClick={onClose}
           />
 
@@ -40,36 +40,36 @@ export default function CompanyDetailModal({
             <button
               onClick={onClose}
               aria-label="Fechar"
-              className="absolute right-6 top-6 text-offwhite/50 transition-colors hover:text-offwhite"
+              className="absolute right-6 top-6 text-ink/50 transition-colors hover:text-ink"
             >
               <X size={22} />
             </button>
 
-            <h3 className="pr-8 font-display text-2xl font-bold text-offwhite">
+            <h3 className="pr-8 font-display text-2xl font-bold text-ink">
               {company.name}
             </h3>
 
             <div className="mt-3 flex flex-wrap gap-1.5">
-              <Tag variant="lime">{company.sector}</Tag>
-              <Tag variant="purple">{company.type}</Tag>
-              {company.paid && <Tag variant="lime">Remunerado</Tag>}
+              <Tag variant="tangerine">{company.sector}</Tag>
+              <Tag variant="ink">{company.type}</Tag>
+              {company.paid && <Tag variant="tangerine">Remunerado</Tag>}
             </div>
 
-            <p className="mt-6 text-sm leading-relaxed text-offwhite/70">
+            <p className="mt-6 text-sm leading-relaxed text-ink-soft">
               {company.fullDescription}
             </p>
 
-            <div className="mt-6 space-y-2.5 text-sm text-offwhite/65">
+            <div className="mt-6 space-y-2.5 text-sm text-ink-soft">
               <div className="flex items-center gap-2">
-                <MapPin size={15} className="shrink-0 text-offwhite/40" />
+                <MapPin size={15} className="shrink-0 text-ink/40" />
                 {company.cities.join(", ")}
               </div>
               <div className="flex items-center gap-2">
-                <Users2 size={15} className="shrink-0 text-offwhite/40" />
+                <Users2 size={15} className="shrink-0 text-ink/40" />
                 {company.target}
               </div>
               <div className="flex items-center gap-2">
-                <Clock size={15} className="shrink-0 text-offwhite/40" />
+                <Clock size={15} className="shrink-0 text-ink/40" />
                 {company.duration}
               </div>
             </div>

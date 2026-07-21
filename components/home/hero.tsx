@@ -19,27 +19,27 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
         >
           <Badge>
-            <Sparkles size={14} className="text-lime" />
+            <Sparkles size={14} className="text-tangerine" />
             O guia definitivo de summer internships no Brasil
           </Badge>
         </motion.div>
 
-        <h1 className="mt-8 font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-offwhite sm:text-6xl lg:text-[80px]">
+        <h1 className="mt-8 font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-[80px]">
           <AnimatedWords text="Seu summer internship" />
           <br />
           <motion.span
-            className="text-gradient-lime inline-block"
+            className="text-gradient-solar inline-block italic"
             initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            style={{ textShadow: "0 0 40px rgba(200,255,0,0.35)" }}
+            style={{ textShadow: "0 0 40px rgba(255,90,31,0.25)" }}
           >
             começa aqui.
           </motion.span>
         </h1>
 
         <motion.p
-          className="mx-auto mt-7 max-w-2xl text-lg text-offwhite/70 sm:text-xl"
+          className="mx-auto mt-7 max-w-2xl text-lg text-ink-soft sm:text-xl"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1 }}

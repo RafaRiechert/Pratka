@@ -7,7 +7,7 @@ export default function AnimatedSection({
   children,
   className,
   delay = 0,
-  y = 28,
+  y = 40,
 }: {
   children: ReactNode;
   className?: string;
@@ -19,8 +19,8 @@ export default function AnimatedSection({
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ type: "spring", stiffness: 90, damping: 18, delay }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ type: "spring", stiffness: 70, damping: 20, delay }}
     >
       {children}
     </motion.div>

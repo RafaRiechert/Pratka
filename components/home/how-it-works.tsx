@@ -27,8 +27,8 @@ export default function HowItWorks() {
   return (
     <section id="como-funciona" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
       <AnimatedSection className="mx-auto max-w-2xl text-center">
-        <h2 className="font-display text-4xl font-extrabold tracking-tight text-offwhite sm:text-5xl">
-          Como <span className="text-gradient-lime">funciona</span>
+        <h2 className="font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
+          Como <span className="text-gradient-solar">funciona</span>
         </h2>
       </AnimatedSection>
 
@@ -37,17 +37,17 @@ export default function HowItWorks() {
           <StaggerItem key={title}>
             <GlassCard className="flex h-full flex-col gap-4 p-8">
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-lime/15 text-lime">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-tangerine/15 text-tangerine-deep">
                   <Icon size={20} />
                 </div>
-                <span className="font-display text-2xl font-extrabold text-purple-soft">
+                <span className="font-display text-2xl font-extrabold text-coral">
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
-              <h3 className="font-display text-lg font-bold text-offwhite">
+              <h3 className="font-display text-lg font-bold text-ink">
                 {title}
               </h3>
-              <p className="text-sm leading-relaxed text-offwhite/65">{text}</p>
+              <p className="text-sm leading-relaxed text-ink-soft">{text}</p>
             </GlassCard>
           </StaggerItem>
         ))}

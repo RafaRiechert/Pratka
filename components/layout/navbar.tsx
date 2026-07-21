@@ -25,7 +25,7 @@ export default function Navbar() {
         <nav className="glass flex items-center justify-between rounded-2xl px-5 py-3 shadow-card">
           <Link
             href="/"
-            className="font-display text-2xl font-extrabold tracking-tight text-offwhite"
+            className="font-display text-2xl font-extrabold tracking-tight text-ink"
           >
             Pratka
           </Link>
@@ -56,7 +56,7 @@ export default function Navbar() {
           </div>
 
           <button
-            className="text-offwhite lg:hidden"
+            className="text-ink lg:hidden"
             onClick={() => setOpen((o) => !o)}
             aria-label="Abrir menu"
           >
@@ -80,12 +80,12 @@ export default function Navbar() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-offwhite/85 hover:bg-white/5"
+                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-ink/85 hover:bg-ink/5"
                 >
                   {l.label}
                 </Link>
               ))}
-              <div className="mt-2 flex flex-col gap-2 border-t border-white/10 pt-3">
+              <div className="mt-2 flex flex-col gap-2 border-t border-ink/10 pt-3">
                 {user ? (
                   <Button
                     variant="ghost"

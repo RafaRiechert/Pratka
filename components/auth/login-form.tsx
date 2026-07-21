@@ -55,9 +55,9 @@ export default function LoginForm() {
         <Button type="submit" disabled={loading} className="w-full">
           {loading ? "Entrando..." : "Entrar"}
         </Button>
-        <p className="text-center text-sm text-offwhite/60">
+        <p className="text-center text-sm text-ink-soft">
           Ainda não tem conta?{" "}
-          <Link href="/cadastro" className="text-lime hover:underline">
+          <Link href="/cadastro" className="text-tangerine-deep hover:underline">
             Cadastre-se
           </Link>
         </p>

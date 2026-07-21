@@ -55,9 +55,9 @@ export default function SignupForm() {
         <Button type="submit" disabled={loading} className="w-full">
           {loading ? "Criando conta..." : "Cadastrar"}
         </Button>
-        <p className="text-center text-sm text-offwhite/60">
+        <p className="text-center text-sm text-ink-soft">
           Já tem uma conta?{" "}
-          <Link href="/login" className="text-lime hover:underline">
+          <Link href="/login" className="text-tangerine-deep hover:underline">
             Entrar
           </Link>
         </p>

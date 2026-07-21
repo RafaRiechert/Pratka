@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Inter } from "next/font/google";
+import { Fraunces, Work_Sans } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
@@ -7,16 +7,19 @@ import SiteChrome from "@/components/layout/site-chrome";
 import GrainOverlay from "@/components/ui/grain-overlay";
 import CursorGlow from "@/components/ui/cursor-glow";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["600", "700", "800", "900"],
+  weight: "variable",
+  style: ["normal", "italic"],
+  axes: ["SOFT", "WONK", "opsz"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const workSans = Work_Sans({
+  variable: "--font-work-sans",
   subsets: ["latin"],
+  weight: "variable",
   display: "swap",
 });
 
@@ -34,9 +37,9 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${poppins.variable} ${inter.variable} h-full`}
+      className={`${fraunces.variable} ${workSans.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-navy text-offwhite font-body antialiased">
+      <body className="min-h-full flex flex-col bg-cream text-ink font-body antialiased">
         <MotionConfig reducedMotion="user">
           <AuthProvider>
             <GrainOverlay />

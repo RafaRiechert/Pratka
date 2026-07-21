@@ -10,7 +10,7 @@ export function Field({
 }) {
   return (
     <div>
-      <label className="mb-1.5 block text-sm font-medium text-offwhite/70">
+      <label className="mb-1.5 block text-sm font-medium text-ink-soft">
         {label}
       </label>
       {children}
@@ -22,7 +22,7 @@ export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElem
   return (
     <input
       className={cn(
-        "glass w-full rounded-xl border-0 bg-transparent px-4 py-2.5 text-sm text-offwhite outline-none focus:ring-2 focus:ring-lime/50",
+        "glass w-full rounded-xl border-0 bg-transparent px-4 py-2.5 text-sm text-ink outline-none focus:ring-2 focus:ring-tangerine/40",
         className
       )}
       {...props}
