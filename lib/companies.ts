@@ -7,7 +7,7 @@ export const companies: Company[] = [
     sector: "Banco de Investimento",
     cities: ["São Paulo", "Rio de Janeiro"],
     shortDescription:
-      "Estágio de férias para brasileiros que estudam fora do país, no maior banco de investimentos da América Latina.",
+      "Estágio de verão para brasileiros que estudam fora do país, no maior banco de investimentos da América Latina.",
     fullDescription:
       "O Summer Undergrad do BTG Pactual é dedicado a contratar estudantes brasileiros de alto potencial que cursam universidades internacionais. O estagiário pode escolher entre 4 macro áreas (tecnologia, negócio, suporte ao negócio e varejo digital). Duração de 3 meses, de junho a agosto, com exposição a diferentes áreas do banco. A área final de atuação é definida pelos gestores e sócios conforme as habilidades avaliadas durante o processo seletivo.",
     type: "Summer Internship",
@@ -18,24 +18,8 @@ export const companies: Company[] = [
     link: "https://conteudo.btgpactual.com/summer-undergrad",
   },
   {
-    id: "btg-estagio-ferias",
-    name: "BTG Pactual — Estágio de Férias",
-    sector: "Banco de Investimento",
-    cities: ["São Paulo", "Rio de Janeiro"],
-    shortDescription:
-      "Programa de 1-2 meses durante as férias para estudantes nos primeiros anos de graduação no Brasil.",
-    fullDescription:
-      "O Estágio de Férias do BTG Pactual acontece em janeiro-fevereiro ou julho-agosto, com duração de 1 a 2 meses. Voltado para estudantes nos primeiros dois anos de graduação em Tecnologia, Engenharias, Negócios ou áreas correlatas. O estagiário desenvolve um projeto de curto prazo para otimizar fluxos da área e participa de rotinas do dia a dia. Presencial em SP ou RJ. Benefícios: bolsa auxílio, vale-refeição, vale-transporte e seguro de vida.",
-    type: "Estágio de Férias",
-    target: "Universitários no Brasil (1º e 2º ano)",
-    duration: "1–2 meses",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://conteudo.btgpactual.com/estagio-de-ferias",
-  },
-  {
-    id: "itau-bba",
-    name: "Itaú BBA",
+    id: "itau-bba-summer",
+    name: "Itaú BBA — Summer",
     sector: "Banco de Investimento",
     cities: ["São Paulo"],
     shortDescription:
@@ -50,44 +34,28 @@ export const companies: Company[] = [
     link: "https://carreiras.itau.com.br/summer",
   },
   {
-    id: "goldman-sachs",
-    name: "Goldman Sachs",
+    id: "morgan-stanley-brazil-internship",
+    name: "Morgan Stanley — Brazil Internship Program",
     sector: "Banco de Investimento",
     cities: ["São Paulo"],
     shortDescription:
-      "Off-Cycle Internship em IB, Risk e Operations no escritório de São Paulo.",
+      "Brazil Internship Program com vagas em IB, Sales & Trading, Research, Tech e mais.",
     fullDescription:
-      "O programa da Goldman Sachs em São Paulo oferece imersão total nas atividades do dia a dia. Cada candidato pode aplicar para até 4 combinações de área/localização. As áreas disponíveis incluem Investment Banking (M&A, financiamento e risk management), Risk (identificação e gestão de riscos financeiros) e Operations. A duração varia conforme a universidade do candidato.",
-    type: "Summer Internship",
-    target: "Universitários (penúltimo ano)",
-    duration: "Varia por universidade",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://higher.gs.com/roles/151739",
-  },
-  {
-    id: "morgan-stanley",
-    name: "Morgan Stanley",
-    sector: "Banco de Investimento",
-    cities: ["São Paulo"],
-    shortDescription:
-      "Brazil Internship Program com exposição a diversas áreas do banco.",
-    fullDescription:
-      "O Morgan Stanley oferece o Brazil Internship Program em São Paulo, com oportunidades em diversas áreas do banco. O programa proporciona experiência prática em um ambiente de alta performance, contato com profissionais experientes e exposição a operações reais do mercado financeiro global.",
+      "O Morgan Stanley oferece o Brazil Internship Program em São Paulo, com oportunidades em Investment Banking & Capital Markets, Sales & Trading, Research, Finance, Technology, Operations, Human Resources e Legal. O programa proporciona experiência prática em um ambiente de alta performance. Benefícios incluem bolsa auxílio, 13ª bolsa, seguro de vida, assistência médica, vale refeição, auxílio transporte e bolsa auxílio idioma inglês. Local: Av. Faria Lima, São Paulo.",
     type: "Summer Internship",
     target: "Universitários",
-    duration: "2–3 meses",
+    duration: "1–2 anos",
     paid: true,
     audience: "Universitários no Brasil",
     link: "https://morganstanley.tal.net/vx/mobile-0/brand-2/spa-1/candidate/so/pm/1/pl/1/opp/21004-2026-2-Brazil-Internship-Program-Sao-Paulo/en-GB",
   },
   {
-    id: "jp-morgan",
-    name: "JP Morgan Chase",
+    id: "jp-morgan-drive-the-future",
+    name: "JP Morgan — Drive The Future",
     sector: "Banco de Investimento",
     cities: ["São Paulo"],
     shortDescription:
-      "Programa Drive The Future — sem exigência de experiência prévia. IB, Equity Research, Corporate Banking.",
+      "Programa aberto a universitários brasileiros sem exigência de experiência prévia.",
     fullDescription:
       "O programa Drive The Future do JP Morgan em São Paulo é aberto a universitários brasileiros sem exigência de experiência prévia. Áreas de atuação incluem Currencies and Emerging Markets, Equity Research (análise de empresas LatAm para clientes institucionais), Global Corporate Banking e Investment Banking (M&A, ECM, DCM). Carga de 30 horas semanais, presencial no escritório de São Paulo. Requisito: graduação prevista para dezembro de 2026 ou depois, com inglês avançado.",
     type: "Summer Internship",
@@ -95,11 +63,11 @@ export const companies: Company[] = [
     duration: "Período de férias",
     paid: true,
     audience: "Universitários no Brasil",
-    link: "https://jpmorgan.tal.net/vx/candidate/apply/17029",
+    link: "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210643718",
   },
   {
-    id: "bank-of-america",
-    name: "Bank of America",
+    id: "bank-of-america-brazil-ib-internship",
+    name: "Bank of America — Brazil IB Internship",
     sector: "Banco de Investimento",
     cities: ["São Paulo"],
     shortDescription: "Investment Banking Internship Program em São Paulo.",
@@ -110,17 +78,17 @@ export const companies: Company[] = [
     duration: "2–3 meses",
     paid: true,
     audience: "Universitários no Brasil",
-    link: "https://careers.bankofamerica.com/en-us/students/job-detail/13192/2026-sao-paulo-brazil",
+    link: "https://careers.bankofamerica.com/en-us/students/job-detail/13192/2026-brazil-investment-banking-internship-program-sao-paulo-brazil",
   },
   {
-    id: "ubs",
-    name: "UBS",
+    id: "ubs-trainee-brasil",
+    name: "UBS — Trainee Brasil",
     sector: "Banco de Investimento",
     cities: ["São Paulo"],
     shortDescription:
       "Jornada de Trainee UBS Brasil em Global Wealth Management e IT Dev.",
     fullDescription:
-      "O UBS oferece a Jornada de Trainee Brasil com programas em Global Wealth Management (assessoria financeira e planejamento patrimonial) e IT Dev (desenvolvimento de soluções tecnológicas para o banco). Os candidatos de IT Dev que avançarem recebem um certificado de 80 horas em Fullstack, mesmo se não contratados. O banco administra globalmente USD 6,1 trilhões em ativos, com 65 anos de história na América Latina.",
+      "O UBS oferece a Jornada de Trainee Brasil com programas em Global Wealth Management (assessoria financeira e planejamento patrimonial) e IT Dev (desenvolvimento de soluções tecnológicas para o banco). Os candidatos de IT Dev que avançarem recebem um certificado de 80 horas em Fullstack, mesmo se não contratados. O banco administra globalmente USD 6,1 trilhões em ativos.",
     type: "Summer Internship",
     target: "Universitários",
     duration: "2–3 meses",
@@ -129,8 +97,8 @@ export const companies: Company[] = [
     link: "https://trainee-ubs.com.br",
   },
   {
-    id: "br-partners",
-    name: "BR Partners",
+    id: "br-partners-summer-job",
+    name: "BR Partners — Summer Job",
     sector: "Banco de Investimento",
     cities: ["São Paulo"],
     shortDescription:
@@ -150,9 +118,9 @@ export const companies: Company[] = [
     sector: "Mercado Financeiro",
     cities: ["São Paulo", "Rio de Janeiro"],
     shortDescription:
-      "Summer Internship e Estágio de Férias em tecnologia, áreas institucionais e comerciais. Faria Lima, SP.",
+      "Summer Internship em tecnologia, áreas institucionais e comerciais. Faria Lima, SP.",
     fullDescription:
-      "A Genial Investimentos possui mais de 2 milhões de clientes e R$ 25 bilhões sob gestão. Oferece o Genial Summer Internship e o Programa Estágio de Férias com oportunidades em tecnologia, áreas institucionais, suporte e comerciais. Presencial na Av. Faria Lima. Busca estudantes de Economia, Administração, Contabilidade, Engenharia, Marketing e áreas correlatas. Também oferece o Desafio Genial, competição com prêmios de R$ 10 mil+ e vaga de estágio.",
+      "A Genial Investimentos possui mais de 2 milhões de clientes e R$ 250 bilhões em ativos sob gestão. Oferece o Genial Summer Internship com oportunidades em tecnologia, áreas institucionais, suporte e comerciais. Presencial na Av. Faria Lima. Busca estudantes de Economia, Administração, Contabilidade, Engenharia, Marketing e áreas correlatas.",
     type: "Summer Internship",
     target: "Universitários no Brasil",
     duration: "1–2 meses",
@@ -161,24 +129,8 @@ export const companies: Company[] = [
     link: "https://estagiogenial.gupy.io",
   },
   {
-    id: "xp-inc",
-    name: "XP Inc.",
-    sector: "Mercado Financeiro",
-    cities: ["São Paulo"],
-    shortDescription:
-      "Vagas em IB, Asset Management, Research, Produtos Financeiros e Tecnologia.",
-    fullDescription:
-      "O Programa de Estágio da XP Inc. oferece vagas em diversas áreas: Mercado Financeiro (Análise de Crédito, Banker, Corporate Desk, Asset Management, Investment Banking, Research, Produtos Financeiros), Corporativo (Branding, Controladoria, Jurídico, M&A, RH) e Tecnologia (Produtos Digitais, Segurança da Informação, Engenharia de Dados). Início previsto para agosto. Requisito: não trabalhar ou estagiar em escritório credenciado à XP.",
-    type: "Estágio",
-    target: "Universitários no Brasil",
-    duration: "12 meses",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://lp.xpi.com.br/programa_de_estagio",
-  },
-  {
-    id: "bcg",
-    name: "BCG",
+    id: "bcg-brasil",
+    name: "BCG — Brasil",
     sector: "Consultoria",
     cities: ["São Paulo", "Rio de Janeiro"],
     shortDescription:
@@ -193,86 +145,8 @@ export const companies: Company[] = [
     link: "https://careers.bcg.com/global/en/locations/brazil/application-process",
   },
   {
-    id: "mckinsey",
-    name: "McKinsey & Company",
-    sector: "Consultoria",
-    cities: ["São Paulo", "Rio de Janeiro"],
-    shortDescription:
-      "Business Analyst e Summer Business Analyst no escritório do Brasil.",
-    fullDescription:
-      "Na McKinsey Brasil você pode explorar seus interesses profissionais e trabalhar ao lado de líderes de empresas globais e startups. O Summer Business Analyst é para estudantes no penúltimo ano, com imersão em projetos reais de consultoria estratégica. O processo é competitivo e inclui entrevistas de caso e fit.",
-    type: "Summer Internship",
-    target: "Universitários (penúltimo ano)",
-    duration: "8–10 semanas",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://www.mckinsey.com/br/careers/role-descriptions/join-us/current-students-and-recent-graduates",
-  },
-  {
-    id: "bain",
-    name: "Bain & Company",
-    sector: "Consultoria",
-    cities: ["São Paulo"],
-    shortDescription:
-      "Associate Consultant Internship em consultoria estratégica com clientes Fortune 1000.",
-    fullDescription:
-      "O Associate Consultant Internship da Bain é para estudantes de graduação. Inclui treinamento intensivo nos primeiros dias para desenvolver habilidades de consultoria (business acumen e comunicação), seguido de alocação em times de caso com clientes reais. Os clientes são empresas Fortune 1000 que buscam inovar em seus setores. O estagiário trabalha com desafios complexos ao lado de consultores seniores.",
-    type: "Summer Internship",
-    target: "Universitários",
-    duration: "8–10 semanas",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://www.bain.com/careers/work-with-us/internships-programs",
-  },
-  {
-    id: "tiktok",
-    name: "TikTok / ByteDance",
-    sector: "Tecnologia",
-    cities: ["São Paulo"],
-    shortDescription: "Internships 2026 em LIVE operations, advertisement e content em SP.",
-    fullDescription:
-      "A TikTok busca talentos para internships de 2026 no escritório de São Paulo. As vagas incluem LIVE Operations (trabalhar com criadores, agências e parceiros), Solutions Engineer (equipe de advertisement) e Content Operations. O programa oferece exposição prática, workshops de desenvolvimento e eventos sociais. O candidato pode aplicar para no máximo duas posições.",
-    type: "Summer Internship",
-    target: "Universitários",
-    duration: "3–6 meses",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://careers.tiktok.com/position?keywords=intern&category=&location=CT_5765&project=&type=&job_hot_flag=&current=1&limit=10",
-  },
-  {
-    id: "wildlife-studios",
-    name: "Wildlife Studios",
-    sector: "Tecnologia",
-    cities: ["São Paulo"],
-    shortDescription:
-      "Uma das maiores desenvolvedoras de jogos mobile do mundo. 30h semanais em SP.",
-    fullDescription:
-      "A Wildlife Studios é uma das maiores desenvolvedoras e publishers de jogos mobile do mundo, com sede em São Paulo. O programa de summer internship oferece 30 horas semanais, com exposição prática em desenvolvimento de jogos, produto, marketing e operações. O ambiente é dinâmico e inovador, com projetos reais desde o primeiro dia.",
-    type: "Summer Internship",
-    target: "Universitários",
-    duration: "2–3 meses",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://wildlifestudios.com/careers",
-  },
-  {
-    id: "prio",
-    name: "PRIO",
-    sector: "Óleo & Gás",
-    cities: ["Rio de Janeiro"],
-    shortDescription: "8-10 semanas no RJ com viagem, moradia e alimentação 100% cobertos.",
-    fullDescription:
-      "A PRIO é a maior empresa independente de óleo e gás do Brasil. O Summer Job Program dura 8 a 10 semanas no Rio de Janeiro, com todas as despesas cobertas (viagem, moradia e alimentação). O estagiário trabalha em projetos reais de negócio. Aberto a estudantes de graduação e pós, preferencialmente de engenharia e business. É uma oportunidade de viver uma experiência profissional completa em uma das cidades mais vibrantes do mundo.",
-    type: "Summer Internship",
-    target: "Universitários (engenharia e business)",
-    duration: "8–10 semanas",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://prio3.com.br",
-  },
-  {
-    id: "disney",
-    name: "Disney (LATAM)",
+    id: "disney-latam",
+    name: "Disney — LATAM",
     sector: "Entretenimento",
     cities: ["São Paulo"],
     shortDescription: "Brazil Internship Program da Walt Disney Company Latin America.",
@@ -287,7 +161,7 @@ export const companies: Company[] = [
   },
 ];
 
-export const sectors: Sector[] = [
+const SECTOR_ORDER: Sector[] = [
   "Banco de Investimento",
   "Consultoria",
   "Tecnologia",
@@ -296,9 +170,21 @@ export const sectors: Sector[] = [
   "Entretenimento",
 ];
 
-export const cities: City[] = ["São Paulo", "Rio de Janeiro"];
+const CITY_ORDER: City[] = ["São Paulo", "Rio de Janeiro"];
 
-export const audiences: Audience[] = [
+const AUDIENCE_ORDER: Audience[] = [
   "Universitários no Brasil",
   "Brasileiros em universidades no exterior",
 ];
+
+export const sectors: Sector[] = SECTOR_ORDER.filter((s) =>
+  companies.some((c) => c.sector === s)
+);
+
+export const cities: City[] = CITY_ORDER.filter((city) =>
+  companies.some((c) => c.cities.includes(city))
+);
+
+export const audiences: Audience[] = AUDIENCE_ORDER.filter((a) =>
+  companies.some((c) => c.audience === a)
+);
