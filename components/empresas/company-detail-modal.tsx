@@ -55,9 +55,11 @@ export default function CompanyDetailModal({
               {company.paid && <Tag variant="tangerine">Remunerado</Tag>}
             </div>
 
-            <p className="mt-6 text-sm leading-relaxed text-ink-soft">
-              {company.fullDescription}
-            </p>
+            {company.fullDescription && (
+              <p className="mt-6 text-sm leading-relaxed text-ink-soft">
+                {company.fullDescription}
+              </p>
+            )}
 
             <div className="mt-6 space-y-2.5 text-sm text-ink-soft">
               <div className="flex items-center gap-2">
@@ -68,22 +70,54 @@ export default function CompanyDetailModal({
                 <Users2 size={15} className="shrink-0 text-ink/40" />
                 {company.target}
               </div>
-              <div className="flex items-center gap-2">
-                <Clock size={15} className="shrink-0 text-ink/40" />
-                {company.duration}
-              </div>
+              {company.duration && (
+                <div className="flex items-center gap-2">
+                  <Clock size={15} className="shrink-0 text-ink/40" />
+                  {company.duration}
+                </div>
+              )}
             </div>
 
-            <Button
-              href={company.link}
-              external
-              variant="primary"
-              size="md"
-              className="mt-8 w-full"
-            >
-              Aplicar
-              <ArrowUpRight size={16} />
-            </Button>
+            {company.areas ? (
+              <div className="mt-6 space-y-4">
+                {company.areas.map((area) => (
+                  <div
+                    key={area.area}
+                    className="rounded-2xl border border-sand bg-paper/60 p-4"
+                  >
+                    <h4 className="font-display text-base font-bold text-ink">
+                      {area.area}
+                    </h4>
+                    <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
+                      {area.description}
+                    </p>
+                    <Button
+                      href={area.link}
+                      external
+                      variant="primary"
+                      size="sm"
+                      className="mt-3 w-full"
+                    >
+                      Aplicar
+                      <ArrowUpRight size={16} />
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              company.link && (
+                <Button
+                  href={company.link}
+                  external
+                  variant="primary"
+                  size="md"
+                  className="mt-8 w-full"
+                >
+                  Aplicar
+                  <ArrowUpRight size={16} />
+                </Button>
+              )
+            )}
           </motion.div>
         </motion.div>
       )}

@@ -159,11 +159,82 @@ export const companies: Company[] = [
     audience: "Universitários no Brasil",
     link: "https://www.disneycareers.com/en/brazil-internships",
   },
+  {
+    id: "citi",
+    name: "Citi",
+    sector: "Banco de Investimento",
+    cities: ["São Paulo"],
+    shortDescription:
+      "Internships em 4 áreas diferentes: Corporate Banking, Sales & Trading, Equity Research e Debt Capital Markets.",
+    type: "Internship",
+    target: "Universitários",
+    paid: true,
+    audience: "Universitários no Brasil",
+    areas: [
+      {
+        area: "Corporate Banking",
+        description:
+          "O time de Corporate Banking é responsável pela gestão de relacionamento com grandes empresas, oferecendo soluções de financiamento e advisory. O estagiário terá contato direto com análise de crédito, modelagem financeira e relacionamento com clientes corporativos.",
+        link: "https://jobs.citi.com/job/sao-paulo/banking-corporate-banking-internship-sao-paulo-brazil-2026/287/94698284736",
+      },
+      {
+        area: "Sales & Trading",
+        description:
+          "O time de Markets busca estagiários para a área de Sales. Como parte de Markets, seu trabalho pode ter impacto imediato — desde suporte a soluções de financiamento até oferecer ideias e soluções para clientes em mercados globais.",
+        link: "https://jobs.citi.com/job/sao-paulo/markets-sales-and-trading-internship-sao-paulo-brazil-2026/287/95588407696",
+      },
+      {
+        area: "Equity Research",
+        description:
+          "O time de Equity Research monitora empresas de capital aberto dentro de um setor específico, oferecendo recomendações de ações para investidores institucionais. O estagiário participará de modelagem financeira, pesquisa, conferências do setor e produção de relatórios.",
+        link: "https://jobs.citi.com/job/sao-paulo/client-equity-research-internship-sao-paulo-brazil-2026/287/94960976896",
+      },
+      {
+        area: "Debt Capital Markets (DCM)",
+        description:
+          "O time de DCM é responsável pela originação e execução de instrumentos no mercado de dívida e empréstimos sindicalizados. O estagiário terá exposição a operações de renda fixa e financiamento estruturado.",
+        link: "https://jobs.citi.com/job/sao-paulo/banking-debt-capital-markets-internship-sao-paulo-brazil-2026/287/89374412592",
+      },
+    ],
+  },
+  {
+    id: "accenture-genew",
+    name: "Accenture — GENEW",
+    sector: "Consultoria",
+    cities: ["São Paulo", "Rio de Janeiro"],
+    shortDescription:
+      "Programa de estágio em consultoria, estratégia e tecnologia com atuação em projetos reais para clientes de diferentes indústrias.",
+    fullDescription:
+      "O Programa de Estágio Accenture GENEW é a porta de entrada para atuar em projetos reais e inovadores, com impacto em diferentes indústrias e clientes. Ao longo do programa, você aprende ao lado de profissionais experientes em consultoria, estratégia e tecnologia. A experiência acontece por meio de três frentes: Reinvention Partners (reinvenção de negócios com clientes), Reinvention Engines (inovação e tecnologia em escala) e Client Success (excelência na entrega). Benefícios: assistência médica 100% subsidiada para titular e dependentes, assistência odontológica, vale refeição/alimentação, vale transporte, seguro de vida, Gympass, convênio pet, férias remuneradas e parceria com escola de idiomas.",
+    type: "Estágio",
+    target: "Universitários no Brasil",
+    duration: "12 meses",
+    paid: true,
+    audience: "Universitários no Brasil",
+    link: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/So-Paulo---Sao-Paulo/Programa-de-Estgio-Accenture-Genew-20262_R00325541/apply",
+  },
+  {
+    id: "mattos-filho-jovens-talentos",
+    name: "Mattos Filho — Jovens Talentos",
+    sector: "Direito",
+    cities: ["São Paulo", "Rio de Janeiro"],
+    shortDescription:
+      "Programa de estágio do maior escritório de advocacia do Brasil para estudantes de Direito.",
+    fullDescription:
+      "Jovens Talentos é o programa de estágio do Mattos Filho, o maior escritório de advocacia do Brasil. O programa tem duração de até dois anos e contempla oportunidades de estágio nos escritórios de São Paulo, Rio de Janeiro e Brasília. A iniciativa seleciona estagiários que serão preparados para se tornarem advogados de excelência no futuro, aptos a lidar com todas as esferas do Direito de forma humana e engajada no propósito do escritório. O programa está em sua sexta edição.",
+    type: "Estágio",
+    target: "Estudantes de Direito",
+    duration: "Até 2 anos",
+    paid: true,
+    audience: "Universitários no Brasil",
+    link: "https://jtmattosfilho.gupy.io",
+  },
 ];
 
 const SECTOR_ORDER: Sector[] = [
   "Banco de Investimento",
   "Consultoria",
+  "Direito",
   "Tecnologia",
   "Mercado Financeiro",
   "Óleo & Gás",

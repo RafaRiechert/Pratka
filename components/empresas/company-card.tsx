@@ -39,19 +39,26 @@ export default function CompanyCard({
       </div>
 
       <div className="mt-auto flex gap-2 pt-2">
-        <Button variant="outline" size="sm" className="flex-1" onClick={onDetails}>
+        <Button
+          variant="outline"
+          size="sm"
+          className={company.areas ? "w-full" : "flex-1"}
+          onClick={onDetails}
+        >
           Mais informações
         </Button>
-        <Button
-          href={company.link}
-          external
-          variant="primary"
-          size="sm"
-          className="flex-1"
-        >
-          Aplicar
-          <ArrowUpRight size={16} />
-        </Button>
+        {!company.areas && company.link && (
+          <Button
+            href={company.link}
+            external
+            variant="primary"
+            size="sm"
+            className="flex-1"
+          >
+            Aplicar
+            <ArrowUpRight size={16} />
+          </Button>
+        )}
       </div>
     </GlassCard>
   );
