@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Building2 } from "lucide-react";
-import { audiences, companies as allCompanies, sectors, cities } from "@/lib/companies";
+import { audiences, cities, companies as allCompanies, sectors } from "@/lib/companies";
 import AnimatedSection, { Stagger, StaggerItem } from "@/components/ui/animated-section";
 import CompanyCard from "@/components/empresas/company-card";
 import CompanyDetailModal from "@/components/empresas/company-detail-modal";
@@ -10,23 +11,74 @@ import CompanyFilters, {
   EMPTY_FILTERS,
   type FilterState,
 } from "@/components/empresas/company-filters";
-import type { Company } from "@/lib/types";
+import SeasonTabs from "@/components/empresas/season-tabs";
+import type { Company, Sector, Season } from "@/lib/types";
+
+function SectorFromQuery({ onSector }: { onSector: (sector: Sector) => void }) {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const sector = searchParams.get("sector");
+    if (sector && (sectors as string[]).includes(sector)) {
+      onSector(sector as Sector);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return null;
+}
 
 export default function CompanyListing() {
+  const [season, setSeason] = useState<Season>("verao-brasil");
   const [filters, setFilters] = useState<FilterState>(EMPTY_FILTERS);
   const [detailCompany, setDetailCompany] = useState<Company | null>(null);
 
+  const seasonCompanies = useMemo(
+    () => allCompanies.filter((c) => c.seasons.includes(season)),
+    [season]
+  );
+
+  const seasonSectors = useMemo(
+    () => sectors.filter((s) => seasonCompanies.some((c) => c.sector === s)),
+    [seasonCompanies]
+  );
+  const seasonCities = useMemo(
+    () => cities.filter((city) => seasonCompanies.some((c) => c.cities.includes(city))),
+    [seasonCompanies]
+  );
+  const seasonAudiences = useMemo(
+    () => audiences.filter((a) => seasonCompanies.some((c) => c.audience === a)),
+    [seasonCompanies]
+  );
+
+  // Drop any filter selection that no longer applies to the current season
+  // (e.g. after switching tabs, or landing with a ?sector= that only exists
+  // in the other season) instead of silently showing stale, empty results.
+  useEffect(() => {
+    setFilters((f) => ({
+      sector: f.sector && seasonSectors.includes(f.sector) ? f.sector : "",
+      city: f.city && seasonCities.includes(f.city) ? f.city : "",
+      audience: f.audience && seasonAudiences.includes(f.audience) ? f.audience : "",
+    }));
+  }, [seasonSectors, seasonCities, seasonAudiences]);
+
   const filtered = useMemo(() => {
-    return allCompanies.filter((c) => {
+    return seasonCompanies.filter((c) => {
       if (filters.sector && c.sector !== filters.sector) return false;
       if (filters.city && !c.cities.includes(filters.city)) return false;
       if (filters.audience && c.audience !== filters.audience) return false;
       return true;
     });
-  }, [filters]);
+  }, [seasonCompanies, filters]);
 
   return (
     <section id="empresas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
+      <Suspense fallback={null}>
+        <SectorFromQuery
+          onSector={(sector) => setFilters((f) => ({ ...f, sector }))}
+        />
+      </Suspense>
+
       <AnimatedSection className="mx-auto max-w-2xl text-center">
         <h2 className="font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
           Programas de Summer Internship no Brasil
@@ -37,11 +89,15 @@ export default function CompanyListing() {
         </p>
       </AnimatedSection>
 
-      <div className="mt-12 mb-10">
+      <div className="mt-10 flex justify-center">
+        <SeasonTabs value={season} onChange={setSeason} />
+      </div>
+
+      <div className="mt-8 mb-10">
         <CompanyFilters
-          sectors={sectors}
-          cities={cities}
-          audiences={audiences}
+          sectors={seasonSectors}
+          cities={seasonCities}
+          audiences={seasonAudiences}
           value={filters}
           onChange={setFilters}
         />

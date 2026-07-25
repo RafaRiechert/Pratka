@@ -6,6 +6,7 @@ import SplashScreen from "@/components/home/splash-screen";
 import Hero from "@/components/home/hero";
 import StatsBar from "@/components/home/stats-bar";
 import HowItWorks from "@/components/home/how-it-works";
+import QuizCta from "@/components/home/quiz-cta";
 import CompanyListing from "@/components/home/company-listing";
 import ProblemSolution from "@/components/home/problem-solution";
 import FinalCta from "@/components/home/final-cta";
@@ -42,6 +43,7 @@ export default function Home() {
           <Hero />
           <StatsBar />
           <HowItWorks />
+          <QuizCta />
           <CompanyListing />
           <ProblemSolution />
           <FinalCta />

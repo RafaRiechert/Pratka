@@ -1,4 +1,4 @@
-import type { Audience, City, Company, Sector } from "@/lib/types";
+import type { Audience, City, Company, Season, Sector } from "@/lib/types";
 
 export const companies: Company[] = [
   {
@@ -15,6 +15,7 @@ export const companies: Company[] = [
     duration: "3 meses (jun–ago)",
     paid: true,
     audience: "Brasileiros em universidades no exterior",
+    seasons: ["verao-brasil", "verao-internacional"],
     link: "https://conteudo.btgpactual.com/summer-undergrad",
   },
   {
@@ -31,6 +32,7 @@ export const companies: Company[] = [
     duration: "2–3 meses",
     paid: true,
     audience: "Brasileiros em universidades no exterior",
+    seasons: ["verao-internacional"],
     link: "https://carreiras.itau.com.br/summer",
   },
   {
@@ -47,6 +49,7 @@ export const companies: Company[] = [
     duration: "1–2 anos",
     paid: true,
     audience: "Universitários no Brasil",
+    seasons: ["verao-internacional"],
     link: "https://morganstanley.tal.net/vx/mobile-0/brand-2/spa-1/candidate/so/pm/1/pl/1/opp/21004-2026-2-Brazil-Internship-Program-Sao-Paulo/en-GB",
   },
   {
@@ -63,6 +66,7 @@ export const companies: Company[] = [
     duration: "Período de férias",
     paid: true,
     audience: "Universitários no Brasil",
+    seasons: ["verao-internacional"],
     link: "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210643718",
   },
   {
@@ -78,6 +82,7 @@ export const companies: Company[] = [
     duration: "2–3 meses",
     paid: true,
     audience: "Universitários no Brasil",
+    seasons: ["verao-internacional"],
     link: "https://careers.bankofamerica.com/en-us/students/job-detail/13192/2026-brazil-investment-banking-internship-program-sao-paulo-brazil",
   },
   {
@@ -94,6 +99,7 @@ export const companies: Company[] = [
     duration: "2–3 meses",
     paid: true,
     audience: "Universitários no Brasil",
+    seasons: ["verao-internacional"],
     link: "https://trainee-ubs.com.br",
   },
   {
@@ -110,6 +116,7 @@ export const companies: Company[] = [
     duration: "Mínimo 8 semanas",
     paid: true,
     audience: "Brasileiros em universidades no exterior",
+    seasons: ["verao-internacional"],
     link: "https://www.brpartners.com.br/pt-BR/careers/internship.html",
   },
   {
@@ -126,6 +133,7 @@ export const companies: Company[] = [
     duration: "1–2 meses",
     paid: true,
     audience: "Universitários no Brasil",
+    seasons: ["verao-brasil"],
     link: "https://estagiogenial.gupy.io",
   },
   {
@@ -142,6 +150,7 @@ export const companies: Company[] = [
     duration: "8–10 semanas",
     paid: true,
     audience: "Universitários no Brasil",
+    seasons: ["verao-brasil"],
     link: "https://careers.bcg.com/global/en/locations/brazil/application-process",
   },
   {
@@ -157,6 +166,7 @@ export const companies: Company[] = [
     duration: "6–12 meses",
     paid: true,
     audience: "Universitários no Brasil",
+    seasons: ["verao-brasil"],
     link: "https://www.disneycareers.com/en/brazil-internships",
   },
   {
@@ -170,6 +180,7 @@ export const companies: Company[] = [
     target: "Universitários",
     paid: true,
     audience: "Universitários no Brasil",
+    seasons: ["verao-internacional"],
     areas: [
       {
         area: "Corporate Banking",
@@ -211,6 +222,7 @@ export const companies: Company[] = [
     duration: "12 meses",
     paid: true,
     audience: "Universitários no Brasil",
+    seasons: ["verao-internacional"],
     link: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/So-Paulo---Sao-Paulo/Programa-de-Estgio-Accenture-Genew-20262_R00325541/apply",
   },
   {
@@ -227,6 +239,7 @@ export const companies: Company[] = [
     duration: "Até 2 anos",
     paid: true,
     audience: "Universitários no Brasil",
+    seasons: ["verao-internacional"],
     link: "https://jtmattosfilho.gupy.io",
   },
 ];
@@ -259,3 +272,10 @@ export const cities: City[] = CITY_ORDER.filter((city) =>
 export const audiences: Audience[] = AUDIENCE_ORDER.filter((a) =>
   companies.some((c) => c.audience === a)
 );
+
+export const seasons: Season[] = ["verao-brasil", "verao-internacional"];
+
+export const seasonLabels: Record<Season, string> = {
+  "verao-brasil": "Verão Brasil (Jan 2027)",
+  "verao-internacional": "Verão Internacional (Jun–Jul 2027)",
+};

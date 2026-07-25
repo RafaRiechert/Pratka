@@ -3,6 +3,7 @@ import { Camera, Briefcase, Send } from "lucide-react";
 
 const footerLinks = [
   { href: "/#empresas", label: "Empresas" },
+  { href: "/quiz", label: "Quiz" },
   { href: "/#como-funciona", label: "Como funciona" },
   { href: "/#problema-solucao", label: "Problema & Solução" },
   { href: "/sobre", label: "Sobre" },
