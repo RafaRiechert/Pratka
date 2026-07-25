@@ -39,14 +39,18 @@ export default function Hero() {
         </h1>
 
         <motion.p
-          className="mx-auto mt-7 max-w-2xl text-lg text-ink-soft sm:text-xl"
+          className="mx-auto mt-7 max-w-3xl text-lg text-ink-soft sm:text-xl"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1 }}
         >
-          O único lugar onde você encontra todos os programas de summer
-          internship do Brasil para universitários, com link direto para se
-          candidatar.
+          A cada ano, as melhores empresas do Brasil abrem suas portas para
+          universitários através de programas de summer internship — mas
+          encontrar essas oportunidades nunca foi fácil. Até agora. A Pratka
+          reuniu todos esses programas em um só lugar, com informações
+          completas e link direto para inscrição. Sem cadastro, sem
+          intermediário. Sua próxima grande oportunidade está a um clique de
+          distância.
         </motion.p>
 
         <motion.div

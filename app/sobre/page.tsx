@@ -7,12 +7,14 @@ export const metadata: Metadata = {
 };
 
 const sobreParagraphs = [
-  `O mercado de trabalho começa antes da formatura. Cada verão é uma janela de oportunidade — e a Pratka existe para garantir que nenhum universitário brasileiro perca essa janela por falta de acesso à informação. Reunimos em um só lugar o que antes estava disperso: todas as empresas que oferecem programas de summer internship no Brasil, com link direto para inscrição.`,
+  `O mercado de trabalho não começa na formatura — começa muito antes. Cada verão é uma janela de oportunidade que pode redefinir uma trajetória inteira — e a Pratka existe para garantir que nenhum universitário brasileiro perca essa janela por falta de acesso à informação.`,
+  `Somos um diretório curado e atualizado de todos os programas de summer internship disponíveis no Brasil, voltado para universitários que querem dar o primeiro passo em direção a uma carreira extraordinária. Reunimos em um só lugar o que antes exigia horas de pesquisa dispersa — e entregamos com um clique.`,
 ];
 
 const quemSomosParagraphs = [
-  `A Pratka nasceu de uma observação atenta. Seu fundador, ainda no ensino médio, acompanhou de perto a frustração de colegas universitários que tentavam, a cada verão, encontrar um programa de summer internship — e esbarravam sempre nas mesmas barreiras: cada empresa conduzia suas aplicações de forma isolada, em plataformas diferentes, com prazos diferentes, e não havia nenhum lugar onde o estudante pudesse ver todas as opções de uma só vez.`,
-  `A solução era simples: criar esse lugar. Uma página só, com todas as oportunidades de summer do Brasil reunidas. Sem cadastro, sem processo seletivo próprio — apenas a informação que o estudante precisa, no formato mais direto possível.`,
+  `A Pratka nasceu de uma observação atenta. Seu fundador, ainda no ensino médio, acompanhou de perto a frustração de colegas e familiares universitários que tentavam, a cada verão, encontrar um programa de summer internship — e esbarravam sempre nas mesmas barreiras: cada empresa conduzia suas aplicações de forma isolada, em plataformas diferentes, com prazos diferentes, e não havia absolutamente nenhum lugar onde o estudante pudesse ver todas as opções de uma só vez.`,
+  `Foi dessa observação que surgiu uma convicção simples: isso precisava mudar. A resposta não deveria ser mais uma plataforma complexa com dezenas de funcionalidades — mas sim o básico, bem feito: todas as oportunidades reunidas, com informação clara e link direto. A ponte que faltava entre o talento e a oportunidade.`,
+  `A Pratka é uma startup brasileira com uma missão clara: democratizar o acesso aos programas de summer internship. Acreditamos que o primeiro passo de uma carreira extraordinária deve estar ao alcance de qualquer universitário, independentemente de onde ele estuda ou de onde ele mora.`,
 ];
 
 export default function SobrePage() {

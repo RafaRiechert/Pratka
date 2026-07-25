@@ -15,7 +15,7 @@ export const companies: Company[] = [
     duration: "3 meses (jun–ago)",
     paid: true,
     audience: "Brasileiros em universidades no exterior",
-    seasons: ["verao-brasil", "verao-internacional"],
+    seasons: ["verao-internacional"],
     link: "https://conteudo.btgpactual.com/summer-undergrad",
   },
   {
@@ -120,21 +120,38 @@ export const companies: Company[] = [
     link: "https://www.brpartners.com.br/pt-BR/careers/internship.html",
   },
   {
-    id: "genial-investimentos",
-    name: "Genial Investimentos",
+    id: "genial-investimentos-estagio-ferias",
+    name: "Genial Investimentos — Estágio de Férias",
     sector: "Mercado Financeiro",
     cities: ["São Paulo", "Rio de Janeiro"],
     shortDescription:
-      "Summer Internship em tecnologia, áreas institucionais e comerciais. Faria Lima, SP.",
+      "Programa de estágio de férias para estudantes de universidades brasileiras. Oportunidades em tecnologia, áreas institucionais e comerciais.",
     fullDescription:
-      "A Genial Investimentos possui mais de 2 milhões de clientes e R$ 250 bilhões em ativos sob gestão. Oferece o Genial Summer Internship com oportunidades em tecnologia, áreas institucionais, suporte e comerciais. Presencial na Av. Faria Lima. Busca estudantes de Economia, Administração, Contabilidade, Engenharia, Marketing e áreas correlatas.",
-    type: "Summer Internship",
+      "O Programa Estágio de Férias da Genial Investimentos é voltado para estudantes universitários brasileiros que desejam vivenciar o mercado financeiro durante as férias de verão (janeiro-fevereiro). A Genial possui mais de 2 milhões de clientes e R$ 250 bilhões em ativos sob gestão. O estagiário atua presencialmente na Av. Faria Lima em São Paulo, com oportunidades em tecnologia, áreas institucionais, suporte e comerciais. Busca estudantes de Economia, Administração, Contabilidade, Engenharia, Marketing e áreas correlatas.",
+    type: "Estágio de Férias",
     target: "Universitários no Brasil",
-    duration: "1–2 meses",
+    duration: "1–2 meses (jan–fev)",
     paid: true,
     audience: "Universitários no Brasil",
     seasons: ["verao-brasil"],
     link: "https://estagiogenial.gupy.io",
+  },
+  {
+    id: "genial-investimentos-summer-job",
+    name: "Genial Investimentos — Summer Job",
+    sector: "Mercado Financeiro",
+    cities: ["São Paulo", "Rio de Janeiro"],
+    shortDescription:
+      "Summer Job para brasileiros cursando universidades internacionais. Experiência intensiva no mercado internacional.",
+    fullDescription:
+      "O Summer Job da Genial Investimentos é dedicado a estudantes brasileiros que cursam ensino superior em universidades internacionais e desejam vivenciar o mercado financeiro brasileiro durante as férias de verão do hemisfério norte (junho-agosto). O programa proporciona uma jornada rica em aprendizado, com participação em atividades, projetos e discussões que incentivam a inovação. A Genial administra R$ 250 bilhões em ativos e tem presença em São Paulo, Rio de Janeiro e Nova York.",
+    type: "Summer Job",
+    target: "Brasileiros em universidades no exterior",
+    duration: "2–3 meses (jun–ago)",
+    paid: true,
+    audience: "Brasileiros em universidades no exterior",
+    seasons: ["verao-internacional"],
+    link: "https://genial.gupy.io",
   },
   {
     id: "bcg-brasil",
@@ -222,7 +239,7 @@ export const companies: Company[] = [
     duration: "12 meses",
     paid: true,
     audience: "Universitários no Brasil",
-    seasons: ["verao-internacional"],
+    seasons: ["verao-brasil"],
     link: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/So-Paulo---Sao-Paulo/Programa-de-Estgio-Accenture-Genew-20262_R00325541/apply",
   },
   {

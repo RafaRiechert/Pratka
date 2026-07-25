@@ -46,17 +46,26 @@ export const staggerItem: Variants = {
 export function Stagger({
   children,
   className,
+  scrollTrigger = true,
 }: {
   children: ReactNode;
   className?: string;
+  /**
+   * When false, animates in on mount instead of on scroll-into-view. Use
+   * this for grids whose contents change after the initial reveal already
+   * fired (filters, tabs) — `whileInView` + `once: true` won't reliably
+   * re-trigger for items that mount later, leaving them stuck invisible.
+   */
+  scrollTrigger?: boolean;
 }) {
   return (
     <motion.div
       className={className}
       variants={staggerContainer}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
+      animate={scrollTrigger ? undefined : "show"}
+      whileInView={scrollTrigger ? "show" : undefined}
+      viewport={scrollTrigger ? { once: true, margin: "-80px" } : undefined}
     >
       {children}
     </motion.div>

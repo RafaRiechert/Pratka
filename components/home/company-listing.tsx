@@ -33,6 +33,9 @@ export default function CompanyListing() {
   const [filters, setFilters] = useState<FilterState>(EMPTY_FILTERS);
   const [detailCompany, setDetailCompany] = useState<Company | null>(null);
 
+  // Always derived straight from the full company list — never from a
+  // previously filtered array — so switching seasons or filters can only
+  // narrow things down from the complete set, never compound on stale data.
   const seasonCompanies = useMemo(
     () => allCompanies.filter((c) => c.seasons.includes(season)),
     [season]
@@ -51,25 +54,31 @@ export default function CompanyListing() {
     [seasonCompanies]
   );
 
-  // Drop any filter selection that no longer applies to the current season
-  // (e.g. after switching tabs, or landing with a ?sector= that only exists
-  // in the other season) instead of silently showing stale, empty results.
-  useEffect(() => {
-    setFilters((f) => ({
-      sector: f.sector && seasonSectors.includes(f.sector) ? f.sector : "",
-      city: f.city && seasonCities.includes(f.city) ? f.city : "",
-      audience: f.audience && seasonAudiences.includes(f.audience) ? f.audience : "",
-    }));
-  }, [seasonSectors, seasonCities, seasonAudiences]);
+  // A filter selection from a previous season (or from the quiz's ?sector=
+  // deep link) might not apply to the season currently on screen. Rather
+  // than reset it via a separate effect — which can race with the query
+  // param being applied — just ignore it wherever it's stale. This keeps
+  // filtering a pure, single-pass derivation over the full season list.
+  const activeFilters: FilterState = useMemo(
+    () => ({
+      sector: filters.sector && seasonSectors.includes(filters.sector) ? filters.sector : "",
+      city: filters.city && seasonCities.includes(filters.city) ? filters.city : "",
+      audience:
+        filters.audience && seasonAudiences.includes(filters.audience)
+          ? filters.audience
+          : "",
+    }),
+    [filters, seasonSectors, seasonCities, seasonAudiences]
+  );
 
   const filtered = useMemo(() => {
     return seasonCompanies.filter((c) => {
-      if (filters.sector && c.sector !== filters.sector) return false;
-      if (filters.city && !c.cities.includes(filters.city)) return false;
-      if (filters.audience && c.audience !== filters.audience) return false;
+      if (activeFilters.sector && c.sector !== activeFilters.sector) return false;
+      if (activeFilters.city && !c.cities.includes(activeFilters.city)) return false;
+      if (activeFilters.audience && c.audience !== activeFilters.audience) return false;
       return true;
     });
-  }, [seasonCompanies, filters]);
+  }, [seasonCompanies, activeFilters]);
 
   return (
     <section id="empresas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
@@ -98,7 +107,7 @@ export default function CompanyListing() {
           sectors={seasonSectors}
           cities={seasonCities}
           audiences={seasonAudiences}
-          value={filters}
+          value={activeFilters}
           onChange={setFilters}
         />
       </div>
@@ -111,7 +120,10 @@ export default function CompanyListing() {
           </p>
         </div>
       ) : (
-        <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger
+          scrollTrigger={false}
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {filtered.map((company) => (
             <StaggerItem key={company.id}>
               <CompanyCard

@@ -1,6 +1,17 @@
 import { CircleAlert, Sparkles } from "lucide-react";
 import AnimatedSection from "@/components/ui/animated-section";
 
+const problemParagraphs = [
+  "Programas de summer internship são uma das experiências mais transformadoras que um universitário pode ter. Em poucas semanas, você ganha exposição real ao mercado de trabalho, constrói um network que pode definir sua carreira e descobre na prática se aquela área é realmente para você. Mas existe um problema fundamental: encontrar esses programas é absurdamente difícil.",
+  "Cada empresa divulga suas vagas de forma isolada — no próprio site, em portais de carreira diferentes, com prazos que mudam a cada ano. Não existe um lugar centralizado onde o estudante possa ver todas as opções de uma vez. O resultado? Quem tem acesso à informação certa, no momento certo, se candidata. Quem não tem, perde a oportunidade, muitas vezes sem nem saber que ela existia.",
+  "E esse é o ponto mais injusto: o acesso à informação não deveria ser um privilégio. Um estudante em Recife, em Belo Horizonte ou em Lisboa deveria ter a mesma chance de descobrir essas oportunidades que um estudante na Faria Lima.",
+];
+
+const solutionParagraphs = [
+  "A Pratka existe para resolver isso da forma mais direta possível. Sem plataforma complexa, sem cadastro obrigatório, sem processo seletivo próprio. Apenas uma página completa, atualizada e bem organizada com todos os programas de summer internship disponíveis no Brasil — e um link direto para você se candidatar.",
+  "Acreditamos que a melhor tecnologia é aquela que sai do caminho. Você não precisa de mais uma conta, mais uma senha, mais um formulário. Você precisa da informação certa, no formato certo, na hora certa. É exatamente isso que a Pratka entrega.",
+];
+
 export default function ProblemSolution() {
   return (
     <section id="problema-solucao" className="scroll-mt-24">
@@ -14,18 +25,13 @@ export default function ProblemSolution() {
               O Problema
             </h2>
           </AnimatedSection>
-          <AnimatedSection>
-            <p className="text-lg leading-relaxed text-cream/65">
-              Programas de summer internship existem no Brasil — mas quase
-              ninguém sabe. As oportunidades estão espalhadas por dezenas de
-              sites diferentes, cada empresa com seu próprio processo e
-              prazos. Para o universitário que quer participar, a busca é
-              exaustiva: são horas navegando entre páginas de carreiras,
-              LinkedIn e grupos de WhatsApp tentando descobrir quais empresas
-              oferecem esse tipo de programa. Muitos desistem antes de
-              encontrar. Outros nem sabem que a oportunidade existe.
-            </p>
-          </AnimatedSection>
+          <div className="space-y-5">
+            {problemParagraphs.map((p, i) => (
+              <AnimatedSection key={i} delay={i * 0.05}>
+                <p className="text-lg leading-relaxed text-cream/65">{p}</p>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -43,16 +49,13 @@ export default function ProblemSolution() {
               A <span className="text-gradient-solar">Solução</span>
             </h2>
           </AnimatedSection>
-          <AnimatedSection>
-            <p className="text-lg leading-relaxed text-ink/80">
-              A Pratka resolve isso da forma mais simples possível: reunimos
-              todas as empresas que oferecem summer internship para
-              undergrads no Brasil em uma única página, com informações
-              claras e link direto para o formulário de inscrição. Sem
-              cadastro, sem intermediário. Você entra, encontra e se
-              candidata. Pronto.
-            </p>
-          </AnimatedSection>
+          <div className="space-y-5">
+            {solutionParagraphs.map((p, i) => (
+              <AnimatedSection key={i} delay={i * 0.05}>
+                <p className="text-lg leading-relaxed text-ink/80">{p}</p>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </div>
     </section>
