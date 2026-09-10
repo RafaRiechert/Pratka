@@ -15,7 +15,7 @@ const solutionParagraphs = [
 export default function ProblemSolution() {
   return (
     <section id="problema-solucao" className="scroll-mt-24">
-      <div className="border-b border-cream/5 bg-ink py-24">
+      <div data-nav-theme="dark" className="border-b border-cream/5 bg-ink py-24">
         <div className="mx-auto max-w-3xl px-6">
           <AnimatedSection className="mb-10 flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cream/10 text-cream/60">

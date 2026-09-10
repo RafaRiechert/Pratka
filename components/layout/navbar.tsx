@@ -7,6 +7,8 @@ import { Menu, X } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import NavLink from "@/components/layout/nav-link";
+import { cn } from "@/lib/utils";
+import { useNavOverDark } from "@/lib/use-nav-over-dark";
 
 const links = [
   { href: "/#empresas", label: "Empresas" },
@@ -19,21 +21,35 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { user, signOut } = useAuth();
+  // Two states only: ink-on-cream, and cream-on-dark over dark sections.
+  const overDark = useNavOverDark();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40">
       <div className="mx-auto mt-4 max-w-7xl px-4">
-        <nav className="glass flex items-center justify-between rounded-2xl px-5 py-3 shadow-card">
+        <nav
+          className={cn(
+            "flex items-center justify-between rounded-2xl px-5 py-3 shadow-card transition-colors duration-500",
+            overDark
+              // Petroleo rather than ink: the dark sections are ink, so an
+              // ink panel on top of them made the header pill disappear.
+              ? "border border-cream/15 bg-petroleo/85 backdrop-blur-lg"
+              : "glass"
+          )}
+        >
           <Link
             href="/"
-            className="font-editorial text-2xl font-extrabold tracking-tight text-ink"
+            className={cn(
+              "font-editorial text-2xl font-extrabold tracking-tight transition-colors duration-500",
+              overDark ? "text-cream" : "text-ink"
+            )}
           >
             Pratka
           </Link>
 
           <div className="hidden items-center gap-0.5 lg:flex">
             {links.map((l) => (
-              <NavLink key={l.href} href={l.href}>
+              <NavLink key={l.href} href={l.href} onDark={overDark}>
                 {l.label}
               </NavLink>
             ))}
@@ -41,12 +57,26 @@ export default function Navbar() {
 
           <div className="hidden items-center gap-3 lg:flex">
             {user ? (
-              <Button variant="ghost" size="sm" onClick={() => signOut()}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className={overDark ? "text-cream hover:bg-cream/10" : undefined}
+                onClick={() => signOut()}
+              >
                 Sair
               </Button>
             ) : (
               <>
-                <Button href="/login" variant="outline" size="sm">
+                <Button
+                  href="/login"
+                  variant="outline"
+                  size="sm"
+                  className={
+                    overDark
+                      ? "border-cream/35 text-cream hover:border-sol hover:text-sol"
+                      : undefined
+                  }
+                >
                   Entrar
                 </Button>
                 <Button href="/cadastro" variant="primary" size="sm">
@@ -57,7 +87,10 @@ export default function Navbar() {
           </div>
 
           <button
-            className="text-ink lg:hidden"
+            className={cn(
+              "transition-colors duration-500 lg:hidden",
+              overDark ? "text-cream" : "text-ink"
+            )}
             onClick={() => setOpen((o) => !o)}
             aria-label="Abrir menu"
           >

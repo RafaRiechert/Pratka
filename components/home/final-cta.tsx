@@ -5,7 +5,7 @@ import GradientOrbs from "@/components/ui/gradient-orbs";
 
 export default function FinalCta() {
   return (
-    <section className="relative overflow-hidden bg-ink py-28">
+    <section data-nav-theme="dark" className="relative overflow-hidden bg-ink py-28">
       <GradientOrbs />
       <AnimatedSection className="relative z-10 mx-auto max-w-3xl px-6 text-center">
         <h2 className="font-display text-4xl font-bold text-cream sm:text-5xl">

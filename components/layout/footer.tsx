@@ -17,7 +17,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="relative mt-32 border-t border-cream/10 bg-ink">
+    <footer data-nav-theme="dark" className="relative mt-32 border-t border-cream/10 bg-ink">
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
