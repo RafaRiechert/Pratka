@@ -3,7 +3,7 @@ import AnimatedSection, {
   Stagger,
   StaggerItem,
 } from "@/components/ui/animated-section";
-import GlassCard from "@/components/ui/glass-card";
+
 
 const steps = [
   {
@@ -34,21 +34,29 @@ export default function HowItWorks() {
 
       <Stagger className="mt-16 grid gap-6 sm:grid-cols-3">
         {steps.map(({ icon: Icon, title, text }, i) => (
-          <StaggerItem key={title}>
-            <GlassCard className="flex h-full flex-col gap-4 p-8">
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-tangerine/15 text-tangerine-deep">
-                  <Icon size={20} />
-                </div>
-                <span className="font-display text-2xl font-bold text-coral">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+          <StaggerItem key={title} className="h-full">
+            {/* The step number is the graphic: set large in Clash and bled
+                to the card's edge, it does the work an illustration would,
+                without inventing imagery we don't have. */}
+            <div className="pop relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border border-ink/8 bg-paper p-8 shadow-card">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-4 -right-2 font-display text-[7rem] font-bold leading-none text-tangerine/12"
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+
+              <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-sol text-ink">
+                <Icon size={20} />
               </div>
-              <h3 className="font-display text-lg font-bold text-ink">
+
+              <h3 className="relative font-display text-xl font-bold text-ink">
                 {title}
               </h3>
-              <p className="text-sm leading-relaxed text-ink-soft">{text}</p>
-            </GlassCard>
+              <p className="relative text-sm leading-relaxed text-ink-soft">
+                {text}
+              </p>
+            </div>
           </StaggerItem>
         ))}
       </Stagger>

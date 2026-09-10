@@ -1,5 +1,6 @@
 import { CircleAlert, Sparkles } from "lucide-react";
 import AnimatedSection from "@/components/ui/animated-section";
+import BenefitPills from "@/components/ui/benefit-pills";
 
 const problemParagraphs = [
   "Programas de summer internship são uma das experiências mais transformadoras que um universitário pode ter. Em poucas semanas, você ganha exposição real ao mercado de trabalho, constrói um network que pode definir sua carreira e descobre na prática se aquela área é realmente para você. Mas existe um problema fundamental: encontrar esses programas é absurdamente difícil.",
@@ -21,7 +22,7 @@ export default function ProblemSolution() {
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cream/10 text-cream/60">
               <CircleAlert size={20} />
             </div>
-            <h2 className="font-display text-3xl font-bold text-cream/90 sm:text-4xl">
+            <h2 className="font-display text-4xl font-bold text-cream sm:text-5xl">
               O Problema
             </h2>
           </AnimatedSection>
@@ -35,27 +36,31 @@ export default function ProblemSolution() {
         </div>
       </div>
 
-      <div className="relative overflow-hidden bg-cream py-24">
+      <div className="relative overflow-hidden bg-sol py-24">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(255,90,31,0.1),transparent_70%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(255,251,243,0.45),transparent_70%)]"
         />
         <div className="relative z-10 mx-auto max-w-3xl px-6">
           <AnimatedSection className="mb-10 flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-tangerine/15 text-tangerine-deep">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-ink/10 text-ink">
               <Sparkles size={20} />
             </div>
-            <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-              A <span className="text-gradient-solar">Solução</span>
+            <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
+              A Solução
             </h2>
           </AnimatedSection>
           <div className="space-y-5">
             {solutionParagraphs.map((p, i) => (
               <AnimatedSection key={i} delay={i * 0.05}>
-                <p className="text-lg leading-relaxed text-ink/80">{p}</p>
+                <p className="text-lg leading-relaxed text-ink/85">{p}</p>
               </AnimatedSection>
             ))}
           </div>
+
+          <AnimatedSection delay={0.1}>
+            <BenefitPills className="mt-10" />
+          </AnimatedSection>
         </div>
       </div>
     </section>

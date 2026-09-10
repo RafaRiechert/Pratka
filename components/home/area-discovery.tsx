@@ -106,7 +106,7 @@ export default function AreaDiscovery() {
       </AnimatedSection>
 
       <div className="mt-14 grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-        <ul className="border-t border-ink/10">
+        <ul className="min-w-0 border-t border-ink/10">
           {areaProgrammes.map((area, i) => {
             const isActive = finePointer && i === hovered;
 
@@ -172,7 +172,7 @@ export default function AreaDiscovery() {
         {/* Anchored preview. Desktop only — the coarse-pointer rows above
             already carry the same information inline. */}
         {finePointer && (
-          <div className="hidden lg:block">
+          <div className="hidden min-w-0 lg:block">
             <div className="sticky top-28">
               <motion.p
                 key={`${active.code}-label`}
