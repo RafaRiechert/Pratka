@@ -24,11 +24,11 @@ export default function Hero() {
           </Badge>
         </motion.div>
 
-        <h1 className="mt-8 font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-[80px]">
+        <h1 className="mt-8 font-display text-5xl font-bold leading-[1.05] text-ink sm:text-6xl lg:text-[80px]">
           <AnimatedWords text="Seu summer internship" />
           <br />
           <motion.span
-            className="text-gradient-solar inline-block italic"
+            className="text-gradient-solar font-editorial inline-block italic"
             initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}

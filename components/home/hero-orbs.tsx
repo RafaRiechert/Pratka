@@ -43,7 +43,7 @@ export default function HeroOrbs() {
       />
       <motion.div
         style={{ x: x2, y: y2 }}
-        className="absolute top-10 right-[-140px] h-[380px] w-[380px] rounded-full bg-gold/30 blur-[120px] animate-float-slower"
+        className="absolute top-10 right-[-140px] h-[380px] w-[380px] rounded-full bg-sol/30 blur-[120px] animate-float-slower"
       />
       <motion.div
         style={{ x: x3, y: y3 }}

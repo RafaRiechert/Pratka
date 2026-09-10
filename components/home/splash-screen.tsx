@@ -23,7 +23,7 @@ export default function SplashScreen({ onDone }: { onDone: () => void }) {
         >
           <motion.div
             aria-hidden="true"
-            className="absolute h-2 w-2 rounded-full bg-gold"
+            className="absolute h-2 w-2 rounded-full bg-sol"
             style={{ boxShadow: "0 0 30px 10px rgba(255,182,39,0.7)" }}
             initial={{ x: "-40vw", opacity: 0 }}
             animate={{ x: "40vw", opacity: [0, 1, 1, 0] }}
@@ -33,7 +33,7 @@ export default function SplashScreen({ onDone }: { onDone: () => void }) {
             {letters.map((letter, i) => (
               <motion.span
                 key={`${letter}-${i}`}
-                className="font-display text-5xl font-extrabold text-cream sm:text-7xl"
+                className="font-editorial text-5xl font-extrabold text-cream sm:text-7xl"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{

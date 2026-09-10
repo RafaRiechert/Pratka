@@ -27,7 +27,7 @@ export default function HowItWorks() {
   return (
     <section id="como-funciona" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
       <AnimatedSection className="mx-auto max-w-2xl text-center">
-        <h2 className="font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
+        <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
           Como <span className="text-gradient-solar">funciona</span>
         </h2>
       </AnimatedSection>
@@ -40,7 +40,7 @@ export default function HowItWorks() {
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-tangerine/15 text-tangerine-deep">
                   <Icon size={20} />
                 </div>
-                <span className="font-display text-2xl font-extrabold text-coral">
+                <span className="font-display text-2xl font-bold text-coral">
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </div>

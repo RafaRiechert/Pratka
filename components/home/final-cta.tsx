@@ -8,7 +8,7 @@ export default function FinalCta() {
     <section className="relative overflow-hidden bg-ink py-28">
       <GradientOrbs />
       <AnimatedSection className="relative z-10 mx-auto max-w-3xl px-6 text-center">
-        <h2 className="font-display text-4xl font-extrabold tracking-tight text-cream sm:text-5xl">
+        <h2 className="font-display text-4xl font-bold text-cream sm:text-5xl">
           Conhece uma empresa que oferece summer e{" "}
           <span className="text-gradient-solar">não está aqui</span>?
         </h2>

@@ -21,7 +21,7 @@ export default function ProblemSolution() {
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cream/10 text-cream/60">
               <CircleAlert size={20} />
             </div>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight text-cream/90 sm:text-4xl">
+            <h2 className="font-display text-3xl font-bold text-cream/90 sm:text-4xl">
               O Problema
             </h2>
           </AnimatedSection>
@@ -45,7 +45,7 @@ export default function ProblemSolution() {
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-tangerine/15 text-tangerine-deep">
               <Sparkles size={20} />
             </div>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+            <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
               A <span className="text-gradient-solar">Solução</span>
             </h2>
           </AnimatedSection>

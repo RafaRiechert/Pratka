@@ -3,15 +3,30 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "outline" | "ghost" | "danger";
+type Variant =
+  | "primary"
+  | "secondary"
+  | "petroleo"
+  | "sol"
+  | "outline"
+  | "ghost"
+  | "danger";
 type Size = "sm" | "md" | "lg";
 
+/*
+ * Every combination below clears WCAG AA (4.5:1) for its own text, which is
+ * why the filled orange is tangerine-deep and not tangerine: cream on
+ * #ff5a1f is 3.1:1 and fails. Tangerine survives as a surface with ink text
+ * (5.5:1) and as decoration — see the palette rule in globals.css.
+ */
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-tangerine text-cream hover:bg-tangerine-deep hover:shadow-glow-tangerine",
-  secondary: "bg-ink text-cream hover:bg-ink-2 hover:shadow-glow-gold",
+    "bg-tangerine-deep text-cream hover:shadow-glow-tangerine",
+  secondary: "bg-ink text-cream hover:bg-ink-2 hover:shadow-card",
+  petroleo: "bg-petroleo text-cream hover:bg-petroleo-deep hover:shadow-glow-petroleo",
+  sol: "bg-sol text-ink hover:shadow-glow-sol",
   outline:
-    "border border-ink/25 text-ink bg-transparent hover:border-tangerine hover:text-tangerine-deep",
+    "border border-ink/25 text-ink bg-transparent hover:border-tangerine-deep hover:text-tangerine-deep",
   ghost: "bg-transparent text-ink hover:bg-ink/5",
   danger:
     "bg-danger/10 text-danger border border-danger/40 hover:bg-danger/20",
@@ -47,7 +62,7 @@ export function Button({
   disabled,
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-xl font-semibold tracking-tight transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none",
+    "pop focus-ring inline-flex items-center justify-center gap-2 rounded-xl font-semibold tracking-tight disabled:opacity-50 disabled:pointer-events-none",
     variantClasses[variant],
     sizeClasses[size],
     className

@@ -26,7 +26,7 @@ export default function Navbar() {
         <nav className="glass flex items-center justify-between rounded-2xl px-5 py-3 shadow-card">
           <Link
             href="/"
-            className="font-display text-2xl font-extrabold tracking-tight text-ink"
+            className="font-editorial text-2xl font-extrabold tracking-tight text-ink"
           >
             Pratka
           </Link>

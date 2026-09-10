@@ -24,7 +24,7 @@ export default function SobrePage() {
 
       <section className="mx-auto max-w-3xl px-6 pb-16">
         <AnimatedSection className="mb-8">
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+          <h2 className="font-editorial text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
             Sobre
           </h2>
         </AnimatedSection>
@@ -39,7 +39,7 @@ export default function SobrePage() {
 
       <section className="mx-auto max-w-3xl px-6 pb-28">
         <AnimatedSection className="mb-8">
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+          <h2 className="font-editorial text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
             Quem somos nós
           </h2>
         </AnimatedSection>

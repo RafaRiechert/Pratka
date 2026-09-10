@@ -1,25 +1,39 @@
 @import "tailwindcss";
 
 @theme {
-  /* Solar Editorial — warm cream paper, tangerine + gold blooms, espresso ink for contrast */
+  /*
+   * Contraponto — cream paper + espresso ink carry the page; the accent
+   * punctuates. Contrast rule baked into the token names, all AA on cream:
+   *   warm (tangerine/sol) = SURFACE, always with ink text
+   *   petroleo             = SURFACE, always with cream text
+   *   tangerine-deep       = TEXT and filled CTAs (white/cream on it)
+   */
   --color-cream: #fdf6ec;
   --color-cream-deep: #f5e7d0;
   --color-paper: #fffbf3;
   --color-ink: #241a12;
   --color-ink-2: #34251a;
   --color-ink-soft: #6b5642;
+  /* accent 1 — energy */
   --color-tangerine: #ff5a1f;
-  --color-tangerine-deep: #de4210;
+  --color-tangerine-deep: #b8380f;
   --color-coral: #ff8b66;
-  --color-gold: #ffb627;
+  /* accent 2 — the cool counterweight the old palette never had */
+  --color-petroleo: #0f4c4a;
+  --color-petroleo-deep: #0b3b42;
+  /* pop — surfaces only, never text on cream */
+  --color-sol: #ffc53d;
   --color-sand: #ead9bd;
   --color-danger: #c43d3d;
 
-  --font-display: var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
+  --font-display: var(--font-clash), "Clash Display", ui-sans-serif, system-ui, sans-serif;
+  --font-editorial: var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
   --font-body: var(--font-work-sans), "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-script: var(--font-caveat), "Caveat", ui-serif, cursive;
 
   --shadow-glow-tangerine: 0 0 0 1px rgba(255, 90, 31, 0.28), 0 10px 32px -8px rgba(255, 90, 31, 0.45);
-  --shadow-glow-gold: 0 0 0 1px rgba(255, 182, 39, 0.32), 0 10px 30px -8px rgba(255, 182, 39, 0.4);
+  --shadow-glow-sol: 0 0 0 1px rgba(255, 197, 61, 0.32), 0 10px 30px -8px rgba(255, 197, 61, 0.4);
+  --shadow-glow-petroleo: 0 0 0 1px rgba(15, 76, 74, 0.3), 0 10px 30px -8px rgba(15, 76, 74, 0.45);
   --shadow-card: 0 20px 50px -22px rgba(36, 26, 18, 0.35), 0 1px 0 0 rgba(255, 255, 255, 0.5) inset;
 
   --animate-float-slow: float 9s ease-in-out infinite;
@@ -43,14 +57,30 @@
 
 :root {
   color-scheme: light;
+
+  /*
+   * Motion tokens. Same numbers as lib/motion.ts so CSS transitions and
+   * Framer springs feel like one system. "Pop" is the ear-popping overshoot
+   * borrowed from the reference; "soft" is for anything a user reads.
+   */
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 620ms;
+  --hover-lift: -2px;
+  --hover-scale: 1.03;
 }
 
 * {
   border-color: rgba(36, 26, 18, 0.08);
 }
 
+/* Scrolling is driven by Lenis (see components/providers/smooth-scroll.tsx).
+   Native smooth-scroll would fight it, so it stays off; under reduced motion
+   Lenis never starts and the browser's instant jump is exactly what we want. */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -75,8 +105,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Give display type (Fraunces) its warm, slightly rounded editorial character */
+/* Clash Display is drawn tight already — Tailwind's tracking-tight on top of
+   it closes the word spaces at display sizes. Optical correction lives here
+   so every headline gets it without per-heading tuning. Clash ships no
+   italic: never set italic on .font-display or the browser fakes an oblique
+   (use .font-editorial, which has a real one). */
 .font-display {
+  letter-spacing: -0.015em;
+  word-spacing: 0.06em;
+  font-synthesis: none;
+}
+
+/* Fraunces is now the editorial voice (wordmark, Sobre, pull quotes) —
+   keep its warm, slightly rounded character. Clash Display carries headlines. */
+.font-editorial {
   font-variation-settings: "SOFT" 40, "WONK" 0;
 }
 
@@ -130,7 +172,7 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(255, 90, 31, 0.45), rgba(255, 182, 39, 0.3), transparent 70%);
+  background: linear-gradient(135deg, rgba(255, 90, 31, 0.45), rgba(255, 197, 61, 0.3), transparent 70%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -143,7 +185,7 @@ body {
 }
 
 .text-gradient-solar {
-  background: linear-gradient(90deg, var(--color-tangerine), var(--color-gold));
+  background: linear-gradient(90deg, var(--color-tangerine), var(--color-sol));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -162,7 +204,62 @@ body {
 .bg-mesh {
   background-image:
     radial-gradient(45% 40% at 16% 20%, rgba(255, 90, 31, 0.18), transparent 70%),
-    radial-gradient(50% 45% at 85% 12%, rgba(255, 182, 39, 0.22), transparent 70%),
+    radial-gradient(50% 45% at 85% 12%, rgba(255, 197, 61, 0.22), transparent 70%),
     radial-gradient(55% 50% at 50% 100%, rgba(255, 139, 102, 0.18), transparent 70%),
     linear-gradient(180deg, #fdf6ec 0%, #fbf1e1 50%, #fdf6ec 100%);
+}
+
+/*
+ * Springy interaction system — the reference's "ear-popping" button hover,
+ * dialed back to a 3% pop. CSS rather than a motion wrapper so it costs
+ * nothing on server-rendered buttons and works on every interactive surface.
+ *
+ * Guards, in order: only where a real pointer exists (never on touch, where
+ * :hover sticks after a tap), and never under reduced motion.
+ */
+.pop {
+  transition:
+    transform var(--dur-base) var(--ease-pop),
+    box-shadow var(--dur-base) var(--ease-soft),
+    background-color var(--dur-fast) linear,
+    border-color var(--dur-fast) linear,
+    color var(--dur-fast) linear;
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pop:hover {
+    transform: translateY(var(--hover-lift)) scale(var(--hover-scale));
+  }
+  /* Trailing icons lean into the direction of travel. */
+  .pop:hover .pop-nudge {
+    transform: translateX(3px);
+  }
+}
+
+.pop:active {
+  transform: scale(0.97);
+}
+
+.pop-nudge {
+  transition: transform var(--dur-base) var(--ease-pop);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pop,
+  .pop-nudge {
+    transition: none;
+  }
+  .pop:hover,
+  .pop:active,
+  .pop:hover .pop-nudge {
+    transform: none;
+  }
+}
+
+/* One focus ring for the whole site, on every accent background. */
+.focus-ring:focus-visible {
+  outline: 3px solid var(--color-petroleo);
+  outline-offset: 3px;
+  border-radius: inherit;
 }

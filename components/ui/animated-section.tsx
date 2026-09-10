@@ -2,12 +2,27 @@
 
 import { motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
+import {
+  revealDistance,
+  springReveal,
+  stagger,
+  viewportOnce,
+} from "@/lib/motion";
 
+/**
+ * Scroll-reveal primitives. Every major block on the site enters through one
+ * of these so the rhythm is identical everywhere — the numbers all come from
+ * lib/motion.ts rather than being tuned per section.
+ *
+ * Reduced motion is handled globally by <MotionConfig reducedMotion="user">
+ * in app/layout.tsx: Framer drops the transforms and keeps the opacity, so
+ * content still appears, it just doesn't travel.
+ */
 export default function AnimatedSection({
   children,
   className,
   delay = 0,
-  y = 40,
+  y = revealDistance.lg,
 }: {
   children: ReactNode;
   className?: string;
@@ -19,8 +34,8 @@ export default function AnimatedSection({
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ type: "spring", stiffness: 70, damping: 20, delay }}
+      viewport={viewportOnce}
+      transition={{ ...springReveal, delay }}
     >
       {children}
     </motion.div>
@@ -30,16 +45,16 @@ export default function AnimatedSection({
 export const staggerContainer: Variants = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.08 },
+    transition: { staggerChildren: stagger.base },
   },
 };
 
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: revealDistance.md },
   show: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 90, damping: 18 },
+    transition: springReveal,
   },
 };
 
@@ -65,7 +80,7 @@ export function Stagger({
       initial="hidden"
       animate={scrollTrigger ? undefined : "show"}
       whileInView={scrollTrigger ? "show" : undefined}
-      viewport={scrollTrigger ? { once: true, margin: "-80px" } : undefined}
+      viewport={scrollTrigger ? viewportOnce : undefined}
     >
       {children}
     </motion.div>

@@ -49,7 +49,7 @@ export default function CompanyListing() {
       </Suspense>
 
       <AnimatedSection className="mx-auto max-w-2xl text-center">
-        <h2 className="font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
+        <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
           Programas de Summer Internship no Brasil
         </h2>
         <p className="mt-5 text-lg text-ink-soft">

@@ -21,7 +21,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
-            <span className="font-display text-2xl font-extrabold tracking-tight text-cream">
+            <span className="font-editorial text-2xl font-extrabold tracking-tight text-cream">
               Pratka
             </span>
             <p className="mt-3 max-w-xs text-sm text-cream/55">
