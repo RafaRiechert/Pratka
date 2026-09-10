@@ -1,8 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import SplashScreen from "@/components/home/splash-screen";
+import IntroLoader from "@/components/home/intro-loader";
 import Hero from "@/components/home/hero";
 import StatsBar from "@/components/home/stats-bar";
 import HowItWorks from "@/components/home/how-it-works";
@@ -11,44 +7,23 @@ import CompanyListing from "@/components/home/company-listing";
 import ProblemSolution from "@/components/home/problem-solution";
 import FinalCta from "@/components/home/final-cta";
 
-const SPLASH_KEY = "pratka_splash_shown";
-
+/**
+ * The page no longer waits on the intro. Content renders immediately and
+ * <IntroLoader /> lays a curtain over it for under a second — so the hero
+ * is the LCP element on its own timeline, and nothing can leave the page
+ * blank if the intro misbehaves.
+ */
 export default function Home() {
-  const [showSplash, setShowSplash] = useState(false);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    if (sessionStorage.getItem(SPLASH_KEY)) {
-      setReady(true);
-    } else {
-      setShowSplash(true);
-    }
-  }, []);
-
-  const handleSplashDone = () => {
-    sessionStorage.setItem(SPLASH_KEY, "1");
-    setShowSplash(false);
-    setReady(true);
-  };
-
   return (
     <>
-      {showSplash && <SplashScreen onDone={handleSplashDone} />}
-      {ready && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Hero />
-          <StatsBar />
-          <HowItWorks />
-          <QuizCta />
-          <CompanyListing />
-          <ProblemSolution />
-          <FinalCta />
-        </motion.div>
-      )}
+      <IntroLoader />
+      <Hero />
+      <StatsBar />
+      <HowItWorks />
+      <QuizCta />
+      <CompanyListing />
+      <ProblemSolution />
+      <FinalCta />
     </>
   );
 }

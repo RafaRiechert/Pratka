@@ -6,66 +6,89 @@ import Badge from "@/components/ui/badge";
 import Magnetic from "@/components/ui/magnetic";
 import { Button } from "@/components/ui/button";
 import HeroOrbs from "@/components/home/hero-orbs";
+import HeroCardStack from "@/components/home/hero-card-stack";
 import AnimatedWords from "@/components/home/animated-words";
+import { duration, ease } from "@/lib/motion";
+
+/** Entrance beats. The whole sequence is done in under a second. */
+const BEAT = {
+  badge: 0,
+  headline: 0.08,
+  italic: 0.34,
+  support: 0.46,
+  cta: 0.56,
+} as const;
+
+const rise = (delay: number) => ({
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: duration.base, delay, ease: ease.soft },
+});
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-mesh">
+    <section className="relative overflow-hidden bg-mesh">
       <HeroOrbs />
-      <div className="relative z-10 mx-auto max-w-5xl px-6 py-32 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Badge>
-            <Sparkles size={14} className="text-tangerine" />
-            O guia definitivo de summer internships no Brasil
-          </Badge>
-        </motion.div>
 
-        <h1 className="mt-8 font-display text-5xl font-bold leading-[1.05] text-ink sm:text-6xl lg:text-[80px]">
-          <AnimatedWords text="Seu summer internship" />
-          <br />
-          <motion.span
-            className="text-gradient-solar font-editorial inline-block italic"
-            initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            style={{ textShadow: "0 0 40px rgba(255,90,31,0.25)" }}
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-16 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10 lg:py-28">
+        <div className="text-center lg:text-left">
+          <motion.div {...rise(BEAT.badge)}>
+            <Badge>
+              <Sparkles size={14} className="text-tangerine-deep" />
+              O guia definitivo de summer internships no Brasil
+            </Badge>
+          </motion.div>
+
+          <h1 className="mt-7 font-display text-5xl font-bold leading-[1.03] text-ink sm:text-6xl lg:text-[68px]">
+            <AnimatedWords text="Seu summer internship" baseDelay={BEAT.headline} />
+            <br />
+            <span className="inline-block overflow-hidden pb-[0.14em] mb-[-0.14em] align-bottom">
+              <motion.span
+                className="text-gradient-solar font-editorial inline-block italic"
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: duration.slow,
+                  delay: BEAT.italic,
+                  ease: ease.soft,
+                }}
+              >
+                começa aqui.
+              </motion.span>
+            </span>
+          </h1>
+
+          <motion.p
+            className="mx-auto mt-6 max-w-xl text-lg text-ink-soft sm:text-xl lg:mx-0"
+            {...rise(BEAT.support)}
           >
-            começa aqui.
-          </motion.span>
-        </h1>
+            O único lugar onde você encontra todos os programas de summer
+            internship do Brasil, com link direto para se candidatar.
+          </motion.p>
 
-        <motion.p
-          className="mx-auto mt-7 max-w-3xl text-lg text-ink-soft sm:text-xl"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1 }}
-        >
-          A cada ano, as melhores empresas do Brasil abrem suas portas para
-          universitários através de programas de summer internship — mas
-          encontrar essas oportunidades nunca foi fácil. Até agora. A Pratka
-          reuniu todos esses programas em um só lugar, com informações
-          completas e link direto para inscrição. Sem cadastro, sem
-          intermediário. Sua próxima grande oportunidade está a um clique de
-          distância.
-        </motion.p>
+          <motion.div
+            className="mt-9 flex flex-wrap items-center justify-center gap-4 lg:justify-start"
+            {...rise(BEAT.cta)}
+          >
+            <Magnetic>
+              <Button href="/#empresas" size="lg">
+                Ver programas
+                <ArrowDown size={18} className="pop-nudge" />
+              </Button>
+            </Magnetic>
 
-        <motion.div
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.15 }}
-        >
-          <Magnetic>
-            <Button href="/#empresas" size="lg">
-              Ver programas
-              <ArrowDown size={18} />
+            <Button href="/quiz" variant="outline" size="lg">
+              Fazer o quiz
             </Button>
-          </Magnetic>
-        </motion.div>
+
+            {/* The script accent, rationed to three words. */}
+            <span className="w-full text-center font-script text-2xl leading-none text-tangerine-deep sm:w-auto lg:text-left">
+              grátis para estudantes
+            </span>
+          </motion.div>
+        </div>
+
+        <HeroCardStack />
       </div>
     </section>
   );

@@ -41,12 +41,17 @@ const clashDisplay = localFont({
   ],
 });
 
-/** Script accent — deliberately rationed to one or two words at a time. */
+/**
+ * Script accent — deliberately rationed to one or two words at a time.
+ * Not preloaded: it decorates three words, and preloading it would put it
+ * in the critical path against Clash, which draws the LCP headline.
+ */
 const caveat = Caveat({
   variable: "--font-caveat",
   subsets: ["latin"],
   weight: "variable",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
