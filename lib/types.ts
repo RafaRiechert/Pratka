@@ -11,8 +11,6 @@ export type City = "São Paulo" | "Rio de Janeiro";
 
 export type Audience = "Universitários no Brasil" | "Brasileiros em universidades no exterior";
 
-export type Season = "verao-brasil" | "verao-internacional";
-
 export interface CompanyArea {
   area: string;
   description: string;
@@ -31,7 +29,6 @@ export interface Company {
   duration?: string;
   paid: boolean;
   audience: Audience;
-  seasons: Season[];
   /** Single application link. Omit when `areas` is set instead. */
   link?: string;
   /** Multiple sub-programs, each with its own apply link (e.g. Citi). */

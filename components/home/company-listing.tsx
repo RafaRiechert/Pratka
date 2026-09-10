@@ -11,8 +11,7 @@ import CompanyFilters, {
   EMPTY_FILTERS,
   type FilterState,
 } from "@/components/empresas/company-filters";
-import SeasonTabs from "@/components/empresas/season-tabs";
-import type { Company, Sector, Season } from "@/lib/types";
+import type { Company, Sector } from "@/lib/types";
 
 function SectorFromQuery({ onSector }: { onSector: (sector: Sector) => void }) {
   const searchParams = useSearchParams();
@@ -29,56 +28,17 @@ function SectorFromQuery({ onSector }: { onSector: (sector: Sector) => void }) {
 }
 
 export default function CompanyListing() {
-  const [season, setSeason] = useState<Season>("verao-brasil");
   const [filters, setFilters] = useState<FilterState>(EMPTY_FILTERS);
   const [detailCompany, setDetailCompany] = useState<Company | null>(null);
 
-  // Always derived straight from the full company list — never from a
-  // previously filtered array — so switching seasons or filters can only
-  // narrow things down from the complete set, never compound on stale data.
-  const seasonCompanies = useMemo(
-    () => allCompanies.filter((c) => c.seasons.includes(season)),
-    [season]
-  );
-
-  const seasonSectors = useMemo(
-    () => sectors.filter((s) => seasonCompanies.some((c) => c.sector === s)),
-    [seasonCompanies]
-  );
-  const seasonCities = useMemo(
-    () => cities.filter((city) => seasonCompanies.some((c) => c.cities.includes(city))),
-    [seasonCompanies]
-  );
-  const seasonAudiences = useMemo(
-    () => audiences.filter((a) => seasonCompanies.some((c) => c.audience === a)),
-    [seasonCompanies]
-  );
-
-  // A filter selection from a previous season (or from the quiz's ?sector=
-  // deep link) might not apply to the season currently on screen. Rather
-  // than reset it via a separate effect — which can race with the query
-  // param being applied — just ignore it wherever it's stale. This keeps
-  // filtering a pure, single-pass derivation over the full season list.
-  const activeFilters: FilterState = useMemo(
-    () => ({
-      sector: filters.sector && seasonSectors.includes(filters.sector) ? filters.sector : "",
-      city: filters.city && seasonCities.includes(filters.city) ? filters.city : "",
-      audience:
-        filters.audience && seasonAudiences.includes(filters.audience)
-          ? filters.audience
-          : "",
-    }),
-    [filters, seasonSectors, seasonCities, seasonAudiences]
-  );
-
   const filtered = useMemo(() => {
-    return seasonCompanies.filter((c) => {
-      if (activeFilters.sector && c.sector !== activeFilters.sector) return false;
-      if (activeFilters.city && !c.cities.includes(activeFilters.city)) return false;
-      if (activeFilters.audience && c.audience !== activeFilters.audience) return false;
+    return allCompanies.filter((c) => {
+      if (filters.sector && c.sector !== filters.sector) return false;
+      if (filters.city && !c.cities.includes(filters.city)) return false;
+      if (filters.audience && c.audience !== filters.audience) return false;
       return true;
     });
-  }, [seasonCompanies, activeFilters]);
+  }, [filters]);
 
   return (
     <section id="empresas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
@@ -98,16 +58,12 @@ export default function CompanyListing() {
         </p>
       </AnimatedSection>
 
-      <div className="mt-10 flex justify-center">
-        <SeasonTabs value={season} onChange={setSeason} />
-      </div>
-
-      <div className="mt-8 mb-10">
+      <div className="mt-10 mb-10">
         <CompanyFilters
-          sectors={seasonSectors}
-          cities={seasonCities}
-          audiences={seasonAudiences}
-          value={activeFilters}
+          sectors={sectors}
+          cities={cities}
+          audiences={audiences}
+          value={filters}
           onChange={setFilters}
         />
       </div>

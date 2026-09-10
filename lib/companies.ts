@@ -1,4 +1,4 @@
-import type { Audience, City, Company, Season, Sector } from "@/lib/types";
+import type { Audience, City, Company, Sector } from "@/lib/types";
 
 export const companies: Company[] = [
   {
@@ -15,7 +15,6 @@ export const companies: Company[] = [
     duration: "3 meses (jun–ago)",
     paid: true,
     audience: "Brasileiros em universidades no exterior",
-    seasons: ["verao-internacional"],
     link: "https://conteudo.btgpactual.com/summer-undergrad",
   },
   {
@@ -32,7 +31,6 @@ export const companies: Company[] = [
     duration: "2–3 meses",
     paid: true,
     audience: "Brasileiros em universidades no exterior",
-    seasons: ["verao-internacional"],
     link: "https://carreiras.itau.com.br/summer",
   },
   {
@@ -49,7 +47,6 @@ export const companies: Company[] = [
     duration: "1–2 anos",
     paid: true,
     audience: "Universitários no Brasil",
-    seasons: ["verao-internacional"],
     link: "https://morganstanley.tal.net/vx/mobile-0/brand-2/spa-1/candidate/so/pm/1/pl/1/opp/21004-2026-2-Brazil-Internship-Program-Sao-Paulo/en-GB",
   },
   {
@@ -66,7 +63,6 @@ export const companies: Company[] = [
     duration: "Período de férias",
     paid: true,
     audience: "Universitários no Brasil",
-    seasons: ["verao-internacional"],
     link: "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210643718",
   },
   {
@@ -82,7 +78,6 @@ export const companies: Company[] = [
     duration: "2–3 meses",
     paid: true,
     audience: "Universitários no Brasil",
-    seasons: ["verao-internacional"],
     link: "https://careers.bankofamerica.com/en-us/students/job-detail/13192/2026-brazil-investment-banking-internship-program-sao-paulo-brazil",
   },
   {
@@ -99,7 +94,6 @@ export const companies: Company[] = [
     duration: "2–3 meses",
     paid: true,
     audience: "Universitários no Brasil",
-    seasons: ["verao-internacional"],
     link: "https://trainee-ubs.com.br",
   },
   {
@@ -116,25 +110,7 @@ export const companies: Company[] = [
     duration: "Mínimo 8 semanas",
     paid: true,
     audience: "Brasileiros em universidades no exterior",
-    seasons: ["verao-internacional"],
     link: "https://www.brpartners.com.br/pt-BR/careers/internship.html",
-  },
-  {
-    id: "genial-investimentos-estagio-ferias",
-    name: "Genial Investimentos — Estágio de Férias",
-    sector: "Mercado Financeiro",
-    cities: ["São Paulo", "Rio de Janeiro"],
-    shortDescription:
-      "Programa de estágio de férias para estudantes de universidades brasileiras. Oportunidades em tecnologia, áreas institucionais e comerciais.",
-    fullDescription:
-      "O Programa Estágio de Férias da Genial Investimentos é voltado para estudantes universitários brasileiros que desejam vivenciar o mercado financeiro durante as férias de verão (janeiro-fevereiro). A Genial possui mais de 2 milhões de clientes e R$ 250 bilhões em ativos sob gestão. O estagiário atua presencialmente na Av. Faria Lima em São Paulo, com oportunidades em tecnologia, áreas institucionais, suporte e comerciais. Busca estudantes de Economia, Administração, Contabilidade, Engenharia, Marketing e áreas correlatas.",
-    type: "Estágio de Férias",
-    target: "Universitários no Brasil",
-    duration: "1–2 meses (jan–fev)",
-    paid: true,
-    audience: "Universitários no Brasil",
-    seasons: ["verao-brasil"],
-    link: "https://estagiogenial.gupy.io",
   },
   {
     id: "genial-investimentos-summer-job",
@@ -150,41 +126,7 @@ export const companies: Company[] = [
     duration: "2–3 meses (jun–ago)",
     paid: true,
     audience: "Brasileiros em universidades no exterior",
-    seasons: ["verao-internacional"],
     link: "https://genial.gupy.io",
-  },
-  {
-    id: "bcg-brasil",
-    name: "BCG — Brasil",
-    sector: "Consultoria",
-    cities: ["São Paulo", "Rio de Janeiro"],
-    shortDescription:
-      "Summer Intern em consultoria estratégica. Prova online com GMAT, Case Study e inglês.",
-    fullDescription:
-      "O BCG oferece a posição de Summer Intern para estudantes com previsão de formação a partir de dezembro/2028. O processo seletivo inclui prova online com questões de múltipla escolha baseadas em GMAT, Case Study e conhecimentos de inglês. O programa proporciona experiência real em consultoria estratégica, trabalhando em projetos para as maiores empresas do mundo.",
-    type: "Summer Internship",
-    target: "Universitários (formatura a partir de dez/2028)",
-    duration: "8–10 semanas",
-    paid: true,
-    audience: "Universitários no Brasil",
-    seasons: ["verao-brasil"],
-    link: "https://careers.bcg.com/global/en/locations/brazil/application-process",
-  },
-  {
-    id: "disney-latam",
-    name: "Disney — LATAM",
-    sector: "Entretenimento",
-    cities: ["São Paulo"],
-    shortDescription: "Brazil Internship Program da Walt Disney Company Latin America.",
-    fullDescription:
-      "O Brazil Internship Program da Walt Disney Company Latin America é uma oportunidade de iniciar sua carreira em uma das maiores empresas de entretenimento do mundo. As entrevistas acontecem em outubro e o programa começa em janeiro. O estagiário tem contato com diversas áreas da operação Disney na América Latina, incluindo marketing, conteúdo, tecnologia e operações.",
-    type: "Estágio",
-    target: "Universitários no Brasil",
-    duration: "6–12 meses",
-    paid: true,
-    audience: "Universitários no Brasil",
-    seasons: ["verao-brasil"],
-    link: "https://www.disneycareers.com/en/brazil-internships",
   },
   {
     id: "citi",
@@ -197,7 +139,6 @@ export const companies: Company[] = [
     target: "Universitários",
     paid: true,
     audience: "Universitários no Brasil",
-    seasons: ["verao-internacional"],
     areas: [
       {
         area: "Corporate Banking",
@@ -226,23 +167,6 @@ export const companies: Company[] = [
     ],
   },
   {
-    id: "accenture-genew",
-    name: "Accenture — GENEW",
-    sector: "Consultoria",
-    cities: ["São Paulo", "Rio de Janeiro"],
-    shortDescription:
-      "Programa de estágio em consultoria, estratégia e tecnologia com atuação em projetos reais para clientes de diferentes indústrias.",
-    fullDescription:
-      "O Programa de Estágio Accenture GENEW é a porta de entrada para atuar em projetos reais e inovadores, com impacto em diferentes indústrias e clientes. Ao longo do programa, você aprende ao lado de profissionais experientes em consultoria, estratégia e tecnologia. A experiência acontece por meio de três frentes: Reinvention Partners (reinvenção de negócios com clientes), Reinvention Engines (inovação e tecnologia em escala) e Client Success (excelência na entrega). Benefícios: assistência médica 100% subsidiada para titular e dependentes, assistência odontológica, vale refeição/alimentação, vale transporte, seguro de vida, Gympass, convênio pet, férias remuneradas e parceria com escola de idiomas.",
-    type: "Estágio",
-    target: "Universitários no Brasil",
-    duration: "12 meses",
-    paid: true,
-    audience: "Universitários no Brasil",
-    seasons: ["verao-brasil"],
-    link: "https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/So-Paulo---Sao-Paulo/Programa-de-Estgio-Accenture-Genew-20262_R00325541/apply",
-  },
-  {
     id: "mattos-filho-jovens-talentos",
     name: "Mattos Filho — Jovens Talentos",
     sector: "Direito",
@@ -256,7 +180,6 @@ export const companies: Company[] = [
     duration: "Até 2 anos",
     paid: true,
     audience: "Universitários no Brasil",
-    seasons: ["verao-internacional"],
     link: "https://jtmattosfilho.gupy.io",
   },
 ];
@@ -289,10 +212,3 @@ export const cities: City[] = CITY_ORDER.filter((city) =>
 export const audiences: Audience[] = AUDIENCE_ORDER.filter((a) =>
   companies.some((c) => c.audience === a)
 );
-
-export const seasons: Season[] = ["verao-brasil", "verao-internacional"];
-
-export const seasonLabels: Record<Season, string> = {
-  "verao-brasil": "Verão Brasil (Jan 2027)",
-  "verao-internacional": "Verão Internacional (Jun–Jul 2027)",
-};
