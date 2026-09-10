@@ -6,6 +6,7 @@ import QuizCta from "@/components/home/quiz-cta";
 import AreaDiscovery from "@/components/home/area-discovery";
 import CompanyListing from "@/components/home/company-listing";
 import ProblemSolution from "@/components/home/problem-solution";
+import Faq from "@/components/home/faq";
 import FinalCta from "@/components/home/final-cta";
 
 /**
@@ -25,6 +26,7 @@ export default function Home() {
       <AreaDiscovery />
       <CompanyListing />
       <ProblemSolution />
+      <Faq />
       <FinalCta />
     </>
   );
