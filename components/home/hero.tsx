@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { motion } from "framer-motion";
 import Badge from "@/components/ui/badge";
 import Magnetic from "@/components/ui/magnetic";
@@ -33,10 +33,7 @@ export default function Hero() {
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-16 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10 lg:py-28">
         <div className="text-center lg:text-left">
           <motion.div {...rise(BEAT.badge)}>
-            <Badge>
-              <Sparkles size={14} className="text-tangerine-deep" />
-              O guia definitivo de summer internships no Brasil
-            </Badge>
+            <Badge>O guia definitivo de summer internships no Brasil</Badge>
           </motion.div>
 
           <h1 className="mt-7 font-display text-5xl font-bold leading-[1.03] text-ink sm:text-6xl lg:text-[68px]">

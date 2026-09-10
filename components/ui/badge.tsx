@@ -11,7 +11,7 @@ export default function Badge({
   return (
     <span
       className={cn(
-        "glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-ink/85 shadow-[0_0_20px_-6px_rgba(255,90,31,0.35)]",
+        "glass inline-flex items-center gap-2 rounded-full px-5 py-1.5 text-sm font-medium text-ink/85 shadow-[0_0_20px_-6px_rgba(255,90,31,0.35)]",
         className
       )}
     >
