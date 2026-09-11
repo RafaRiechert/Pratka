@@ -113,13 +113,14 @@ export default function QuizFlow() {
     return (
       <div className="flex min-h-[40vh] flex-col items-center justify-center gap-4 text-center">
         <motion.div
+          aria-hidden="true"
           animate={{ rotate: 360 }}
-          transition={{ duration: 1.1, repeat: Infinity, ease: "linear" }}
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent-deep"
+          transition={{ duration: 1.6, repeat: Infinity, ease: "linear" }}
+          className="flex h-11 w-11 items-center justify-center rounded-control border border-line-strong text-accent-deep"
         >
-          <Sparkles size={22} />
+          <Sparkles size={18} />
         </motion.div>
-        <p className="font-display text-xl font-semibold text-ink">
+        <p className="font-display text-2xl font-semibold tracking-tight text-ink">
           Analisando suas respostas...
         </p>
       </div>

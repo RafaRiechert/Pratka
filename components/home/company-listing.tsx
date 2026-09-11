@@ -77,25 +77,27 @@ export default function CompanyListing() {
   ];
 
   return (
-    <section id="empresas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
+    <section id="empresas" className="mx-auto max-w-6xl scroll-mt-20 px-6 py-24">
       <Suspense fallback={null}>
         <SectorFromQuery onSector={(next) => setSector(next)} />
       </Suspense>
 
-      <AnimatedSection className="mx-auto max-w-2xl text-center">
-        <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
+      <AnimatedSection>
+        <h2 className="rule-section max-w-4xl pt-6 font-display text-[clamp(2.25rem,6vw,3.5rem)] font-semibold leading-[1.05] tracking-tight text-ink">
           Programas de Summer Internship no Brasil
         </h2>
-        <p className="mt-5 text-lg text-ink-soft">
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
           Todas as empresas que oferecem oportunidades de verão para
           universitários, atualizadas e com link direto.
         </p>
       </AnimatedSection>
 
+      {/* Aba de arquivo: retângulo de fio, rótulo em caixa alta, contagem em
+          mono. A selecionada é a única chapada de tinta. */}
       <div
         role="group"
         aria-label="Filtrar por status das inscrições"
-        className="mt-10 flex flex-wrap justify-center gap-2"
+        className="mt-10 flex flex-wrap gap-2 border-t border-line pt-8"
       >
         {statusChips.map((chip) => {
           const selected = status === chip.value;
@@ -105,14 +107,18 @@ export default function CompanyListing() {
               type="button"
               aria-pressed={selected}
               onClick={() => setStatus(chip.value)}
-              className={`pop focus-ring rounded-full px-4 py-2 text-sm font-semibold ${
+              className={`pop focus-ring label-meta inline-flex items-center gap-2 rounded-tag border px-3.5 py-2.5 ${
                 selected
-                  ? "bg-inverse text-on-inverse"
-                  : "border border-ink/15 bg-surface-2/60 text-ink-soft hover:border-ink/30"
+                  ? "border-ink bg-inverse text-on-inverse"
+                  : "border-line-strong text-ink-soft hover:border-ink hover:text-ink"
               }`}
             >
               {chip.label}
-              <span className={selected ? "ml-1.5 text-on-inverse/60" : "ml-1.5 text-ink/35"}>
+              <span
+                className={`font-mono tabular-nums ${
+                  selected ? "text-on-inverse/75" : "text-ink-soft"
+                }`}
+              >
                 {chip.count}
               </span>
             </button>
@@ -120,7 +126,7 @@ export default function CompanyListing() {
         })}
       </div>
 
-      <div className="mt-6 mb-10">
+      <div className="mt-4 mb-12">
         <CompanyFilters
           sectors={sectors}
           cities={cities}
@@ -131,8 +137,8 @@ export default function CompanyListing() {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="panel flex flex-col items-center gap-3 rounded-card px-8 py-20 text-center">
-          <Building2 size={28} className="text-ink/30" />
+        <div className="flex flex-col items-center gap-3 border border-dashed border-line-strong px-8 py-20 text-center">
+          <Building2 size={26} className="text-ink-soft" aria-hidden="true" />
           <p className="text-ink-soft">
             Nenhuma empresa encontrada com esses filtros.
           </p>
@@ -140,7 +146,7 @@ export default function CompanyListing() {
       ) : (
         <Stagger
           scrollTrigger={false}
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
         >
           {filtered.map((company) => (
             <StaggerItem key={company.id}>

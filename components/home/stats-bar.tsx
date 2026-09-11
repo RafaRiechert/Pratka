@@ -31,52 +31,87 @@ const lastUpdated = `${new Intl.DateTimeFormat("pt-BR", { month: "short" })
   .format(buildDate)
   .replace(".", "")}/${buildDate.getFullYear()}`;
 
+/*
+ * A faixa deixou de ser um cartão flutuando sobre o herói e virou o que é
+ * numa publicação: a tira de números da ficha técnica. Quatro células
+ * separadas por fio vertical, o dado grande na serifada, o rótulo em caixa
+ * alta por baixo. Os ícones ficaram, mas reduzidos e em cinza de apoio —
+ * aqui quem tem que gritar é o número.
+ */
+function Cell({
+  children,
+  label,
+}: {
+  children: React.ReactNode;
+  label: string;
+}) {
+  return (
+    <div className="bg-surface-3 px-5 py-6 sm:px-6 sm:py-7">
+      <div className="flex items-baseline gap-2 font-display text-[2rem] font-semibold leading-none tracking-tight text-ink sm:text-[2.5rem]">
+        {children}
+      </div>
+      <p className="label-meta mt-3 text-ink-soft">{label}</p>
+    </div>
+  );
+}
+
 export default function StatsBar() {
   return (
-    <section className="relative -mt-16 px-6">
-      <AnimatedSection className="mx-auto max-w-6xl">
-        <div className="panel grid grid-cols-2 gap-8 rounded-card px-8 py-10 shadow-card sm:grid-cols-4">
-          <div className="text-center">
-            <div className="font-display text-4xl font-bold text-accent-deep sm:text-5xl">
-              {/* The "+" only makes sense alongside a real count. */}
+    <section className="bg-surface-3">
+      <AnimatedSection className="mx-auto max-w-7xl px-6">
+        {/* Os fios entre as células são o próprio fundo do grid aparecendo
+            pelo gap de 1px — assim eles caem certos tanto em 4 colunas
+            quanto em 2, o que `divide-*` não faz num grid que quebra. */}
+        <div className="grid grid-cols-2 gap-px border-x border-b border-line-strong bg-line-strong sm:grid-cols-4 sm:border-b-0">
+          <Cell
+            label={companyCount === 1 ? "empresa mapeada" : "empresas mapeadas"}
+          >
+            {/* The "+" only makes sense alongside a real count. */}
+            <span className="tabular-nums">
               <CountUp value={companyCount} suffix={companyCount > 0 ? "+" : ""} />
-            </div>
-            <p className="mt-2 text-sm text-ink-soft">
-              {companyCount === 1 ? "empresa mapeada" : "empresas mapeadas"}
-            </p>
-          </div>
+            </span>
+          </Cell>
 
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-accent-deep sm:text-3xl">
-              <MapPin size={22} className="shrink-0" aria-hidden="true" />
-              {coverage}
-            </div>
-            <p className="mt-2 text-sm text-ink-soft">cobertura principal</p>
-          </div>
+          <Cell label="cobertura principal">
+            <MapPin
+              size={18}
+              className="shrink-0 self-center text-ink-soft"
+              aria-hidden="true"
+            />
+            {coverage}
+          </Cell>
 
-          <div className="text-center">
-            {/*
-              Era "Diretos / links para inscrição". Com 6 das 10 empresas em
-              "em breve", só 4 cards têm link de inscrição — a alegação
-              deixou de ser verdadeira. Esta conta é derivada do mesmo dado
-              que alimenta os cards, então acompanha a lista sozinha.
-            */}
-            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-accent-deep sm:text-3xl">
-              <Link2 size={22} className="shrink-0" aria-hidden="true" />
+          {/*
+            Era "Diretos / links para inscrição". Com 6 das 10 empresas em
+            "em breve", só 4 cards têm link de inscrição — a alegação
+            deixou de ser verdadeira. Esta conta é derivada do mesmo dado
+            que alimenta os cards, então acompanha a lista sozinha.
+          */}
+          <Cell
+            label={
+              openCount === 1 ? "com inscrição aberta" : "com inscrições abertas"
+            }
+          >
+            <Link2
+              size={18}
+              className="shrink-0 self-center text-ink-soft"
+              aria-hidden="true"
+            />
+            <span className="tabular-nums">
               <CountUp value={openCount} />
-            </div>
-            <p className="mt-2 text-sm text-ink-soft">
-              {openCount === 1 ? "com inscrição aberta" : "com inscrições abertas"}
-            </p>
-          </div>
+            </span>
+          </Cell>
 
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-accent-deep sm:text-3xl">
-              <RefreshCw size={22} className="shrink-0" aria-hidden="true" />
+          <Cell label="última atualização">
+            <RefreshCw
+              size={18}
+              className="shrink-0 self-center text-ink-soft"
+              aria-hidden="true"
+            />
+            <span className="font-mono text-[1.375rem] tabular-nums sm:text-[1.625rem]">
               {lastUpdated}
-            </div>
-            <p className="mt-2 text-sm text-ink-soft">última atualização</p>
-          </div>
+            </span>
+          </Cell>
         </div>
       </AnimatedSection>
     </section>

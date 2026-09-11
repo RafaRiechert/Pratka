@@ -48,32 +48,45 @@ export default function QuizQuestionCard({
         <button
           type="button"
           onClick={onBack}
-          className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft transition-colors hover:text-accent-deep"
+          className="focus-ring label-meta mb-8 inline-flex items-center gap-1.5 rounded-input py-1 text-ink-soft transition-colors hover:text-ink"
         >
-          <ArrowLeft size={16} />
+          <ArrowLeft size={14} aria-hidden="true" />
           Voltar
         </button>
       )}
 
-      <h2 className="text-balance font-display text-2xl font-bold leading-tight text-ink sm:text-3xl">
+      <h2 className="rule-section text-balance pt-6 font-display text-[1.75rem] font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
         {question.question}
       </h2>
 
-      <div className="mt-8 flex flex-col gap-3">
-        {question.options.map((option) => (
+      <div className="mt-10 border-t border-line">
+        {question.options.map((option, i) => (
           <button
             key={option.id}
             type="button"
             onClick={() => handleSelect(option)}
             disabled={justClicked !== null}
             className={cn(
-              "panel panel-glow rounded-panel px-6 py-4 text-left text-base text-ink shadow-card transition-all duration-200",
-              "hover:-translate-y-0.5 hover:shadow-glow-accent disabled:pointer-events-none",
-              highlighted === option.id && "border-2 border-accent bg-accent/10",
+              // Cada alternativa é uma linha de formulário impresso: fio
+              // embaixo, numeral fora, e a marcação de escolhida chapa a
+              // tinta em vez de acender um preenchimento colorido.
+              "focus-ring flex w-full items-baseline gap-4 border-b border-line px-2 py-4 text-left text-base transition-colors duration-200",
+              highlighted === option.id
+                ? "bg-inverse text-on-inverse"
+                : "text-ink hover:bg-surface-3",
+              justClicked !== null && "disabled:pointer-events-none",
               justClicked !== null && justClicked !== option.id && "opacity-40"
             )}
           >
-            {option.text}
+            <span
+              aria-hidden="true"
+              className={`index-numeral shrink-0 ${
+                highlighted === option.id ? "text-on-inverse/70" : "text-ink-soft"
+              }`}
+            >
+              {String.fromCharCode(65 + i)}
+            </span>
+            <span className="min-w-0 flex-1">{option.text}</span>
           </button>
         ))}
       </div>

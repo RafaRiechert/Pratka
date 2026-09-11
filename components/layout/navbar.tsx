@@ -18,6 +18,12 @@ const links = [
   { href: "/sobre", label: "Sobre" },
 ];
 
+/**
+ * Cabeçalho como cabeçalho de publicação: uma faixa de papel de largura
+ * total fechada por um fio, não um cartão arredondado flutuando sobre o
+ * conteúdo. É a peça que mais define se o site parece produto ou parece
+ * documento — e o dossiê precisa de documento.
+ */
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { user, signOut } = useAuth();
@@ -25,29 +31,27 @@ export default function Navbar() {
   const overDark = useNavOverDark();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40">
-      <div className="mx-auto mt-4 max-w-7xl px-4">
-        <nav
-          className={cn(
-            "flex items-center justify-between rounded-panel px-5 py-3 shadow-card transition-colors duration-500",
-            overDark
-              // `support` em vez de `inverse`: as seções escuras já são
-              // `inverse`, e um painel inverse sobre elas sumia.
-              ? "border border-on-inverse/15 bg-support/85 backdrop-blur-lg"
-              : "panel"
-          )}
-        >
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-40 border-b transition-colors duration-500",
+        overDark
+          ? "border-on-inverse/20 bg-inverse"
+          : "border-line-strong bg-surface"
+      )}
+    >
+      <div className="mx-auto max-w-7xl px-5">
+        <nav className="flex items-center justify-between gap-6 py-4">
           <Link
             href="/"
             className={cn(
-              "font-editorial text-2xl font-extrabold tracking-tight transition-colors duration-500",
+              "focus-ring font-display text-2xl font-semibold leading-none tracking-tight transition-colors duration-500",
               overDark ? "text-on-inverse" : "text-ink"
             )}
           >
             Pratka
           </Link>
 
-          <div className="hidden items-center gap-0.5 lg:flex">
+          <div className="hidden items-center gap-1 lg:flex">
             {links.map((l) => (
               <NavLink key={l.href} href={l.href} onDark={overDark}>
                 {l.label}
@@ -55,12 +59,16 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden items-center gap-2 lg:flex">
             {user ? (
               <Button
                 variant="ghost"
                 size="sm"
-                className={overDark ? "text-on-inverse hover:bg-on-inverse/10" : undefined}
+                className={
+                  overDark
+                    ? "text-on-inverse hover:border-on-inverse/40"
+                    : undefined
+                }
                 onClick={() => signOut()}
               >
                 Sair
@@ -73,13 +81,22 @@ export default function Navbar() {
                   size="sm"
                   className={
                     overDark
-                      ? "border-on-inverse/35 text-on-inverse hover:border-signal hover:text-signal"
+                      ? "border-on-inverse/40 text-on-inverse hover:border-on-inverse hover:bg-on-inverse hover:text-ink"
                       : undefined
                   }
                 >
                   Entrar
                 </Button>
-                <Button href="/cadastro" variant="primary" size="sm">
+                <Button
+                  href="/cadastro"
+                  variant="primary"
+                  size="sm"
+                  className={
+                    overDark
+                      ? "border-on-inverse bg-on-inverse text-ink hover:border-signal hover:bg-signal hover:text-on-signal"
+                      : undefined
+                  }
+                >
                   Cadastrar
                 </Button>
               </>
@@ -88,13 +105,13 @@ export default function Navbar() {
 
           <button
             className={cn(
-              "transition-colors duration-500 lg:hidden",
+              "focus-ring rounded-control transition-colors duration-500 lg:hidden",
               overDark ? "text-on-inverse" : "text-ink"
             )}
             onClick={() => setOpen((o) => !o)}
             aria-label="Abrir menu"
           >
-            {open ? <X size={24} /> : <Menu size={24} />}
+            {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </nav>
       </div>
@@ -102,27 +119,27 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="mx-4 mt-2 lg:hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.22 }}
+            className="overflow-hidden border-t border-line bg-surface-2 lg:hidden"
           >
-            <div className="panel flex flex-col gap-1 rounded-panel p-4 shadow-card">
+            <div className="mx-auto flex max-w-7xl flex-col px-5 py-2">
               {links.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-input px-3 py-2.5 text-sm font-medium text-ink/85 hover:bg-ink/5"
+                  className="focus-ring label-meta border-b border-line py-3.5 text-ink hover:text-accent-deep"
                 >
                   {l.label}
                 </Link>
               ))}
-              <div className="mt-2 flex flex-col gap-2 border-t border-ink/10 pt-3">
+              <div className="flex flex-col gap-2 py-4">
                 {user ? (
                   <Button
-                    variant="ghost"
+                    variant="outline"
                     size="sm"
                     onClick={() => {
                       signOut();

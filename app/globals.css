@@ -4,6 +4,11 @@
  * ============================================================================
  * DESIGN TOKENS — a camada única de identidade
  * ============================================================================
+ * IDENTIDADE ATUAL: "DOSSIÊ" — guia curado, energia de publicação impressa
+ * independente. Papel quente chapado, tinta preta, fios finos, serifada
+ * editorial grande, metadados em caixa alta. Zero gradiente de fundo: a
+ * única textura é o grão do papel.
+ *
  * Nenhum componente escolhe cor, raio ou fonte por conta própria: todos
  * consomem os tokens semânticos abaixo. Trocar a identidade do site inteiro
  * é trocar os VALORES deste bloco (mais os componentes de forma), nunca
@@ -23,65 +28,95 @@
  */
 
 @theme {
-  /* --- superfícies ------------------------------------------------------ */
-  --color-surface: #fdf6ec;
-  --color-surface-2: #fffbf3;
-  --color-surface-3: #f5e7d0;
-  --color-surface-inset: #ead9bd;
+  /* --- superfícies ------------------------------------------------------
+   * Papel quente chapado. `surface-2` é a folha do cartão (um tom acima),
+   * `surface-3` o encarte, `surface-inset` o fio/preenchimento de apoio.
+   * Nenhuma delas é gradiente; a variação entre seções vem de fio e respiro.
+   */
+  --color-surface: #f7f4ef;
+  --color-surface-2: #fcfaf6;
+  --color-surface-3: #efeae1;
+  --color-surface-inset: #e3dccf;
 
-  /* --- bloco de contraste ----------------------------------------------- */
-  --color-inverse: #241a12;
-  --color-inverse-2: #34251a;
-  --color-on-inverse: #fdf6ec;
+  /* --- bloco de contraste -----------------------------------------------
+   * A "tinta". Usada com parcimônia: uma única virada escura no meio do
+   * documento (O Problema) e o rodapé, que é a colofão.
+   */
+  --color-inverse: #14110f;
+  --color-inverse-2: #241f1b;
+  --color-on-inverse: #f7f4ef;
 
   /* --- texto ------------------------------------------------------------ */
-  --color-ink: #241a12;
-  --color-ink-2: #34251a;
-  --color-ink-soft: #6b5642;
+  --color-ink: #14110f;
+  --color-ink-2: #2e2926;
+  --color-ink-soft: #6b6560;
 
-  /* --- fios ------------------------------------------------------------- */
-  --color-line: rgba(36, 26, 18, 0.1);
-  --color-line-strong: rgba(36, 26, 18, 0.24);
+  /* --- fios -------------------------------------------------------------
+   * O dossiê separa seções com fio, não com bloco de cor. `line` é o fio
+   * de tabela; `line-strong` é a borda de cartão e a régua de coluna.
+   */
+  --color-line: rgba(20, 17, 15, 0.14);
+  --color-line-strong: rgba(20, 17, 15, 0.34);
 
-  /* --- acento principal ------------------------------------------------- */
-  --color-accent: #ff5a1f;
-  --color-accent-deep: #b8380f;
-  --color-accent-soft: #ff8b66;
-  --color-on-accent: #fdf6ec;
+  /* --- acento principal -------------------------------------------------
+   * Verde de dossiê. O brief pedia "acento verde profundo" e anexava um hex
+   * azul: o conceito venceu o hex (ver relatório). O azul não foi jogado
+   * fora — virou `support`, o acento frio.
+   */
+  --color-accent: #d2ddd1;
+  --color-accent-deep: #1d4636;
+  --color-accent-soft: #8aa596;
+  --color-on-accent: #f7f4ef;
 
-  /* --- acento de apoio (o contrapeso frio) ------------------------------ */
-  --color-support: #0f4c4a;
-  --color-support-deep: #0b3b42;
-  --color-on-support: #fdf6ec;
+  /* --- acento de apoio (o contrapeso frio) ------------------------------
+   * O azul do brief (#1F3A93), rebaixado para tinta de impressão.
+   */
+  --color-support: #22406b;
+  --color-support-deep: #162943;
+  --color-on-support: #f7f4ef;
 
-  /* --- sinal: prazos, urgência, contagem -------------------------------- */
-  --color-signal: #ffc53d;
-  --color-signal-deep: #8a5a00;
-  --color-on-signal: #241a12;
+  /* --- sinal: prazos, urgência, contagem --------------------------------
+   * Ocre de carimbo como superfície, ferrugem de "stop press" como tinta.
+   */
+  --color-signal: #e3cb9d;
+  --color-signal-deep: #8c3a1d;
+  --color-on-signal: #14110f;
 
-  --color-danger: #c43d3d;
+  --color-danger: #a3261c;
 
-  /* --- tipografia ------------------------------------------------------- */
-  /* Três slots no máximo: display (títulos), body (leitura) e mono (dado). */
-  --font-display: var(--font-clash), "Clash Display", ui-sans-serif, system-ui, sans-serif;
+  /* --- tipografia -------------------------------------------------------
+   * Duas vozes + a mono funcional:
+   *   display  Fraunces  — a serifada editorial, das manchetes ao wordmark
+   *   body     Work Sans — a grotesca limpa de leitura e de rótulo
+   *   mono     JetBrains — SÓ dado: data, prazo, índice, contador, cidade
+   * Clash Display e Caveat saíram da identidade (imports removidos em
+   * app/layout.tsx). `--font-editorial` continua existindo como apelido da
+   * display porque o markup já pede a serifada por esse nome.
+   */
+  --font-display: var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
   --font-body: var(--font-work-sans), "Work Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono-stack), ui-monospace, SFMono-Regular, Menlo, monospace;
-  /* Vozes extras da identidade atual — cada direção decide se sobrevivem. */
   --font-editorial: var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
-  --font-script: var(--font-caveat), "Caveat", ui-serif, cursive;
 
-  /* --- forma ------------------------------------------------------------ */
-  --radius-card: 1.5rem;
-  --radius-panel: 1rem;
-  --radius-control: 0.75rem;
-  --radius-tag: 999px;
-  --radius-pill: 999px;
+  /* --- forma ------------------------------------------------------------
+   * Impresso: canto praticamente reto. 2px só para tirar o ar de "caixa de
+   * CSS" sem virar cápsula. Nenhuma pílula sobreviveu.
+   */
+  --radius-card: 0.125rem;
+  --radius-panel: 0.125rem;
+  --radius-control: 0.125rem;
+  --radius-input: 0.125rem;
+  --radius-tag: 0.125rem;
+  --radius-pill: 0.125rem;
 
-  /* --- elevação --------------------------------------------------------- */
-  --shadow-card: 0 20px 50px -22px rgba(36, 26, 18, 0.35), 0 1px 0 0 rgba(255, 255, 255, 0.5) inset;
-  --shadow-glow-accent: 0 0 0 1px rgba(255, 90, 31, 0.28), 0 10px 32px -8px rgba(255, 90, 31, 0.45);
-  --shadow-glow-signal: 0 0 0 1px rgba(255, 197, 61, 0.32), 0 10px 30px -8px rgba(255, 197, 61, 0.4);
-  --shadow-glow-support: 0 0 0 1px rgba(15, 76, 74, 0.3), 0 10px 30px -8px rgba(15, 76, 74, 0.45);
+  /* --- elevação ---------------------------------------------------------
+   * Papel impresso não projeta sombra. A hierarquia vem do fio e do respiro;
+   * os antigos "glow" viraram anéis de 1px, sem desfoque.
+   */
+  --shadow-card: none;
+  --shadow-glow-accent: 0 0 0 1px var(--color-accent-deep);
+  --shadow-glow-signal: 0 0 0 1px var(--color-signal-deep);
+  --shadow-glow-support: 0 0 0 1px var(--color-support);
 
   --animate-float-slow: float 9s ease-in-out infinite;
   --animate-float-slower: float 14s ease-in-out infinite;
@@ -114,8 +149,10 @@
   --dur-fast: 180ms;
   --dur-base: 320ms;
   --dur-slow: 620ms;
-  --hover-lift: -2px;
-  --hover-scale: 1.03;
+  /* Dossiê: o objeto se desloca um fio, não pula. O "pop" de 3% era de
+     outra identidade — aqui a página tem que se comportar como papel. */
+  --hover-lift: -1px;
+  --hover-scale: 1;
 
   /*
    * ------------------------------------------------------------------
@@ -123,23 +160,33 @@
    * ------------------------------------------------------------------
    */
 
-  /* Textura de fundo. Grão, nunca gradiente. Uma direção pode zerar. */
-  --grain-opacity: 0.045;
+  /* Textura de fundo. Grão, nunca gradiente. É o que faz o papel. */
+  --grain-opacity: 0.05;
   --grain-blend: multiply;
 
-  /* Superfície elevada (.panel): vidro, papel chapado ou painel de borda. */
-  --panel-bg: color-mix(in srgb, var(--color-surface-2) 78%, transparent);
-  --panel-border: var(--color-line);
-  --panel-filter: blur(16px);
-  --panel-glow-bg: var(--color-accent);
+  /* Superfície elevada (.panel): aqui é papel chapado com fio, sem vidro. */
+  --panel-bg: var(--color-surface-2);
+  --panel-border: var(--color-line-strong);
+  --panel-filter: none;
+  --panel-glow-bg: var(--color-ink);
 
-  /* Brilho que segue o cursor. Alpha 0 desliga o efeito por completo. */
-  --cursor-glow-color: color-mix(in srgb, var(--color-accent) 14%, transparent);
-  --cursor-glow-blend: multiply;
+  /* Brilho que segue o cursor: desligado. Um halo difuso é exatamente o
+     efeito que esta direção proíbe. */
+  --cursor-glow-color: transparent;
+  --cursor-glow-blend: normal;
 }
 
-* {
-  border-color: var(--color-line);
+/*
+ * Cor de borda padrão do site. Tem que ficar em @layer base — é onde o
+ * preflight do Tailwind põe a dele. Fora de layer, este seletor venceria
+ * TODO utilitário `border-<cor>` (CSS sem layer ganha de qualquer layer), e
+ * numa identidade cujo vocabulário inteiro é fio colorido isso significa
+ * que nenhuma régua de seção teria cor.
+ */
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
 }
 
 /* Scrolling is driven by Lenis (see components/providers/smooth-scroll.tsx).
@@ -167,36 +214,41 @@ body {
   background: var(--color-surface);
   color: var(--color-ink);
   font-family: var(--font-body);
-  line-height: 1.7;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Clash Display is drawn tight already — Tailwind's tracking-tight on top of
-   it closes the word spaces at display sizes. Optical correction lives here
-   so every headline gets it without per-heading tuning. Clash ships no
-   italic: never set italic on .font-display or the browser fakes an oblique
-   (use .font-editorial, which has a real one). */
+/*
+ * Fraunces é uma serifada de eixo óptico: `font-optical-sizing: auto` deixa
+ * o desenho afinar sozinho conforme o corpo cresce — é o que dá a manchete
+ * de alto contraste de revista sem precisar de uma segunda fonte. Os eixos
+ * SOFT e WONK ficam no padrão (0/0): o corte reto, não o esquisito.
+ */
 .font-display {
-  letter-spacing: -0.015em;
-  word-spacing: 0.06em;
+  letter-spacing: -0.014em;
+  font-optical-sizing: auto;
   font-synthesis: none;
 }
 
 .font-editorial {
-  font-variation-settings: "SOFT" 40, "WONK" 0;
+  font-optical-sizing: auto;
+  font-synthesis: none;
 }
 
-/* Metadados em caixa alta — setor, cidade, status, rótulo de painel. */
+/* Metadados em caixa alta — setor, cidade, status, rótulo de painel, cabeça
+   de coluna. A voz de rótulo do dossiê, sempre na grotesca. */
 .label-meta {
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  line-height: 1.4;
 }
 
 ::selection {
-  background: var(--color-accent);
-  color: var(--color-on-accent);
+  background: var(--color-ink);
+  color: var(--color-on-inverse);
 }
 
 ::-webkit-scrollbar {
@@ -204,15 +256,15 @@ body {
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-surface);
+  background: var(--color-surface-3);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-accent-soft);
+  background: var(--color-ink-soft);
   border-radius: var(--radius-pill);
-  border: 2px solid var(--color-surface);
+  border: 3px solid var(--color-surface-3);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+  background: var(--color-ink);
 }
 
 /* Textura fina de papel. Grão, não gradiente. */
@@ -229,14 +281,24 @@ body {
 
 /*
  * Superfície elevada padrão do site. Cada direção redefine as três
- * variáveis abaixo — vidro fosco, papel chapado ou painel de borda — sem
+ * variáveis acima — vidro fosco, papel chapado ou painel de borda — sem
  * que nenhum componente precise saber qual identidade está no ar.
+ *
+ * Fica em @layer base de propósito. Fora de layer, o atalho `border` daqui
+ * ganharia de qualquer utilitário de borda do Tailwind (que mora na layer
+ * `utilities`, mas layer nenhuma perde para CSS sem layer): um
+ * `border-t-2 border-t-accent-deep` num `.panel` simplesmente não aparecia.
+ * Dentro de base, o utilitário volta a mandar — que é o que o dossiê
+ * precisa, porque a régua grossa colorida no topo do cartão é a marca de
+ * seção da identidade inteira.
  */
-.panel {
-  background: var(--panel-bg, var(--color-surface-2));
-  border: 1px solid var(--panel-border, var(--color-line));
-  backdrop-filter: var(--panel-filter, none);
-  -webkit-backdrop-filter: var(--panel-filter, none);
+@layer base {
+  .panel {
+    background: var(--panel-bg, var(--color-surface-2));
+    border: 1px solid var(--panel-border, var(--color-line));
+    backdrop-filter: var(--panel-filter, none);
+    -webkit-backdrop-filter: var(--panel-filter, none);
+  }
 }
 
 .panel-glow {
@@ -261,9 +323,7 @@ body {
 }
 
 /*
- * Ênfase tipográfica do acento. A identidade atual pinta com gradiente de
- * texto; direções que não querem gradiente nenhum sobrescrevem para cor
- * chapada e o markup não muda.
+ * Ênfase tipográfica do acento — cor chapada, nunca gradiente de texto.
  */
 .text-accent-emphasis {
   color: var(--color-accent-deep);
@@ -272,9 +332,9 @@ body {
 .shimmer-bg {
   background-image: linear-gradient(
     100deg,
-    rgba(255, 251, 243, 0) 35%,
-    rgba(255, 251, 243, 0.5) 50%,
-    rgba(255, 251, 243, 0) 65%
+    rgba(252, 250, 246, 0) 35%,
+    rgba(252, 250, 246, 0.5) 50%,
+    rgba(252, 250, 246, 0) 65%
   );
   background-size: 200% 100%;
 }
@@ -288,8 +348,42 @@ body {
 }
 
 /*
- * Springy interaction system — the reference's "ear-popping" button hover,
- * dialed back to a 3% pop.
+ * ---------------------------------------------------------------------------
+ * UTILITÁRIOS EDITORIAIS
+ * ---------------------------------------------------------------------------
+ */
+
+/*
+ * Régua de abertura de seção: o fio grosso que anuncia um novo caderno do
+ * dossiê. Fica no elemento, não numa borda solta, para acompanhar o mesmo
+ * respiro em qualquer largura.
+ */
+.rule-section {
+  border-top: 2px solid var(--color-ink);
+}
+
+/* Fio fino de tabela — o separador padrão entre linhas de índice. */
+.rule-hair {
+  border-top: 1px solid var(--color-line);
+}
+
+/*
+ * Numeral de índice. Mono e tabular para que "01" e "10" ocupem a mesma
+ * largura e a coluna da esquerda fique perfeitamente alinhada, como num
+ * sumário impresso.
+ */
+.index-numeral {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+}
+
+/*
+ * Springy interaction system — dialed all the way down for this identity:
+ * --hover-scale is 1 and --hover-lift is a single pixel, so hover shifts the
+ * object a hair instead of popping it. The machinery stays so a future
+ * direction can turn the spring back on from :root alone.
  *
  * Guards, in order: only where a real pointer exists (never on touch, where
  * :hover sticks after a tap), and never under reduced motion.
@@ -315,7 +409,7 @@ body {
 }
 
 .pop:active {
-  transform: scale(0.97);
+  transform: scale(0.99);
 }
 
 .pop-nudge {
@@ -334,9 +428,17 @@ body {
   }
 }
 
-/* One focus ring for the whole site, on every accent background. */
+/*
+ * Um único anel de foco para o site inteiro — e ele precisa funcionar tanto
+ * sobre papel quanto sobre o bloco de tinta. Por isso são dois fios: o azul
+ * `support` é o que se vê sobre o papel (9,5:1) e o ocre `signal` é o que se
+ * vê sobre a tinta (11,9:1). Em qualquer fundo do site, pelo menos um dos
+ * dois passa folgado em AA, e o par lido junto parece uma régua dupla
+ * impressa em vez de um brilho.
+ */
 .focus-ring:focus-visible {
-  outline: 3px solid var(--color-support);
-  outline-offset: 3px;
+  outline: 2px solid var(--color-support);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px var(--color-signal);
   border-radius: inherit;
 }

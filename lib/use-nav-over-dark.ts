@@ -3,9 +3,14 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
-/** The band the floating header actually occupies (mt-4 + py-3 + content). */
-const BAND_TOP = 20;
-const BAND_BOTTOM = 96;
+/**
+ * The band the header actually occupies. It is no longer a floating card
+ * inset from the top: the "Dossiê" identity turns it into a full-width
+ * masthead flush against the viewport, so the band starts at 0 and ends at
+ * py-4 + the wordmark's line box + the hairline rule.
+ */
+const BAND_TOP = 0;
+const BAND_BOTTOM = 57;
 
 /**
  * True while a dark surface sits under the floating header.

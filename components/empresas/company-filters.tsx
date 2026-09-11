@@ -28,13 +28,15 @@ export default function CompanyFilters({
   value: FilterState;
   onChange: (next: FilterState) => void;
 }) {
+  // Campo de ficha: caixa de fio com a base reforçada, texto em caixa alta
+  // espaçada. Nenhum vidro, nenhuma cápsula, nenhum anel colorido.
   const selectClass =
-    "panel rounded-control border-0 bg-transparent px-4 py-2.5 text-sm text-ink/80 outline-none focus:ring-2 focus:ring-accent/40";
+    "focus-ring label-meta rounded-input border border-line-strong border-b-2 border-b-ink bg-surface-2 px-3 py-2.5 text-ink outline-none transition-colors hover:border-ink";
 
   return (
-    <div className="flex flex-wrap items-center gap-3">
-      <div className="flex items-center gap-2 text-sm font-medium text-ink-soft">
-        <Filter size={16} />
+    <div className="flex flex-wrap items-center gap-2.5">
+      <div className="label-meta flex items-center gap-2 text-ink-soft">
+        <Filter size={14} aria-hidden="true" />
         Filtrar:
       </div>
       <select
@@ -82,7 +84,7 @@ export default function CompanyFilters({
       {(value.sector || value.city || value.audience) && (
         <button
           onClick={() => onChange(EMPTY_FILTERS)}
-          className="text-sm text-ink-soft underline-offset-2 hover:text-accent-deep hover:underline"
+          className="focus-ring label-meta rounded-input px-1 py-2 text-ink-soft underline underline-offset-4 hover:text-accent-deep"
         >
           Limpar filtros
         </button>

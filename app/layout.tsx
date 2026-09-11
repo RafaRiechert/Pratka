@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat, Fraunces, JetBrains_Mono, Work_Sans } from "next/font/google";
-import localFont from "next/font/local";
+import { Fraunces, JetBrains_Mono, Work_Sans } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
@@ -9,6 +8,19 @@ import SmoothScroll from "@/components/providers/smooth-scroll";
 import GrainOverlay from "@/components/ui/grain-overlay";
 import CursorGlow from "@/components/ui/cursor-glow";
 
+/**
+ * DUAS VOZES + A MONO FUNCIONAL — o teto que o IDENTIDADE.md impõe.
+ *
+ * Fraunces é a voz de display E de editorial da identidade "Dossiê": uma
+ * serifada de eixo óptico, então a mesma família dá a manchete de alto
+ * contraste e o corpo serifado de destaque sem virar duas fontes. Carrega
+ * itálico de verdade (usado no herói e nas linhas de personalidade das
+ * áreas) e é preload porque desenha a manchete, que é o elemento de LCP.
+ *
+ * Saíram nesta direção: Clash Display (a grotesca pesada da pele anterior —
+ * o dossiê não tem display sem serifa) e Caveat (a voz manuscrita, que é o
+ * oposto exato de "publicação séria").
+ */
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
@@ -16,6 +28,7 @@ const fraunces = Fraunces({
   style: ["normal", "italic"],
   axes: ["SOFT", "WONK", "opsz"],
   display: "swap",
+  preload: true,
 });
 
 const workSans = Work_Sans({
@@ -27,40 +40,12 @@ const workSans = Work_Sans({
 
 /**
  * Voz monoespaçada — o terceiro slot, e o único que se justifica por ser
- * funcional: data, prazo, contador, cidade. Fica atrás de --font-mono em
- * globals.css, então trocar a mono da identidade é trocar só este import.
+ * funcional: data, prazo, contador, cidade, numeral de índice. Fica atrás
+ * de --font-mono em globals.css, então trocar a mono da identidade é trocar
+ * só este import.
  */
 const mono = JetBrains_Mono({
   variable: "--font-mono-stack",
-  subsets: ["latin"],
-  weight: "variable",
-  display: "swap",
-  preload: false,
-});
-
-/**
- * Clash Display (Fontshare / ITF, free license) — the heavy display voice for
- * headlines. Self-hosted rather than CDN-linked so it ships from our own
- * origin with the static export: two weights, 29KB total, preloaded because
- * the hero headline is the LCP element.
- */
-const clashDisplay = localFont({
-  variable: "--font-clash",
-  display: "swap",
-  preload: true,
-  src: [
-    { path: "../public/fonts/ClashDisplay-Semibold.woff2", weight: "600", style: "normal" },
-    { path: "../public/fonts/ClashDisplay-Bold.woff2", weight: "700", style: "normal" },
-  ],
-});
-
-/**
- * Script accent — deliberately rationed to one or two words at a time.
- * Not preloaded: it decorates three words, and preloading it would put it
- * in the critical path against Clash, which draws the LCP headline.
- */
-const caveat = Caveat({
-  variable: "--font-caveat",
   subsets: ["latin"],
   weight: "variable",
   display: "swap",
@@ -81,7 +66,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${clashDisplay.variable} ${fraunces.variable} ${workSans.variable} ${mono.variable} ${caveat.variable} h-full`}
+      className={`${fraunces.variable} ${workSans.variable} ${mono.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-surface text-ink font-body antialiased">
         <MotionConfig reducedMotion="user">

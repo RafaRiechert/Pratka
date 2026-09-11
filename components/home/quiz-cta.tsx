@@ -1,30 +1,29 @@
-import { Sparkles } from "lucide-react";
 import AnimatedSection from "@/components/ui/animated-section";
-import PanelCard from "@/components/ui/panel-card";
 import { Button } from "@/components/ui/button";
 
+/**
+ * Chamada de margem. Numa revista, o box que interrompe a leitura para
+ * oferecer outra coisa é uma faixa de fundo de encarte com fio em cima e
+ * embaixo — não um cartão flutuante. O ícone de sparkle saiu: é o mesmo
+ * vocabulário de "IA mágica" que a badge do herói levou embora.
+ */
 export default function QuizCta() {
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-4">
+    <section className="mx-auto max-w-6xl px-6 py-20">
       <AnimatedSection>
-        <PanelCard className="flex flex-col items-center gap-5 p-10 text-center sm:flex-row sm:justify-between sm:text-left">
-          <div className="flex items-start gap-4">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-panel bg-accent/15 text-accent-deep">
-              <Sparkles size={22} />
-            </div>
-            <div>
-              <h3 className="font-display text-xl font-bold text-ink sm:text-2xl">
-                Não sabe por onde começar?
-              </h3>
-              <p className="mt-1.5 text-ink-soft">
-                Descubra qual área do mercado combina com você.
-              </p>
-            </div>
+        <div className="flex flex-col gap-6 border-y-2 border-ink bg-surface-3 px-6 py-9 sm:flex-row sm:items-center sm:justify-between sm:px-10">
+          <div>
+            <h3 className="font-display text-2xl font-semibold leading-tight tracking-tight text-ink sm:text-3xl">
+              Não sabe por onde começar?
+            </h3>
+            <p className="mt-2 text-ink-2">
+              Descubra qual área do mercado combina com você.
+            </p>
           </div>
-          <Button href="/quiz" variant="primary" size="md" className="shrink-0">
+          <Button href="/quiz" variant="primary" size="md" className="shrink-0 self-start sm:self-auto">
             Fazer o quiz
           </Button>
-        </PanelCard>
+        </div>
       </AnimatedSection>
     </section>
   );

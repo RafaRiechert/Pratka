@@ -50,11 +50,11 @@ function FaqRow({ q, a }: { q: string; a: string }) {
   const buttonId = useId();
 
   return (
+    // Linha de índice, não cartão: o fio embaixo é a única moldura, e o
+    // estado aberto se marca com a folha de encarte por trás do bloco.
     <div
-      className={`overflow-hidden rounded-card border transition-colors duration-300 ${
-        open
-          ? "border-accent/35 bg-surface-2"
-          : "border-ink/10 bg-surface-2/60 hover:border-ink/20"
+      className={`overflow-hidden border-b border-line transition-colors duration-300 ${
+        open ? "bg-surface-3" : "hover:bg-surface-2"
       }`}
     >
       <h3>
@@ -64,20 +64,20 @@ function FaqRow({ q, a }: { q: string; a: string }) {
           aria-expanded={open}
           aria-controls={panelId}
           onClick={() => setOpen((o) => !o)}
-          className="focus-ring flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+          className="focus-ring flex w-full items-center justify-between gap-6 px-4 py-5 text-left sm:px-6"
         >
-          <span className="font-display text-lg font-bold text-ink sm:text-xl">
+          <span className="font-display text-lg font-semibold leading-snug tracking-tight text-ink sm:text-xl">
             {q}
           </span>
           <motion.span
             aria-hidden="true"
             animate={{ rotate: open ? 45 : 0 }}
             transition={springPop}
-            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
-              open ? "bg-accent text-ink" : "bg-ink/8 text-ink-soft"
+            className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-tag border transition-colors duration-300 ${
+              open ? "border-ink bg-inverse text-on-inverse" : "border-line-strong text-ink-soft"
             }`}
           >
-            <Plus size={17} />
+            <Plus size={15} />
           </motion.span>
         </button>
       </h3>
@@ -97,7 +97,7 @@ function FaqRow({ q, a }: { q: string; a: string }) {
               opacity: { duration: duration.fast, ease: ease.soft },
             }}
           >
-            <p className="px-6 pb-6 text-base leading-relaxed text-ink-soft">
+            <p className="max-w-[68ch] px-4 pb-6 text-base leading-relaxed text-ink-2 sm:px-6">
               {a}
             </p>
           </motion.div>
@@ -109,14 +109,14 @@ function FaqRow({ q, a }: { q: string; a: string }) {
 
 export default function Faq() {
   return (
-    <section id="faq" className="mx-auto max-w-3xl scroll-mt-24 px-6 py-28">
-      <AnimatedSection className="text-center">
-        <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
+    <section id="faq" className="mx-auto max-w-3xl scroll-mt-20 px-6 py-24">
+      <AnimatedSection>
+        <h2 className="rule-section pt-6 font-display text-[clamp(2.25rem,6vw,3.5rem)] font-semibold leading-[1.05] tracking-tight text-ink">
           Perguntas frequentes
         </h2>
       </AnimatedSection>
 
-      <Stagger className="mt-12 space-y-3">
+      <Stagger className="mt-12 border-t-2 border-ink">
         {faqs.map((faq) => (
           <StaggerItem key={faq.q}>
             <FaqRow {...faq} />

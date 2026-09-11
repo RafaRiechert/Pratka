@@ -22,12 +22,11 @@ export default function SobrePage() {
     <>
       <PageHero eyebrow="Nossa história" title="Sobre" />
 
-      <section className="mx-auto max-w-3xl px-6 pb-16">
-        <AnimatedSection className="mb-8">
-          <h2 className="font-editorial text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+      <section className="mx-auto max-w-3xl px-6 pt-16 pb-16">
+        <AnimatedSection className="mb-10">
+          <h2 className="rule-section pt-6 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
             Sobre
           </h2>
-          <span aria-hidden="true" className="mt-3 block h-1 w-14 rounded-full bg-signal" />
         </AnimatedSection>
         <div className="space-y-6">
           {sobreParagraphs.map((p, i) => (
@@ -35,8 +34,8 @@ export default function SobrePage() {
               <p
                 className={
                   i === 0
-                    ? "font-editorial text-xl leading-relaxed text-ink sm:text-2xl"
-                    : "text-lg leading-relaxed text-ink/80"
+                    ? "font-editorial text-[1.375rem] leading-relaxed text-ink sm:text-[1.625rem]"
+                    : "text-lg leading-relaxed text-ink-2"
                 }
               >
                 {p}
@@ -47,16 +46,15 @@ export default function SobrePage() {
       </section>
 
       <section className="mx-auto max-w-3xl px-6 pb-28">
-        <AnimatedSection className="mb-8">
-          <h2 className="font-editorial text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+        <AnimatedSection className="mb-10">
+          <h2 className="rule-section pt-6 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
             Quem somos nós
           </h2>
-          <span aria-hidden="true" className="mt-3 block h-1 w-14 rounded-full bg-signal" />
         </AnimatedSection>
         <div className="space-y-6">
           {quemSomosParagraphs.map((p, i) => (
             <AnimatedSection key={i} delay={i * 0.05}>
-              <p className="text-lg leading-relaxed text-ink/80">{p}</p>
+              <p className="text-lg leading-relaxed text-ink-2">{p}</p>
             </AnimatedSection>
           ))}
         </div>

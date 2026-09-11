@@ -15,21 +15,30 @@ const solutionParagraphs = [
 
 export default function ProblemSolution() {
   return (
-    <section id="problema-solucao" className="scroll-mt-24">
-      <div data-nav-theme="dark" className="border-b border-on-inverse/5 bg-inverse py-24">
+    <section id="problema-solucao" className="scroll-mt-20">
+      {/*
+        A ÚNICA virada de tinta no corpo do documento. O conceito pede
+        parcimônia, então das três seções que eram escuras só esta continua:
+        é o argumento da publicação, a "página preta" que interrompe a
+        leitura. O CTA final voltou para o papel; o rodapé segue em tinta
+        porque é colofão, e colofão escuro é convenção, não efeito.
+      */}
+      <div data-nav-theme="dark" className="bg-inverse py-24">
         <div className="mx-auto max-w-3xl px-6">
-          <AnimatedSection className="mb-10 flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-control bg-on-inverse/10 text-on-inverse/60">
-              <CircleAlert size={20} />
-            </div>
-            <h2 className="font-display text-4xl font-bold text-on-inverse sm:text-5xl">
+          <AnimatedSection className="mb-10 border-t-2 border-on-inverse pt-6">
+            <CircleAlert
+              size={18}
+              aria-hidden="true"
+              className="text-signal"
+            />
+            <h2 className="mt-4 font-display text-[clamp(2.25rem,6vw,3.5rem)] font-semibold leading-[1.05] tracking-tight text-on-inverse">
               O Problema
             </h2>
           </AnimatedSection>
-          <div className="space-y-5">
+          <div className="space-y-6">
             {problemParagraphs.map((p, i) => (
               <AnimatedSection key={i} delay={i * 0.05}>
-                <p className="text-lg leading-relaxed text-on-inverse/65">{p}</p>
+                <p className="text-lg leading-relaxed text-on-inverse/75">{p}</p>
               </AnimatedSection>
             ))}
           </div>
@@ -39,17 +48,17 @@ export default function ProblemSolution() {
       {/* Sem o amarelo emprestado e sem o gradiente radial: a seção agora
           usa uma superfície do próprio sistema. O ícone de sparkle saiu
           junto com a badge do herói — mesmo motivo. */}
-      <div className="relative overflow-hidden bg-surface-3 py-24">
-        <div className="relative z-10 mx-auto max-w-3xl px-6">
+      <div className="bg-surface py-24">
+        <div className="mx-auto max-w-3xl px-6">
           <AnimatedSection className="mb-10">
-            <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
+            <h2 className="rule-section pt-6 font-display text-[clamp(2.25rem,6vw,3.5rem)] font-semibold leading-[1.05] tracking-tight text-ink">
               A Solução
             </h2>
           </AnimatedSection>
-          <div className="space-y-5">
+          <div className="space-y-6">
             {solutionParagraphs.map((p, i) => (
               <AnimatedSection key={i} delay={i * 0.05}>
-                <p className="text-lg leading-relaxed text-ink/85">{p}</p>
+                <p className="text-lg leading-relaxed text-ink-2">{p}</p>
               </AnimatedSection>
             ))}
           </div>

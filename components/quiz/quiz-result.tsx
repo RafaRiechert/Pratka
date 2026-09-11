@@ -58,16 +58,16 @@ export default function QuizResult({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="mx-auto w-full max-w-2xl text-center"
+      className="mx-auto w-full max-w-2xl"
     >
-      <span className="text-sm font-semibold uppercase tracking-widest text-accent-deep">
+      <span className="label-meta rule-section block pt-6 text-accent-deep">
         Seu resultado
       </span>
       <motion.h2
         initial={{ opacity: 0, y: 12, filter: "blur(6px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-        className="mt-3 text-balance font-display text-4xl font-bold text-ink sm:text-5xl"
+        className="mt-4 text-balance font-display text-[clamp(2.5rem,8vw,4rem)] font-semibold leading-[1.03] tracking-tight text-ink"
       >
         <span className="text-accent-emphasis">{primaryInfo.name}</span>
       </motion.h2>
@@ -75,7 +75,7 @@ export default function QuizResult({
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink-soft"
+        className="mt-6 max-w-xl text-lg leading-relaxed text-ink-2"
       >
         {primaryInfo.description}
       </motion.p>
@@ -85,14 +85,14 @@ export default function QuizResult({
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.45 }}
-          className="mx-auto mt-8 max-w-xl rounded-card border border-surface-inset bg-surface-2/60 p-6 text-left"
+          className="mt-10 max-w-xl border-t-2 border-t-ink bg-surface-3 p-6 text-left"
         >
-          <h3 className="font-display text-base font-bold text-ink">
+          <h3 className="font-display text-lg font-semibold tracking-tight text-ink">
             Por que essa área combina com você
           </h3>
-          <ul className="mt-3 space-y-2.5">
+          <ul className="mt-4 space-y-3">
             {insights.map((sentence, i) => (
-              <li key={i} className="text-sm leading-relaxed text-ink-soft">
+              <li key={i} className="border-t border-line pt-3 text-sm leading-relaxed text-ink-2 first:border-t-0 first:pt-0">
                 {sentence}
               </li>
             ))}
@@ -104,21 +104,21 @@ export default function QuizResult({
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
-        className="mx-auto mt-6 flex max-w-xl flex-col gap-3 sm:flex-row"
+        className="mt-6 flex max-w-xl flex-col gap-3 sm:flex-row"
       >
         {secondaryInfo && (
-          <div className="flex-1 rounded-panel border border-surface-inset bg-surface-2/60 p-5 text-left">
+          <div className="flex-1 border border-line-strong p-5 text-left">
             <p className="text-sm text-ink-soft">
               Você também tem perfil para{" "}
               <span className="font-semibold text-ink">{secondaryInfo.name}</span>.
             </p>
-            <p className="mt-1.5 text-xs text-ink-soft/80">
+            <p className="mt-2 text-xs leading-relaxed text-ink-soft">
               {secondaryInfo.description.split(".")[0]}.
             </p>
           </div>
         )}
         {tertiaryInfo && (
-          <div className="flex-1 rounded-panel border border-surface-inset bg-surface-2/40 p-5 text-left">
+          <div className="flex-1 border border-line-strong p-5 text-left">
             <p className="text-sm text-ink-soft">
               Outra área para ficar de olho:{" "}
               <span className="font-semibold text-ink">{tertiaryInfo.name}</span>.
@@ -131,7 +131,7 @@ export default function QuizResult({
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.75 }}
-        className="mt-10 flex flex-wrap items-center justify-center gap-3"
+        className="mt-12 flex flex-wrap items-center gap-3 border-t border-line pt-8"
       >
         <Button href={companiesHref} variant="primary" size="md">
           Ver programas nessa área

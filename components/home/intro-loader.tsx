@@ -62,13 +62,13 @@ export default function IntroLoader() {
           // Decorative: the hero underneath is the real content, and a
           // screen reader should never be held behind a curtain.
           aria-hidden="true"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-support"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-inverse"
           initial={{ y: 0 }}
           exit={{ y: "-100%" }}
           transition={{ duration: duration.slow, ease: ease.soft }}
         >
           <motion.span
-            className="font-editorial text-6xl font-extrabold text-on-inverse sm:text-8xl"
+            className="font-display text-6xl font-semibold tracking-tight text-on-inverse sm:text-8xl"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: duration.base, ease: ease.soft }}

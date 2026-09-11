@@ -61,15 +61,15 @@ function FloatingProgrammes({
       {area.matches.slice(0, 3).map((company, i) => (
         <motion.li
           key={company.id}
-          initial={reduced ? false : { opacity: 0, y: 14, rotate: 0 }}
-          animate={{ opacity: 1, y: 0, rotate: i % 2 === 0 ? -2 : 2.5 }}
+          initial={reduced ? false : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ ...springPop, delay: reduced ? 0 : i * stagger.tight }}
-          className="rounded-panel border border-ink/8 bg-surface-2 p-4 shadow-card"
+          className="border border-line-strong border-t-2 border-t-ink bg-surface-2 p-4"
         >
-          <p className="font-display text-sm font-bold leading-tight text-ink">
+          <p className="font-display text-[0.9375rem] font-semibold leading-snug tracking-tight text-ink">
             {company.name}
           </p>
-          <p className="mt-1.5 flex items-center gap-1.5 text-xs text-ink-soft">
+          <p className="mt-2 flex items-center gap-1.5 font-mono text-[0.6875rem] text-ink-soft">
             <MapPin size={11} aria-hidden="true" />
             {company.cities.join(", ")}
           </p>
@@ -83,6 +83,7 @@ function AreaRow({
   area,
   finePointer,
   reduced,
+  index,
   active,
   onActivate,
   onHoverChange,
@@ -90,6 +91,8 @@ function AreaRow({
   area: AreaProgrammes;
   finePointer: boolean;
   reduced: boolean;
+  /** Posição na lista — vira o numeral de índice do sumário. */
+  index: number;
   active: boolean;
   onActivate: () => void;
   onHoverChange: (hovering: boolean) => void;
@@ -98,16 +101,27 @@ function AreaRow({
 
   const label = (
     <span className="relative z-10 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      {/* Numeral de sumário: decorativo, então fica fora da árvore de
+          acessibilidade — a ordem já é dada pela própria lista. */}
       <span
-        className={`font-display text-2xl font-bold transition-colors duration-300 sm:text-3xl ${
+        aria-hidden="true"
+        className={`index-numeral w-7 shrink-0 self-center transition-colors duration-300 ${
+          active ? "text-accent-deep" : "text-ink-soft"
+        }`}
+      >
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <span
+        className={`font-display text-2xl font-semibold tracking-tight transition-colors duration-300 sm:text-[1.75rem] ${
           active ? "text-accent-deep" : "text-ink"
         }`}
       >
         {area.info.name}
       </span>
 
-      {/* The personality line in the script face — the one "handwritten"
-          moment, and permanently visible where hover doesn't exist. */}
+      {/* A linha de personalidade. Era a voz manuscrita (Caveat); no dossiê
+          é o itálico da serifada — o mesmo aparte editorial que o herói usa,
+          e permanentemente visível onde hover não existe. */}
       <AnimatePresence initial={false}>
         {showPitch && (
           <motion.span
@@ -116,7 +130,7 @@ function AreaRow({
             animate={{ opacity: 1, x: 0 }}
             exit={reduced ? undefined : { opacity: 0, x: -8 }}
             transition={{ duration: duration.fast, ease: ease.soft }}
-            className="font-script text-xl leading-none text-accent-deep sm:text-2xl"
+            className="font-editorial text-lg italic leading-snug text-accent-deep sm:text-xl"
           >
             {area.pitch}
           </motion.span>
@@ -124,7 +138,7 @@ function AreaRow({
       </AnimatePresence>
 
       {!area.interactive && (
-        <span className="rounded-full bg-ink/8 px-2.5 py-1 text-xs font-semibold text-ink-soft">
+        <span className="label-meta rounded-tag border border-line-strong px-2 py-[0.3rem] text-ink-soft">
           Em breve
         </span>
       )}
@@ -135,14 +149,14 @@ function AreaRow({
   // does nothing is worse for keyboard users than no control at all.
   if (!area.interactive) {
     return (
-      <li className="border-b border-ink/10">
+      <li className="border-b border-line">
         <div className="min-w-0 py-5 opacity-70 lg:pr-[20rem]">{label}</div>
       </li>
     );
   }
 
   return (
-    <li className="relative border-b border-ink/10">
+    <li className="relative border-b border-line">
       <button
         type="button"
         onClick={onActivate}
@@ -179,21 +193,22 @@ export default function AreaDiscovery() {
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
-    <section id="areas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
-      <AnimatedSection className="mx-auto max-w-2xl text-center">
-        <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
+    <section id="areas" className="mx-auto max-w-6xl scroll-mt-20 px-6 py-24">
+      <AnimatedSection>
+        <h2 className="rule-section pt-6 font-display text-[clamp(2.25rem,6vw,3.5rem)] font-semibold leading-[1.05] tracking-tight text-ink">
           Descubra por área
         </h2>
-        <p className="mt-5 text-lg text-ink-soft">
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
           Doze áreas do mercado, os programas que combinam com cada uma.
         </p>
       </AnimatedSection>
 
-      <ul className="mt-14 min-w-0 border-t border-ink/10">
-        {areaProgrammes.map((area) => (
+      <ul className="mt-12 min-w-0 border-t-2 border-ink">
+        {areaProgrammes.map((area, i) => (
           <AreaRow
             key={area.code}
             area={area}
+            index={i}
             finePointer={finePointer}
             reduced={reduced}
             active={hovered === area.code}

@@ -14,10 +14,12 @@ export default function PanelCard({
   interactive?: boolean;
 }) {
   return (
+    // Dossiê: o cartão é uma folha, não um objeto flutuante. O hover levanta
+    // um fio (–2px, sem escala) em vez de tirar o papel da mesa.
     <motion.div
-      className={cn("panel panel-glow rounded-panel shadow-card", className)}
-      whileHover={interactive ? { y: -6, scale: 1.015 } : undefined}
-      transition={{ type: "spring", stiffness: 220, damping: 18 }}
+      className={cn("panel panel-glow rounded-panel", className)}
+      whileHover={interactive ? { y: -2 } : undefined}
+      transition={{ type: "spring", stiffness: 260, damping: 24 }}
     >
       {children}
     </motion.div>

@@ -30,7 +30,7 @@ export default function LoginForm() {
   }
 
   return (
-    <PanelCard className="mx-auto max-w-md p-8">
+    <PanelCard className="mx-auto max-w-md border-t-2 border-t-ink p-8">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <Field label="E-mail">
           <Input
@@ -55,9 +55,9 @@ export default function LoginForm() {
         <Button type="submit" disabled={loading} className="w-full">
           {loading ? "Entrando..." : "Entrar"}
         </Button>
-        <p className="text-center text-sm text-ink-soft">
+        <p className="border-t border-line pt-5 text-center text-sm text-ink-soft">
           Ainda não tem conta?{" "}
-          <Link href="/cadastro" className="text-accent-deep hover:underline">
+          <Link href="/cadastro" className="focus-ring rounded-input font-semibold text-accent-deep underline underline-offset-4">
             Cadastre-se
           </Link>
         </p>
