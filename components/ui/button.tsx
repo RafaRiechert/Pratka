@@ -6,27 +6,27 @@ import { cn } from "@/lib/utils";
 type Variant =
   | "primary"
   | "secondary"
-  | "petroleo"
-  | "sol"
+  | "support"
+  | "signal"
   | "outline"
   | "ghost"
   | "danger";
 type Size = "sm" | "md" | "lg";
 
 /*
- * Every combination below clears WCAG AA (4.5:1) for its own text, which is
- * why the filled orange is tangerine-deep and not tangerine: cream on
- * #ff5a1f is 3.1:1 and fails. Tangerine survives as a surface with ink text
- * (5.5:1) and as decoration — see the palette rule in globals.css.
+ * Nenhuma cor aqui é escolhida: cada variante nomeia um PAPEL do sistema de
+ * tokens. O contrato de contraste vive em globals.css — `accent` é
+ * superfície e carrega `ink`; `accent-deep` é preenchimento e carrega
+ * `on-accent`. Trocar a identidade não deve exigir tocar neste arquivo.
  */
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-tangerine-deep text-cream hover:shadow-glow-tangerine",
-  secondary: "bg-ink text-cream hover:bg-ink-2 hover:shadow-card",
-  petroleo: "bg-petroleo text-cream hover:bg-petroleo-deep hover:shadow-glow-petroleo",
-  sol: "bg-sol text-ink hover:shadow-glow-sol",
+    "bg-accent-deep text-on-accent hover:shadow-glow-accent",
+  secondary: "bg-inverse text-on-inverse hover:bg-inverse-2 hover:shadow-card",
+  support: "bg-support text-on-support hover:bg-support-deep hover:shadow-glow-support",
+  signal: "bg-signal text-on-signal hover:shadow-glow-signal",
   outline:
-    "border border-ink/25 text-ink bg-transparent hover:border-tangerine-deep hover:text-tangerine-deep",
+    "border border-ink/25 text-ink bg-transparent hover:border-accent-deep hover:text-accent-deep",
   ghost: "bg-transparent text-ink hover:bg-ink/5",
   danger:
     "bg-danger/10 text-danger border border-danger/40 hover:bg-danger/20",
@@ -62,7 +62,7 @@ export function Button({
   disabled,
 }: ButtonProps) {
   const classes = cn(
-    "pop focus-ring inline-flex items-center justify-center gap-2 rounded-xl font-semibold tracking-tight disabled:opacity-50 disabled:pointer-events-none",
+    "pop focus-ring inline-flex items-center justify-center gap-2 rounded-control font-semibold tracking-tight disabled:opacity-50 disabled:pointer-events-none",
     variantClasses[variant],
     sizeClasses[size],
     className

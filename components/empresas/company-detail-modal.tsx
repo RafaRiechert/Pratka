@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Clock, MapPin, Users2, X } from "lucide-react";
-import { Tag } from "@/components/ui/badge";
+import { Tag } from "@/components/ui/tag";
 import { Button } from "@/components/ui/button";
 import type { Company } from "@/lib/types";
 
@@ -31,7 +31,7 @@ export default function CompanyDetailModal({
           <motion.div
             role="dialog"
             aria-modal="true"
-            className="glass relative z-10 max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-3xl p-8 shadow-card"
+            className="panel relative z-10 max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-card p-8 shadow-card"
             initial={{ opacity: 0, y: 24, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.97 }}
@@ -50,9 +50,9 @@ export default function CompanyDetailModal({
             </h3>
 
             <div className="mt-3 flex flex-wrap gap-1.5">
-              <Tag variant="tangerine">{company.sector}</Tag>
+              <Tag variant="accent">{company.sector}</Tag>
               <Tag variant="ink">{company.type}</Tag>
-              {company.paid && <Tag variant="tangerine">Remunerado</Tag>}
+              {company.paid && <Tag variant="accent">Remunerado</Tag>}
             </div>
 
             {company.fullDescription && (
@@ -83,7 +83,7 @@ export default function CompanyDetailModal({
                 {company.areas.map((area) => (
                   <div
                     key={area.area}
-                    className="rounded-2xl border border-sand bg-paper/60 p-4"
+                    className="rounded-panel border border-surface-inset bg-surface-2/60 p-4"
                   >
                     <h4 className="font-display text-base font-bold text-ink">
                       {area.area}
@@ -105,7 +105,7 @@ export default function CompanyDetailModal({
                 ))}
               </div>
             ) : company.status === "em-breve" ? (
-              <p className="mt-8 w-full rounded-2xl border border-dashed border-tangerine/40 bg-tangerine/8 px-4 py-3 text-center text-sm font-medium text-tangerine-deep">
+              <p className="mt-8 w-full rounded-panel border border-dashed border-accent/40 bg-accent/8 px-4 py-3 text-center text-sm font-medium text-accent-deep">
                 {company.opensWhen ?? "Inscrições abrem em breve"}
               </p>
             ) : (

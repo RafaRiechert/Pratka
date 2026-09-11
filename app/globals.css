@@ -1,40 +1,87 @@
 @import "tailwindcss";
 
+/*
+ * ============================================================================
+ * DESIGN TOKENS — a camada única de identidade
+ * ============================================================================
+ * Nenhum componente escolhe cor, raio ou fonte por conta própria: todos
+ * consomem os tokens semânticos abaixo. Trocar a identidade do site inteiro
+ * é trocar os VALORES deste bloco (mais os componentes de forma), nunca
+ * caçar hex espalhado pelos componentes.
+ *
+ * Papéis, e o contrato de contraste de cada um (tudo AA, 4.5:1, no mínimo):
+ *   surface / surface-2 / surface-3  fundos; sempre com texto `ink`
+ *   inverse / inverse-2              o bloco de contraste; texto `on-inverse`
+ *   ink / ink-2 / ink-soft           texto sobre surface
+ *   line / line-strong               fios, bordas, réguas
+ *   accent                           SUPERFÍCIE de acento; texto `ink` em cima
+ *   accent-deep                      TEXTO e CTA preenchido; `on-accent` em cima
+ *   accent-soft                      tinta decorativa; nunca carrega texto
+ *   support / support-deep           acento frio; texto `on-support` em cima
+ *   signal / signal-deep             prazos e urgência; texto `on-signal`
+ *   danger                           erro de formulário
+ */
+
 @theme {
-  /*
-   * Contraponto — cream paper + espresso ink carry the page; the accent
-   * punctuates. Contrast rule baked into the token names, all AA on cream:
-   *   warm (tangerine/sol) = SURFACE, always with ink text
-   *   petroleo             = SURFACE, always with cream text
-   *   tangerine-deep       = TEXT and filled CTAs (white/cream on it)
-   */
-  --color-cream: #fdf6ec;
-  --color-cream-deep: #f5e7d0;
-  --color-paper: #fffbf3;
+  /* --- superfícies ------------------------------------------------------ */
+  --color-surface: #fdf6ec;
+  --color-surface-2: #fffbf3;
+  --color-surface-3: #f5e7d0;
+  --color-surface-inset: #ead9bd;
+
+  /* --- bloco de contraste ----------------------------------------------- */
+  --color-inverse: #241a12;
+  --color-inverse-2: #34251a;
+  --color-on-inverse: #fdf6ec;
+
+  /* --- texto ------------------------------------------------------------ */
   --color-ink: #241a12;
   --color-ink-2: #34251a;
   --color-ink-soft: #6b5642;
-  /* accent 1 — energy */
-  --color-tangerine: #ff5a1f;
-  --color-tangerine-deep: #b8380f;
-  --color-coral: #ff8b66;
-  /* accent 2 — the cool counterweight the old palette never had */
-  --color-petroleo: #0f4c4a;
-  --color-petroleo-deep: #0b3b42;
-  /* pop — surfaces only, never text on cream */
-  --color-sol: #ffc53d;
-  --color-sand: #ead9bd;
+
+  /* --- fios ------------------------------------------------------------- */
+  --color-line: rgba(36, 26, 18, 0.1);
+  --color-line-strong: rgba(36, 26, 18, 0.24);
+
+  /* --- acento principal ------------------------------------------------- */
+  --color-accent: #ff5a1f;
+  --color-accent-deep: #b8380f;
+  --color-accent-soft: #ff8b66;
+  --color-on-accent: #fdf6ec;
+
+  /* --- acento de apoio (o contrapeso frio) ------------------------------ */
+  --color-support: #0f4c4a;
+  --color-support-deep: #0b3b42;
+  --color-on-support: #fdf6ec;
+
+  /* --- sinal: prazos, urgência, contagem -------------------------------- */
+  --color-signal: #ffc53d;
+  --color-signal-deep: #8a5a00;
+  --color-on-signal: #241a12;
+
   --color-danger: #c43d3d;
 
+  /* --- tipografia ------------------------------------------------------- */
+  /* Três slots no máximo: display (títulos), body (leitura) e mono (dado). */
   --font-display: var(--font-clash), "Clash Display", ui-sans-serif, system-ui, sans-serif;
-  --font-editorial: var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
   --font-body: var(--font-work-sans), "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-stack), ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Vozes extras da identidade atual — cada direção decide se sobrevivem. */
+  --font-editorial: var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
   --font-script: var(--font-caveat), "Caveat", ui-serif, cursive;
 
-  --shadow-glow-tangerine: 0 0 0 1px rgba(255, 90, 31, 0.28), 0 10px 32px -8px rgba(255, 90, 31, 0.45);
-  --shadow-glow-sol: 0 0 0 1px rgba(255, 197, 61, 0.32), 0 10px 30px -8px rgba(255, 197, 61, 0.4);
-  --shadow-glow-petroleo: 0 0 0 1px rgba(15, 76, 74, 0.3), 0 10px 30px -8px rgba(15, 76, 74, 0.45);
+  /* --- forma ------------------------------------------------------------ */
+  --radius-card: 1.5rem;
+  --radius-panel: 1rem;
+  --radius-control: 0.75rem;
+  --radius-tag: 999px;
+  --radius-pill: 999px;
+
+  /* --- elevação --------------------------------------------------------- */
   --shadow-card: 0 20px 50px -22px rgba(36, 26, 18, 0.35), 0 1px 0 0 rgba(255, 255, 255, 0.5) inset;
+  --shadow-glow-accent: 0 0 0 1px rgba(255, 90, 31, 0.28), 0 10px 32px -8px rgba(255, 90, 31, 0.45);
+  --shadow-glow-signal: 0 0 0 1px rgba(255, 197, 61, 0.32), 0 10px 30px -8px rgba(255, 197, 61, 0.4);
+  --shadow-glow-support: 0 0 0 1px rgba(15, 76, 74, 0.3), 0 10px 30px -8px rgba(15, 76, 74, 0.45);
 
   --animate-float-slow: float 9s ease-in-out infinite;
   --animate-float-slower: float 14s ease-in-out infinite;
@@ -60,8 +107,7 @@
 
   /*
    * Motion tokens. Same numbers as lib/motion.ts so CSS transitions and
-   * Framer springs feel like one system. "Pop" is the ear-popping overshoot
-   * borrowed from the reference; "soft" is for anything a user reads.
+   * Framer springs feel like one system.
    */
   --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -70,10 +116,30 @@
   --dur-slow: 620ms;
   --hover-lift: -2px;
   --hover-scale: 1.03;
+
+  /*
+   * ------------------------------------------------------------------
+   * PELE — as variáveis que cada direção sobrescreve sem tocar em componente
+   * ------------------------------------------------------------------
+   */
+
+  /* Textura de fundo. Grão, nunca gradiente. Uma direção pode zerar. */
+  --grain-opacity: 0.045;
+  --grain-blend: multiply;
+
+  /* Superfície elevada (.panel): vidro, papel chapado ou painel de borda. */
+  --panel-bg: color-mix(in srgb, var(--color-surface-2) 78%, transparent);
+  --panel-border: var(--color-line);
+  --panel-filter: blur(16px);
+  --panel-glow-bg: var(--color-accent);
+
+  /* Brilho que segue o cursor. Alpha 0 desliga o efeito por completo. */
+  --cursor-glow-color: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  --cursor-glow-blend: multiply;
 }
 
 * {
-  border-color: rgba(36, 26, 18, 0.08);
+  border-color: var(--color-line);
 }
 
 /* Scrolling is driven by Lenis (see components/providers/smooth-scroll.tsx).
@@ -98,7 +164,7 @@ html {
 }
 
 body {
-  background: var(--color-cream);
+  background: var(--color-surface);
   color: var(--color-ink);
   font-family: var(--font-body);
   line-height: 1.7;
@@ -116,15 +182,21 @@ body {
   font-synthesis: none;
 }
 
-/* Fraunces is now the editorial voice (wordmark, Sobre, pull quotes) —
-   keep its warm, slightly rounded character. Clash Display carries headlines. */
 .font-editorial {
   font-variation-settings: "SOFT" 40, "WONK" 0;
 }
 
+/* Metadados em caixa alta — setor, cidade, status, rótulo de painel. */
+.label-meta {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 ::selection {
-  background: var(--color-tangerine);
-  color: var(--color-cream);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
 }
 
 ::-webkit-scrollbar {
@@ -132,47 +204,51 @@ body {
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-cream);
+  background: var(--color-surface);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-coral);
-  border-radius: 999px;
-  border: 2px solid var(--color-cream);
+  background: var(--color-accent-soft);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-surface);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-tangerine);
+  background: var(--color-accent);
 }
 
-/* Fine paper-grain texture overlay */
+/* Textura fina de papel. Grão, não gradiente. */
 .grain-overlay {
   position: fixed;
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.045;
-  mix-blend-mode: multiply;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: var(--grain-blend);
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-repeat: repeat;
 }
 
-/* Frosted warm-paper card surface */
-.glass {
-  background: linear-gradient(180deg, rgba(255, 251, 243, 0.78), rgba(253, 246, 236, 0.6));
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(36, 26, 18, 0.08);
+/*
+ * Superfície elevada padrão do site. Cada direção redefine as três
+ * variáveis abaixo — vidro fosco, papel chapado ou painel de borda — sem
+ * que nenhum componente precise saber qual identidade está no ar.
+ */
+.panel {
+  background: var(--panel-bg, var(--color-surface-2));
+  border: 1px solid var(--panel-border, var(--color-line));
+  backdrop-filter: var(--panel-filter, none);
+  -webkit-backdrop-filter: var(--panel-filter, none);
 }
 
-.glass-border-glow {
+.panel-glow {
   position: relative;
 }
-.glass-border-glow::before {
+.panel-glow::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(255, 90, 31, 0.45), rgba(255, 197, 61, 0.3), transparent 70%);
+  background: var(--panel-glow-bg, var(--color-accent));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -180,15 +256,17 @@ body {
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
-.glass-border-glow:hover::before {
+.panel-glow:hover::before {
   opacity: 1;
 }
 
-.text-gradient-solar {
-  background: linear-gradient(90deg, var(--color-tangerine), var(--color-sol));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/*
+ * Ênfase tipográfica do acento. A identidade atual pinta com gradiente de
+ * texto; direções que não querem gradiente nenhum sobrescrevem para cor
+ * chapada e o markup não muda.
+ */
+.text-accent-emphasis {
+  color: var(--color-accent-deep);
 }
 
 .shimmer-bg {
@@ -201,18 +279,17 @@ body {
   background-size: 200% 100%;
 }
 
-.bg-mesh {
-  background-image:
-    radial-gradient(45% 40% at 16% 20%, rgba(255, 90, 31, 0.18), transparent 70%),
-    radial-gradient(50% 45% at 85% 12%, rgba(255, 197, 61, 0.22), transparent 70%),
-    radial-gradient(55% 50% at 50% 100%, rgba(255, 139, 102, 0.18), transparent 70%),
-    linear-gradient(180deg, #fdf6ec 0%, #fbf1e1 50%, #fdf6ec 100%);
+/*
+ * Fundo do herói e das seções de topo. REGRA DA RODADA: sem gradiente
+ * suave / mesh. Chapado, com a textura fina do grão por cima.
+ */
+.bg-hero {
+  background-color: var(--color-surface);
 }
 
 /*
  * Springy interaction system — the reference's "ear-popping" button hover,
- * dialed back to a 3% pop. CSS rather than a motion wrapper so it costs
- * nothing on server-rendered buttons and works on every interactive surface.
+ * dialed back to a 3% pop.
  *
  * Guards, in order: only where a real pointer exists (never on touch, where
  * :hover sticks after a tap), and never under reduced motion.
@@ -259,7 +336,7 @@ body {
 
 /* One focus ring for the whole site, on every accent background. */
 .focus-ring:focus-visible {
-  outline: 3px solid var(--color-petroleo);
+  outline: 3px solid var(--color-support);
   outline-offset: 3px;
   border-radius: inherit;
 }

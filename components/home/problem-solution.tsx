@@ -1,4 +1,4 @@
-import { CircleAlert, Sparkles } from "lucide-react";
+import { CircleAlert } from "lucide-react";
 import AnimatedSection from "@/components/ui/animated-section";
 import BenefitPills from "@/components/ui/benefit-pills";
 
@@ -16,36 +16,32 @@ const solutionParagraphs = [
 export default function ProblemSolution() {
   return (
     <section id="problema-solucao" className="scroll-mt-24">
-      <div data-nav-theme="dark" className="border-b border-cream/5 bg-ink py-24">
+      <div data-nav-theme="dark" className="border-b border-on-inverse/5 bg-inverse py-24">
         <div className="mx-auto max-w-3xl px-6">
           <AnimatedSection className="mb-10 flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cream/10 text-cream/60">
+            <div className="flex h-11 w-11 items-center justify-center rounded-control bg-on-inverse/10 text-on-inverse/60">
               <CircleAlert size={20} />
             </div>
-            <h2 className="font-display text-4xl font-bold text-cream sm:text-5xl">
+            <h2 className="font-display text-4xl font-bold text-on-inverse sm:text-5xl">
               O Problema
             </h2>
           </AnimatedSection>
           <div className="space-y-5">
             {problemParagraphs.map((p, i) => (
               <AnimatedSection key={i} delay={i * 0.05}>
-                <p className="text-lg leading-relaxed text-cream/65">{p}</p>
+                <p className="text-lg leading-relaxed text-on-inverse/65">{p}</p>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="relative overflow-hidden bg-sol py-24">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(255,251,243,0.45),transparent_70%)]"
-        />
+      {/* Sem o amarelo emprestado e sem o gradiente radial: a seção agora
+          usa uma superfície do próprio sistema. O ícone de sparkle saiu
+          junto com a badge do herói — mesmo motivo. */}
+      <div className="relative overflow-hidden bg-surface-3 py-24">
         <div className="relative z-10 mx-auto max-w-3xl px-6">
-          <AnimatedSection className="mb-10 flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-ink/10 text-ink">
-              <Sparkles size={20} />
-            </div>
+          <AnimatedSection className="mb-10">
             <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
               A Solução
             </h2>

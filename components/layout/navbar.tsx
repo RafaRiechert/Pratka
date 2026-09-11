@@ -21,7 +21,7 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { user, signOut } = useAuth();
-  // Two states only: ink-on-cream, and cream-on-dark over dark sections.
+  // Dois estados apenas: ink sobre surface, e on-inverse sobre o bloco escuro.
   const overDark = useNavOverDark();
 
   return (
@@ -29,19 +29,19 @@ export default function Navbar() {
       <div className="mx-auto mt-4 max-w-7xl px-4">
         <nav
           className={cn(
-            "flex items-center justify-between rounded-2xl px-5 py-3 shadow-card transition-colors duration-500",
+            "flex items-center justify-between rounded-panel px-5 py-3 shadow-card transition-colors duration-500",
             overDark
-              // Petroleo rather than ink: the dark sections are ink, so an
-              // ink panel on top of them made the header pill disappear.
-              ? "border border-cream/15 bg-petroleo/85 backdrop-blur-lg"
-              : "glass"
+              // `support` em vez de `inverse`: as seções escuras já são
+              // `inverse`, e um painel inverse sobre elas sumia.
+              ? "border border-on-inverse/15 bg-support/85 backdrop-blur-lg"
+              : "panel"
           )}
         >
           <Link
             href="/"
             className={cn(
               "font-editorial text-2xl font-extrabold tracking-tight transition-colors duration-500",
-              overDark ? "text-cream" : "text-ink"
+              overDark ? "text-on-inverse" : "text-ink"
             )}
           >
             Pratka
@@ -60,7 +60,7 @@ export default function Navbar() {
               <Button
                 variant="ghost"
                 size="sm"
-                className={overDark ? "text-cream hover:bg-cream/10" : undefined}
+                className={overDark ? "text-on-inverse hover:bg-on-inverse/10" : undefined}
                 onClick={() => signOut()}
               >
                 Sair
@@ -73,7 +73,7 @@ export default function Navbar() {
                   size="sm"
                   className={
                     overDark
-                      ? "border-cream/35 text-cream hover:border-sol hover:text-sol"
+                      ? "border-on-inverse/35 text-on-inverse hover:border-signal hover:text-signal"
                       : undefined
                   }
                 >
@@ -89,7 +89,7 @@ export default function Navbar() {
           <button
             className={cn(
               "transition-colors duration-500 lg:hidden",
-              overDark ? "text-cream" : "text-ink"
+              overDark ? "text-on-inverse" : "text-ink"
             )}
             onClick={() => setOpen((o) => !o)}
             aria-label="Abrir menu"
@@ -108,13 +108,13 @@ export default function Navbar() {
             transition={{ duration: 0.2 }}
             className="mx-4 mt-2 lg:hidden"
           >
-            <div className="glass flex flex-col gap-1 rounded-2xl p-4 shadow-card">
+            <div className="panel flex flex-col gap-1 rounded-panel p-4 shadow-card">
               {links.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-ink/85 hover:bg-ink/5"
+                  className="rounded-input px-3 py-2.5 text-sm font-medium text-ink/85 hover:bg-ink/5"
                 >
                   {l.label}
                 </Link>

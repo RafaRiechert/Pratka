@@ -22,7 +22,7 @@ export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElem
   return (
     <input
       className={cn(
-        "glass w-full rounded-xl border-0 bg-transparent px-4 py-2.5 text-sm text-ink outline-none focus:ring-2 focus:ring-tangerine/40",
+        "panel w-full rounded-control border-0 bg-transparent px-4 py-2.5 text-sm text-ink outline-none focus:ring-2 focus:ring-accent/40",
         className
       )}
       {...props}

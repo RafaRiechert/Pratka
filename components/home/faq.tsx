@@ -51,10 +51,10 @@ function FaqRow({ q, a }: { q: string; a: string }) {
 
   return (
     <div
-      className={`overflow-hidden rounded-3xl border transition-colors duration-300 ${
+      className={`overflow-hidden rounded-card border transition-colors duration-300 ${
         open
-          ? "border-tangerine/35 bg-paper"
-          : "border-ink/10 bg-paper/60 hover:border-ink/20"
+          ? "border-accent/35 bg-surface-2"
+          : "border-ink/10 bg-surface-2/60 hover:border-ink/20"
       }`}
     >
       <h3>
@@ -74,7 +74,7 @@ function FaqRow({ q, a }: { q: string; a: string }) {
             animate={{ rotate: open ? 45 : 0 }}
             transition={springPop}
             className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
-              open ? "bg-tangerine text-ink" : "bg-ink/8 text-ink-soft"
+              open ? "bg-accent text-ink" : "bg-ink/8 text-ink-soft"
             }`}
           >
             <Plus size={17} />

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
-import GlassCard from "@/components/ui/glass-card";
+import PanelCard from "@/components/ui/panel-card";
 import { Field, Input } from "@/components/ui/input";
 
 export default function SignupForm() {
@@ -30,7 +30,7 @@ export default function SignupForm() {
   }
 
   return (
-    <GlassCard className="mx-auto max-w-md p-8">
+    <PanelCard className="mx-auto max-w-md p-8">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <Field label="E-mail">
           <Input
@@ -57,11 +57,11 @@ export default function SignupForm() {
         </Button>
         <p className="text-center text-sm text-ink-soft">
           Já tem uma conta?{" "}
-          <Link href="/login" className="text-tangerine-deep hover:underline">
+          <Link href="/login" className="text-accent-deep hover:underline">
             Entrar
           </Link>
         </p>
       </form>
-    </GlassCard>
+    </PanelCard>
   );
 }

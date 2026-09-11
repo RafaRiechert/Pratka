@@ -64,7 +64,7 @@ function FloatingProgrammes({
           initial={reduced ? false : { opacity: 0, y: 14, rotate: 0 }}
           animate={{ opacity: 1, y: 0, rotate: i % 2 === 0 ? -2 : 2.5 }}
           transition={{ ...springPop, delay: reduced ? 0 : i * stagger.tight }}
-          className="rounded-2xl border border-ink/8 bg-paper p-4 shadow-card"
+          className="rounded-panel border border-ink/8 bg-surface-2 p-4 shadow-card"
         >
           <p className="font-display text-sm font-bold leading-tight text-ink">
             {company.name}
@@ -100,7 +100,7 @@ function AreaRow({
     <span className="relative z-10 flex flex-wrap items-baseline gap-x-4 gap-y-1">
       <span
         className={`font-display text-2xl font-bold transition-colors duration-300 sm:text-3xl ${
-          active ? "text-tangerine-deep" : "text-ink"
+          active ? "text-accent-deep" : "text-ink"
         }`}
       >
         {area.info.name}
@@ -116,7 +116,7 @@ function AreaRow({
             animate={{ opacity: 1, x: 0 }}
             exit={reduced ? undefined : { opacity: 0, x: -8 }}
             transition={{ duration: duration.fast, ease: ease.soft }}
-            className="font-script text-xl leading-none text-tangerine-deep sm:text-2xl"
+            className="font-script text-xl leading-none text-accent-deep sm:text-2xl"
           >
             {area.pitch}
           </motion.span>
@@ -158,7 +158,7 @@ function AreaRow({
           size={20}
           aria-hidden="true"
           className={`pop-nudge relative z-10 shrink-0 transition-colors duration-300 ${
-            active ? "text-tangerine-deep" : "text-ink-soft"
+            active ? "text-accent-deep" : "text-ink-soft"
           }`}
         />
       </button>

@@ -27,7 +27,7 @@ export default function SobrePage() {
           <h2 className="font-editorial text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
             Sobre
           </h2>
-          <span aria-hidden="true" className="mt-3 block h-1 w-14 rounded-full bg-sol" />
+          <span aria-hidden="true" className="mt-3 block h-1 w-14 rounded-full bg-signal" />
         </AnimatedSection>
         <div className="space-y-6">
           {sobreParagraphs.map((p, i) => (
@@ -51,7 +51,7 @@ export default function SobrePage() {
           <h2 className="font-editorial text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
             Quem somos nós
           </h2>
-          <span aria-hidden="true" className="mt-3 block h-1 w-14 rounded-full bg-sol" />
+          <span aria-hidden="true" className="mt-3 block h-1 w-14 rounded-full bg-signal" />
         </AnimatedSection>
         <div className="space-y-6">
           {quemSomosParagraphs.map((p, i) => (

@@ -60,7 +60,7 @@ export default function QuizResult({
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="mx-auto w-full max-w-2xl text-center"
     >
-      <span className="text-sm font-semibold uppercase tracking-widest text-tangerine-deep">
+      <span className="text-sm font-semibold uppercase tracking-widest text-accent-deep">
         Seu resultado
       </span>
       <motion.h2
@@ -69,7 +69,7 @@ export default function QuizResult({
         transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         className="mt-3 text-balance font-display text-4xl font-bold text-ink sm:text-5xl"
       >
-        <span className="text-gradient-solar">{primaryInfo.name}</span>
+        <span className="text-accent-emphasis">{primaryInfo.name}</span>
       </motion.h2>
       <motion.p
         initial={{ opacity: 0, y: 12 }}
@@ -85,7 +85,7 @@ export default function QuizResult({
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.45 }}
-          className="mx-auto mt-8 max-w-xl rounded-3xl border border-sand bg-paper/60 p-6 text-left"
+          className="mx-auto mt-8 max-w-xl rounded-card border border-surface-inset bg-surface-2/60 p-6 text-left"
         >
           <h3 className="font-display text-base font-bold text-ink">
             Por que essa área combina com você
@@ -107,7 +107,7 @@ export default function QuizResult({
         className="mx-auto mt-6 flex max-w-xl flex-col gap-3 sm:flex-row"
       >
         {secondaryInfo && (
-          <div className="flex-1 rounded-2xl border border-sand bg-paper/60 p-5 text-left">
+          <div className="flex-1 rounded-panel border border-surface-inset bg-surface-2/60 p-5 text-left">
             <p className="text-sm text-ink-soft">
               Você também tem perfil para{" "}
               <span className="font-semibold text-ink">{secondaryInfo.name}</span>.
@@ -118,7 +118,7 @@ export default function QuizResult({
           </div>
         )}
         {tertiaryInfo && (
-          <div className="flex-1 rounded-2xl border border-sand bg-paper/40 p-5 text-left">
+          <div className="flex-1 rounded-panel border border-surface-inset bg-surface-2/40 p-5 text-left">
             <p className="text-sm text-ink-soft">
               Outra área para ficar de olho:{" "}
               <span className="font-semibold text-ink">{tertiaryInfo.name}</span>.

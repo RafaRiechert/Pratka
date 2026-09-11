@@ -107,12 +107,12 @@ export default function CompanyListing() {
               onClick={() => setStatus(chip.value)}
               className={`pop focus-ring rounded-full px-4 py-2 text-sm font-semibold ${
                 selected
-                  ? "bg-ink text-cream"
-                  : "border border-ink/15 bg-paper/60 text-ink-soft hover:border-ink/30"
+                  ? "bg-inverse text-on-inverse"
+                  : "border border-ink/15 bg-surface-2/60 text-ink-soft hover:border-ink/30"
               }`}
             >
               {chip.label}
-              <span className={selected ? "ml-1.5 text-cream/60" : "ml-1.5 text-ink/35"}>
+              <span className={selected ? "ml-1.5 text-on-inverse/60" : "ml-1.5 text-ink/35"}>
                 {chip.count}
               </span>
             </button>
@@ -131,7 +131,7 @@ export default function CompanyListing() {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="glass flex flex-col items-center gap-3 rounded-3xl px-8 py-20 text-center">
+        <div className="panel flex flex-col items-center gap-3 rounded-card px-8 py-20 text-center">
           <Building2 size={28} className="text-ink/30" />
           <p className="text-ink-soft">
             Nenhuma empresa encontrada com esses filtros.

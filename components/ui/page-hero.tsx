@@ -10,11 +10,11 @@ export default function PageHero({
   description?: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-mesh py-24 sm:py-28">
+    <section className="relative overflow-hidden bg-hero py-24 sm:py-28">
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
         <AnimatedSection>
           {eyebrow && (
-            <span className="text-sm font-semibold uppercase tracking-widest text-tangerine-deep">
+            <span className="text-sm font-semibold uppercase tracking-widest text-accent-deep">
               {eyebrow}
             </span>
           )}

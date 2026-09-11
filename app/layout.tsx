@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat, Fraunces, Work_Sans } from "next/font/google";
+import { Caveat, Fraunces, JetBrains_Mono, Work_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
@@ -23,6 +23,19 @@ const workSans = Work_Sans({
   subsets: ["latin"],
   weight: "variable",
   display: "swap",
+});
+
+/**
+ * Voz monoespaçada — o terceiro slot, e o único que se justifica por ser
+ * funcional: data, prazo, contador, cidade. Fica atrás de --font-mono em
+ * globals.css, então trocar a mono da identidade é trocar só este import.
+ */
+const mono = JetBrains_Mono({
+  variable: "--font-mono-stack",
+  subsets: ["latin"],
+  weight: "variable",
+  display: "swap",
+  preload: false,
 });
 
 /**
@@ -68,9 +81,9 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${clashDisplay.variable} ${fraunces.variable} ${workSans.variable} ${caveat.variable} h-full`}
+      className={`${clashDisplay.variable} ${fraunces.variable} ${workSans.variable} ${mono.variable} ${caveat.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-cream text-ink font-body antialiased">
+      <body className="min-h-full flex flex-col bg-surface text-ink font-body antialiased">
         <MotionConfig reducedMotion="user">
           <AuthProvider>
             <GrainOverlay />

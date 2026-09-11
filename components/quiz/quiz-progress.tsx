@@ -17,7 +17,7 @@ export default function QuizProgress({
       </div>
       <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-ink/10">
         <motion.div
-          className="h-full rounded-full bg-tangerine"
+          className="h-full rounded-full bg-accent"
           initial={false}
           animate={{ width: `${percent}%` }}
           transition={{ type: "spring", stiffness: 120, damping: 20 }}

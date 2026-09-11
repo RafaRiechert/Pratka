@@ -17,20 +17,20 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer data-nav-theme="dark" className="relative mt-32 border-t border-cream/10 bg-ink">
+    <footer data-nav-theme="dark" className="relative mt-32 border-t border-on-inverse/10 bg-inverse">
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
-            <span className="font-editorial text-2xl font-extrabold tracking-tight text-cream">
+            <span className="font-editorial text-2xl font-extrabold tracking-tight text-on-inverse">
               Pratka
             </span>
-            <p className="mt-3 max-w-xs text-sm text-cream/55">
+            <p className="mt-3 max-w-xs text-sm text-on-inverse/55">
               Feito no Brasil para universitários brasileiros.
             </p>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-cream/45">
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-on-inverse/45">
               Navegação
             </h4>
             <ul className="mt-4 space-y-2.5">
@@ -38,7 +38,7 @@ export default function Footer() {
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="focus-ring rounded text-sm text-cream/70 transition-colors hover:text-sol"
+                    className="focus-ring rounded text-sm text-on-inverse/70 transition-colors hover:text-signal"
                   >
                     {l.label}
                   </Link>
@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-cream/45">
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-on-inverse/45">
               Redes sociais
             </h4>
             <div className="mt-4 flex gap-3">
@@ -57,7 +57,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="pop focus-ring flex h-10 w-10 items-center justify-center rounded-full bg-cream/10 text-cream/70 hover:bg-sol hover:text-ink"
+                  className="pop focus-ring flex h-10 w-10 items-center justify-center rounded-full bg-on-inverse/10 text-on-inverse/70 hover:bg-signal hover:text-ink"
                 >
                   <Icon size={18} />
                 </a>
@@ -66,7 +66,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-cream/10 pt-6 text-center text-xs text-cream/35">
+        <div className="mt-12 border-t border-on-inverse/10 pt-6 text-center text-xs text-on-inverse/35">
           © {new Date().getFullYear()} Pratka. Todos os direitos reservados.
         </div>
       </div>

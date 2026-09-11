@@ -4,22 +4,18 @@ import { motion } from "framer-motion";
 import { springPop, stagger, viewportOnce } from "@/lib/motion";
 
 /**
- * Rotated badge labels, borrowed from the reference and rationed to three.
- * Each one demonstrates the palette rule rather than picking a colour at
- * random: warm surfaces carry ink text, petroleo carries cream.
- */
-/*
- * Surfaces chosen to read on cream *and* on the sol block they currently
- * sit on — a sol pill on the sol field was invisible. Text/surface pairs
- * all clear AA: cream on ink 15.9, ink on tangerine 5.5, cream on
- * petroleo 9.1.
+ * Rótulos inclinados, racionados em três. Cada um demonstra a regra da
+ * paleta em vez de escolher uma cor avulsa: nenhum par de texto/superfície
+ * aqui é literal — todos saem dos tokens, e cada par abaixo é um contrato
+ * de contraste que globals.css garante (inverse/on-inverse, accent/ink,
+ * support/on-support).
  */
 const pills = [
-  { label: "Vagas reais", className: "bg-ink text-cream", rotate: -3 },
-  { label: "Feito no Brasil", className: "bg-tangerine text-ink", rotate: 2 },
+  { label: "Vagas reais", className: "bg-inverse text-on-inverse", rotate: -3 },
+  { label: "Feito no Brasil", className: "bg-accent text-ink", rotate: 2 },
   {
     label: "Grátis para estudantes",
-    className: "bg-petroleo text-cream",
+    className: "bg-support text-on-support",
     rotate: -1.5,
   },
 ];

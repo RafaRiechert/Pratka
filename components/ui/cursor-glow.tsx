@@ -37,9 +37,11 @@ export default function CursorGlow() {
         y: springY,
         translateX: "-50%",
         translateY: "-50%",
+        // Cor e mescla vêm dos tokens: uma direção que não quer brilho de
+        // cursor zera --cursor-glow-alpha em globals.css e isto some.
         background:
-          "radial-gradient(circle, rgba(255,90,31,0.14), transparent 70%)",
-        mixBlendMode: "multiply",
+          "radial-gradient(circle, var(--cursor-glow-color), transparent 70%)",
+        mixBlendMode: "var(--cursor-glow-blend)" as React.CSSProperties["mixBlendMode"],
       }}
     />
   );

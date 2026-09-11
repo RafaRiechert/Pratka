@@ -35,9 +35,9 @@ export default function StatsBar() {
   return (
     <section className="relative -mt-16 px-6">
       <AnimatedSection className="mx-auto max-w-6xl">
-        <div className="glass grid grid-cols-2 gap-8 rounded-3xl px-8 py-10 shadow-card sm:grid-cols-4">
+        <div className="panel grid grid-cols-2 gap-8 rounded-card px-8 py-10 shadow-card sm:grid-cols-4">
           <div className="text-center">
-            <div className="font-display text-4xl font-bold text-tangerine-deep sm:text-5xl">
+            <div className="font-display text-4xl font-bold text-accent-deep sm:text-5xl">
               {/* The "+" only makes sense alongside a real count. */}
               <CountUp value={companyCount} suffix={companyCount > 0 ? "+" : ""} />
             </div>
@@ -47,7 +47,7 @@ export default function StatsBar() {
           </div>
 
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-tangerine-deep sm:text-3xl">
+            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-accent-deep sm:text-3xl">
               <MapPin size={22} className="shrink-0" aria-hidden="true" />
               {coverage}
             </div>
@@ -61,7 +61,7 @@ export default function StatsBar() {
               deixou de ser verdadeira. Esta conta é derivada do mesmo dado
               que alimenta os cards, então acompanha a lista sozinha.
             */}
-            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-tangerine-deep sm:text-3xl">
+            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-accent-deep sm:text-3xl">
               <Link2 size={22} className="shrink-0" aria-hidden="true" />
               <CountUp value={openCount} />
             </div>
@@ -71,7 +71,7 @@ export default function StatsBar() {
           </div>
 
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-tangerine-deep sm:text-3xl">
+            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-accent-deep sm:text-3xl">
               <RefreshCw size={22} className="shrink-0" aria-hidden="true" />
               {lastUpdated}
             </div>

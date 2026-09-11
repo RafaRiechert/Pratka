@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-export default function GlassCard({
+export default function PanelCard({
   children,
   className,
   interactive = false,
@@ -15,7 +15,7 @@ export default function GlassCard({
 }) {
   return (
     <motion.div
-      className={cn("glass glass-border-glow rounded-2xl shadow-card", className)}
+      className={cn("panel panel-glow rounded-panel shadow-card", className)}
       whileHover={interactive ? { y: -6, scale: 1.015 } : undefined}
       transition={{ type: "spring", stiffness: 220, damping: 18 }}
     >

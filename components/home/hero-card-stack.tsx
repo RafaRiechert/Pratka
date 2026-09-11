@@ -69,7 +69,7 @@ function Card({
       {/* Entrance lives on its own element so it never collides with the
           scroll transform above. */}
       <motion.div
-        className="flex h-52 flex-col rounded-3xl border border-ink/8 bg-paper p-6 shadow-card"
+        className="flex h-52 flex-col rounded-card border border-ink/8 bg-surface-2 p-6 shadow-card"
         initial={{ opacity: 0, y: 36 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...springPop, delay: 0.25 + index * stagger.loose }}
@@ -78,7 +78,7 @@ function Card({
           <h3 className="line-clamp-2 font-display text-lg font-bold leading-tight text-ink">
             {company.name}
           </h3>
-          <span className="mt-0.5 shrink-0 rounded-full bg-sol px-2.5 py-1 text-[11px] font-semibold text-ink">
+          <span className="mt-0.5 shrink-0 rounded-full bg-signal px-2.5 py-1 text-[11px] font-semibold text-ink">
             {company.type}
           </span>
         </div>
