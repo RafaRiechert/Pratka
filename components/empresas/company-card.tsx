@@ -1,4 +1,4 @@
-import { ArrowUpRight, MapPin, Users2 } from "lucide-react";
+import { ArrowUpRight, Clock3, MapPin, Users2 } from "lucide-react";
 import GlassCard from "@/components/ui/glass-card";
 import { Tag } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,9 +14,17 @@ export default function CompanyCard({
   return (
     <GlassCard interactive className="flex h-full flex-col gap-5 p-6">
       <div>
-        <h3 className="font-display text-lg font-bold text-ink">
-          {company.name}
-        </h3>
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="font-display text-lg font-bold text-ink">
+            {company.name}
+          </h3>
+          {company.status === "em-breve" && (
+            <span className="mt-0.5 flex shrink-0 items-center gap-1 rounded-full border border-tangerine/45 bg-tangerine/12 px-2.5 py-1 text-[11px] font-semibold text-tangerine-deep">
+              <Clock3 size={11} aria-hidden="true" />
+              Em breve
+            </span>
+          )}
+        </div>
         <div className="mt-2 flex flex-wrap gap-1.5">
           <Tag variant="tangerine">{company.sector}</Tag>
           <Tag variant="ink">{company.type}</Tag>
@@ -47,17 +55,27 @@ export default function CompanyCard({
         >
           Mais informações
         </Button>
-        {!company.areas && company.link && (
-          <Button
-            href={company.link}
-            external
-            variant="primary"
-            size="sm"
-            className="flex-1"
-          >
-            Aplicar
-            <ArrowUpRight size={16} />
-          </Button>
+        {company.status === "em-breve" ? (
+          // Sem link ativo: um texto informativo, não um botão morto — um
+          // controle que parece clicável e não faz nada custa mais confiança
+          // do que a informação que ele daria.
+          <p className="flex flex-1 items-center justify-center rounded-xl border border-dashed border-ink/20 px-3 py-2 text-center text-xs font-medium text-ink-soft">
+            {company.opensWhen ?? "Inscrições abrem em breve"}
+          </p>
+        ) : (
+          !company.areas &&
+          company.link && (
+            <Button
+              href={company.link}
+              external
+              variant="primary"
+              size="sm"
+              className="flex-1"
+            >
+              Aplicar
+              <ArrowUpRight size={16} />
+            </Button>
+          )
         )}
       </div>
     </GlassCard>

@@ -11,7 +11,7 @@ import CompanyFilters, {
   EMPTY_FILTERS,
   type FilterState,
 } from "@/components/empresas/company-filters";
-import type { Company, Sector } from "@/lib/types";
+import type { Company, CompanyStatus, Sector } from "@/lib/types";
 import { useSectorFilter } from "@/components/home/sector-filter-context";
 
 function SectorFromQuery({ onSector }: { onSector: (sector: Sector) => void }) {
@@ -45,15 +45,36 @@ export default function CompanyListing() {
   };
 
   const [detailCompany, setDetailCompany] = useState<Company | null>(null);
+  const [status, setStatus] = useState<CompanyStatus | "">("");
 
   const filtered = useMemo(() => {
-    return allCompanies.filter((c) => {
-      if (filters.sector && c.sector !== filters.sector) return false;
-      if (filters.city && !c.cities.includes(filters.city)) return false;
-      if (filters.audience && c.audience !== filters.audience) return false;
-      return true;
-    });
-  }, [filters]);
+    return allCompanies
+      .filter((c) => {
+        if (filters.sector && c.sector !== filters.sector) return false;
+        if (filters.city && !c.cities.includes(filters.city)) return false;
+        if (filters.audience && c.audience !== filters.audience) return false;
+        if (status && c.status !== status) return false;
+        return true;
+      })
+      // Quem pode receber uma inscrição hoje vem primeiro; dentro de cada
+      // grupo a ordem da fonte é preservada.
+      .sort((a, b) => Number(a.status === "em-breve") - Number(b.status === "em-breve"));
+  }, [filters, status]);
+
+  const counts = useMemo(
+    () => ({
+      todas: allCompanies.length,
+      aberta: allCompanies.filter((c) => c.status === "aberta").length,
+      "em-breve": allCompanies.filter((c) => c.status === "em-breve").length,
+    }),
+    []
+  );
+
+  const statusChips: { value: CompanyStatus | ""; label: string; count: number }[] = [
+    { value: "", label: "Todas", count: counts.todas },
+    { value: "aberta", label: "Abertas", count: counts.aberta },
+    { value: "em-breve", label: "Em breve", count: counts["em-breve"] },
+  ];
 
   return (
     <section id="empresas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
@@ -71,7 +92,35 @@ export default function CompanyListing() {
         </p>
       </AnimatedSection>
 
-      <div className="mt-10 mb-10">
+      <div
+        role="group"
+        aria-label="Filtrar por status das inscrições"
+        className="mt-10 flex flex-wrap justify-center gap-2"
+      >
+        {statusChips.map((chip) => {
+          const selected = status === chip.value;
+          return (
+            <button
+              key={chip.label}
+              type="button"
+              aria-pressed={selected}
+              onClick={() => setStatus(chip.value)}
+              className={`pop focus-ring rounded-full px-4 py-2 text-sm font-semibold ${
+                selected
+                  ? "bg-ink text-cream"
+                  : "border border-ink/15 bg-paper/60 text-ink-soft hover:border-ink/30"
+              }`}
+            >
+              {chip.label}
+              <span className={selected ? "ml-1.5 text-cream/60" : "ml-1.5 text-ink/35"}>
+                {chip.count}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mt-6 mb-10">
         <CompanyFilters
           sectors={sectors}
           cities={cities}

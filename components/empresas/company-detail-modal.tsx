@@ -104,6 +104,10 @@ export default function CompanyDetailModal({
                   </div>
                 ))}
               </div>
+            ) : company.status === "em-breve" ? (
+              <p className="mt-8 w-full rounded-2xl border border-dashed border-tangerine/40 bg-tangerine/8 px-4 py-3 text-center text-sm font-medium text-tangerine-deep">
+                {company.opensWhen ?? "Inscrições abrem em breve"}
+              </p>
             ) : (
               company.link && (
                 <Button

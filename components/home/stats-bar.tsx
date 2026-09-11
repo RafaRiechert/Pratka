@@ -11,6 +11,9 @@ import { cities, companies } from "@/lib/companies";
 /** Distinct companies, which is what the label claims. Not programmes. */
 const companyCount = companies.length;
 
+/** Quantas estão recebendo inscrição agora — derivado, não afirmado. */
+const openCount = companies.filter((c) => c.status === "aberta").length;
+
 /** Cities that actually appear in the data, shortened for the tile. */
 const CITY_SHORT: Record<string, string> = {
   "São Paulo": "SP",
@@ -52,11 +55,19 @@ export default function StatsBar() {
           </div>
 
           <div className="text-center">
+            {/*
+              Era "Diretos / links para inscrição". Com 6 das 10 empresas em
+              "em breve", só 4 cards têm link de inscrição — a alegação
+              deixou de ser verdadeira. Esta conta é derivada do mesmo dado
+              que alimenta os cards, então acompanha a lista sozinha.
+            */}
             <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-tangerine-deep sm:text-3xl">
               <Link2 size={22} className="shrink-0" aria-hidden="true" />
-              Oficiais
+              <CountUp value={openCount} />
             </div>
-            <p className="mt-2 text-sm text-ink-soft">links para inscrição</p>
+            <p className="mt-2 text-sm text-ink-soft">
+              {openCount === 1 ? "com inscrição aberta" : "com inscrições abertas"}
+            </p>
           </div>
 
           <div className="text-center">

@@ -1,6 +1,7 @@
 import type { Audience, City, Company, Sector } from "@/lib/types";
 
 export const companies: Company[] = [
+  // ---- Inscrições abertas ----
   {
     id: "btg-summer-undergrad",
     name: "BTG Pactual — Summer Undergrad",
@@ -9,13 +10,101 @@ export const companies: Company[] = [
     shortDescription:
       "Estágio de verão para brasileiros que estudam fora do país, no maior banco de investimentos da América Latina.",
     fullDescription:
-      "O Summer Undergrad do BTG Pactual é dedicado a contratar estudantes brasileiros de alto potencial que cursam universidades internacionais. O estagiário pode escolher entre 4 macro áreas (tecnologia, negócio, suporte ao negócio e varejo digital). Duração de 3 meses, de junho a agosto, com exposição a diferentes áreas do banco. A área final de atuação é definida pelos gestores e sócios conforme as habilidades avaliadas durante o processo seletivo.",
+      "O Summer Undergrad do BTG Pactual é dedicado a contratar estudantes brasileiros de alto potencial que cursam universidades internacionais. Duração de cerca de 3 meses, entre junho e setembro de 2027, com exposição a diferentes áreas do banco. A área final de atuação é definida pelos gestores e sócios conforme as habilidades avaliadas durante o processo seletivo.",
     type: "Summer Internship",
     target: "Brasileiros em universidades no exterior",
-    duration: "3 meses (jun–ago)",
+    duration: "3 meses (jun–set)",
     paid: true,
     audience: "Brasileiros em universidades no exterior",
-    link: "https://conteudo.btgpactual.com/summer-undergrad",
+    status: "aberta",
+    link: "https://carreiras.btgpactual.com/programas-de-entrada/summer-undergrad/vagas/6113588004",
+  },
+  {
+    id: "bank-of-america-brazil-ib-internship",
+    name: "Bank of America — Brazil IB Internship 2027",
+    sector: "Banco de Investimento",
+    cities: ["São Paulo"],
+    shortDescription:
+      "Investment Banking Internship Program em São Paulo para 2027.",
+    fullDescription:
+      "O programa de Investment Banking Internship do Bank of America em São Paulo oferece exposição a operações de M&A, mercados de dívida e capital (Debt and Equity underwriting). Busca estudantes de Business, Economia, Contabilidade, Engenharia ou áreas correlatas, com previsão de formatura em 1 ano ou mais, inglês fluente e disponibilidade de 30 horas semanais em formato presencial ou híbrido.",
+    type: "Summer Internship",
+    target: "Universitários (penúltimo ano)",
+    duration: "Período de férias",
+    paid: true,
+    audience: "Universitários no Brasil",
+    status: "aberta",
+    link: "https://careers.bankofamerica.com/en-us/students/job-detail/14454/2027-brazil-investment-banking-internship-program-sao-paulo-brazil",
+  },
+  {
+    id: "citi-sales-trading",
+    name: "Citi — Markets (Sales & Trading)",
+    sector: "Banco de Investimento",
+    cities: ["São Paulo"],
+    shortDescription:
+      "Internship na área de Markets (Sales & Trading) no escritório de São Paulo.",
+    fullDescription:
+      "O Citi busca estagiários para o time de Markets em São Paulo. Como parte de Markets, o trabalho tem impacto imediato — desde apoiar soluções de financiamento para grandes corporações, governos e investidores institucionais até oferecer uma ampla gama de produtos e serviços, com conhecimento aprofundado em um setor específico. Pré-requisitos do programa: formatura prevista até julho de 2028, forte capacidade analítica e de resolução de problemas, e domínio de Word, Excel e PowerPoint.",
+    type: "Summer Internship",
+    target: "Universitários (formatura até jul/2028)",
+    duration: "Período de férias",
+    paid: true,
+    audience: "Universitários no Brasil",
+    status: "aberta",
+    link: "https://jobs.citi.com/job/sao-paulo/markets-sales-and-trading-internship-sao-paulo-brazil-2026/287/99545044624",
+  },
+  {
+    id: "moove-summer-job",
+    name: "Moove — Summer Job",
+    sector: "Tecnologia",
+    cities: ["São Paulo"],
+    shortDescription:
+      "Summer Job da Moove para brasileiros que estudam no exterior, com foco em IA aplicada a negócios.",
+    fullDescription:
+      "A Moove é uma multinacional brasileira de lubrificantes automotivos e industriais, com presença na América do Sul, Estados Unidos e Europa. O Summer Job é voltado para estudantes brasileiros em universidades no exterior, com foco em aplicar IA de forma prática nas operações. O estagiário atua em projetos reais nas áreas de Logística, Planejamento, Comercial e suporte, mapeando processos e testando ferramentas de IA. Duração de 8 semanas, presença em São Paulo (modelo híbrido). O processo é conduzido pela Mappit.",
+    type: "Summer Job",
+    target: "Brasileiros em universidades no exterior",
+    duration: "8 semanas",
+    paid: true,
+    audience: "Brasileiros em universidades no exterior",
+    status: "aberta",
+    link: "https://mappit.com.br/jobs/summer-job-moove-sao-paulo/blnup10bxl32anrt9okfyqgd0",
+  },
+
+  // ---- Programa existe, inscrições ainda não abertas ----
+  {
+    id: "br-partners-summer-job",
+    name: "BR Partners — Summer Job",
+    sector: "Banco de Investimento",
+    cities: ["São Paulo"],
+    shortDescription:
+      "Summer Job para brasileiros que estudam no exterior e pretendem voltar ao Brasil.",
+    fullDescription:
+      "O BR Partners oferece o Summer Job para universitários brasileiros que estudam no exterior. As inscrições abrem em outubro, com início das atividades em junho e duração mínima de 8 semanas. Os estagiários rotacionam entre diferentes áreas do banco e contam com o apoio de um buddy (ex-estagiário) para ambientação e contato com executivos.",
+    type: "Summer Job",
+    target: "Brasileiros em universidades no exterior",
+    duration: "Mínimo 8 semanas",
+    paid: true,
+    audience: "Brasileiros em universidades no exterior",
+    status: "em-breve",
+    opensWhen: "Inscrições abrem em outubro de 2026",
+  },
+  {
+    id: "banco-pine-summer-undergrad",
+    name: "Banco Pine — Summer Job Undergrad",
+    sector: "Banco de Investimento",
+    cities: ["São Paulo"],
+    shortDescription:
+      "Summer Job Undergrad que aproxima universitários brasileiros no exterior do mercado financeiro.",
+    fullDescription:
+      "O Summer Job Undergrad do Banco Pine é voltado para universitários brasileiros que estudam no exterior, com início no período de férias de julho. O programa oferece imersão na rotina de um banco de negócios ágil, com contato direto com diferentes áreas e projetos reais.",
+    type: "Summer Job",
+    target: "Brasileiros em universidades no exterior",
+    duration: "Período de férias (julho)",
+    paid: true,
+    audience: "Brasileiros em universidades no exterior",
+    status: "em-breve",
+    opensWhen: "Inscrições reabrem no fim de 2026",
   },
   {
     id: "itau-bba-summer",
@@ -25,162 +114,65 @@ export const companies: Company[] = [
     shortDescription:
       "Summer para estudantes brasileiros em universidades estrangeiras, nas áreas de Asset, IB e Tesouraria.",
     fullDescription:
-      "O programa do Itaú BBA é voltado para estudantes brasileiros em universidades estrangeiras que querem impactar o mercado financeiro. Áreas de atuação incluem Asset Management (maior gestora privada do Brasil, com mais de R$ 1 trilhão em ativos), Banco de Investimentos (maior da América Latina — M&A, ECM, DCM) e Tesouraria Institucional. O estagiário tem exposição direta a operações reais e contato com sócios e executivos.",
+      "O programa do Itaú BBA é voltado para estudantes brasileiros em universidades estrangeiras que querem impactar o mercado financeiro. As áreas de atuação incluem Asset Management (maior gestora privada do Brasil), Banco de Investimentos (M&A, ECM, DCM), Private Bank, Global Markets e Tesouraria Institucional. O estágio começa em junho e tem duração de 2 a 3 meses na sede em São Paulo.",
     type: "Summer Internship",
     target: "Brasileiros em universidades no exterior",
-    duration: "2–3 meses",
+    duration: "2–3 meses (a partir de jun)",
     paid: true,
     audience: "Brasileiros em universidades no exterior",
-    link: "https://carreiras.itau.com.br/summer",
+    status: "em-breve",
+    opensWhen: "Inscrições reabrem para a turma de 2027",
   },
   {
-    id: "morgan-stanley-brazil-internship",
-    name: "Morgan Stanley — Brazil Internship Program",
-    sector: "Banco de Investimento",
+    id: "nomad-summer-job",
+    name: "Nomad — Summer Job Global Ambassadors",
+    sector: "Tecnologia",
     cities: ["São Paulo"],
     shortDescription:
-      "Brazil Internship Program com vagas em IB, Sales & Trading, Research, Tech e mais.",
+      "Programa para brasileiros que estudam e residem no exterior, com projeto estratégico remoto alinhado ao fuso do Brasil.",
     fullDescription:
-      "O Morgan Stanley oferece o Brazil Internship Program em São Paulo, com oportunidades em Investment Banking & Capital Markets, Sales & Trading, Research, Finance, Technology, Operations, Human Resources e Legal. O programa proporciona experiência prática em um ambiente de alta performance. Benefícios incluem bolsa auxílio, 13ª bolsa, seguro de vida, assistência médica, vale refeição, auxílio transporte e bolsa auxílio idioma inglês. Local: Av. Faria Lima, São Paulo.",
-    type: "Summer Internship",
-    target: "Universitários",
-    duration: "1–2 anos",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://morganstanley.tal.net/vx/mobile-0/brand-2/spa-1/candidate/so/pm/1/pl/1/opp/21004-2026-2-Brazil-Internship-Program-Sao-Paulo/en-GB",
-  },
-  {
-    id: "jp-morgan-drive-the-future",
-    name: "JP Morgan — Drive The Future",
-    sector: "Banco de Investimento",
-    cities: ["São Paulo"],
-    shortDescription:
-      "Programa aberto a universitários brasileiros sem exigência de experiência prévia.",
-    fullDescription:
-      "O programa Drive The Future do JP Morgan em São Paulo é aberto a universitários brasileiros sem exigência de experiência prévia. Áreas de atuação incluem Currencies and Emerging Markets, Equity Research (análise de empresas LatAm para clientes institucionais), Global Corporate Banking e Investment Banking (M&A, ECM, DCM). Carga de 30 horas semanais, presencial no escritório de São Paulo. Requisito: graduação prevista para dezembro de 2026 ou depois, com inglês avançado.",
-    type: "Summer Internship",
-    target: "Universitários no Brasil",
-    duration: "Período de férias",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210643718",
-  },
-  {
-    id: "bank-of-america-brazil-ib-internship",
-    name: "Bank of America — Brazil IB Internship",
-    sector: "Banco de Investimento",
-    cities: ["São Paulo"],
-    shortDescription: "Investment Banking Internship Program em São Paulo.",
-    fullDescription:
-      "O programa de Investment Banking Internship do Bank of America em São Paulo oferece exposição a operações de M&A, mercados de capitais e financiamento estruturado. Busca estudantes de Business, Economia, Contabilidade, Engenharia ou áreas correlatas, com disponibilidade de 30 horas semanais em formato presencial ou híbrido.",
-    type: "Summer Internship",
-    target: "Universitários",
-    duration: "2–3 meses",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://careers.bankofamerica.com/en-us/students/job-detail/13192/2026-brazil-investment-banking-internship-program-sao-paulo-brazil",
-  },
-  {
-    id: "ubs-trainee-brasil",
-    name: "UBS — Trainee Brasil",
-    sector: "Banco de Investimento",
-    cities: ["São Paulo"],
-    shortDescription:
-      "Jornada de Trainee UBS Brasil em Global Wealth Management e IT Dev.",
-    fullDescription:
-      "O UBS oferece a Jornada de Trainee Brasil com programas em Global Wealth Management (assessoria financeira e planejamento patrimonial) e IT Dev (desenvolvimento de soluções tecnológicas para o banco). Os candidatos de IT Dev que avançarem recebem um certificado de 80 horas em Fullstack, mesmo se não contratados. O banco administra globalmente USD 6,1 trilhões em ativos.",
-    type: "Summer Internship",
-    target: "Universitários",
-    duration: "2–3 meses",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://trainee-ubs.com.br",
-  },
-  {
-    id: "br-partners-summer-job",
-    name: "BR Partners — Summer Job",
-    sector: "Banco de Investimento",
-    cities: ["São Paulo"],
-    shortDescription:
-      "Summer Job para brasileiros que estudam no exterior. 8 semanas mínimo, início em junho.",
-    fullDescription:
-      "O BR Partners oferece o Summer Job para universitários brasileiros que estudam no exterior e pretendem retornar ao Brasil após a formação. Inscrições em setembro, início das atividades em junho, com duração mínima de 8 semanas. Os estagiários rotacionam entre diferentes áreas para entender as interações do dia a dia, e contam com o apoio de um buddy (ex-estagiário) para ambientação e contato com executivos.",
+      "O Summer Job Global Ambassadors da Nomad é voltado para brasileiros que estudam e residem nos Estados Unidos, Europa ou América Latina. Os participantes protagonizam um projeto estratégico de expansão da Nomad, com até 10 semanas consecutivas a partir da primeira semana de junho, trabalhando de forma remota alinhada ao fuso do Brasil. Bolsa mensal de R$ 5.000 e mentoria com profissionais de Banking e Marketing.",
     type: "Summer Job",
     target: "Brasileiros em universidades no exterior",
-    duration: "Mínimo 8 semanas",
+    duration: "Até 10 semanas (a partir de jun)",
     paid: true,
     audience: "Brasileiros em universidades no exterior",
-    link: "https://www.brpartners.com.br/pt-BR/careers/internship.html",
+    status: "em-breve",
+    opensWhen: "Inscrições da edição 2027 ainda não abriram",
   },
   {
-    id: "genial-investimentos-summer-job",
-    name: "Genial Investimentos — Summer Job",
+    id: "grupo-nc-summer-internship",
+    name: "Grupo NC — Summer Internship Internacional",
+    sector: "Mercado Financeiro",
+    cities: ["São Paulo"],
+    shortDescription:
+      "Summer Internship do Grupo NC (dono da EMS) para brasileiros que cursam graduação no exterior.",
+    fullDescription:
+      "O Summer Internship Internacional do Grupo NC — holding que controla a farmacêutica EMS e diversos negócios — é voltado para estudantes brasileiros que cursam graduação no exterior e retornam ao Brasil durante as férias acadêmicas (entre junho e agosto). Os participantes atuam em projetos reais em uma empresa brasileira com presença internacional.",
+    type: "Summer Internship",
+    target: "Brasileiros em universidades no exterior",
+    duration: "Jun–ago",
+    paid: true,
+    audience: "Brasileiros em universidades no exterior",
+    status: "em-breve",
+    opensWhen: "Inscrições da edição 2027 ainda não abriram",
+  },
+  {
+    id: "genial-summer-internacional",
+    name: "Genial Investimentos — Summer Internacional",
     sector: "Mercado Financeiro",
     cities: ["São Paulo", "Rio de Janeiro"],
     shortDescription:
-      "Summer Job para brasileiros cursando universidades internacionais. Experiência intensiva no mercado internacional.",
+      "Programa Summer da Genial para universitários brasileiros que estudam no exterior.",
     fullDescription:
-      "O Summer Job da Genial Investimentos é dedicado a estudantes brasileiros que cursam ensino superior em universidades internacionais e desejam vivenciar o mercado financeiro brasileiro durante as férias de verão do hemisfério norte (junho-agosto). O programa proporciona uma jornada rica em aprendizado, com participação em atividades, projetos e discussões que incentivam a inovação. A Genial administra R$ 250 bilhões em ativos e tem presença em São Paulo, Rio de Janeiro e Nova York.",
-    type: "Summer Job",
+      "Além do Estágio de Férias nacional, a Genial Investimentos possui o Programa Summer voltado a universitários brasileiros que estudam no exterior, com atuação durante as férias do hemisfério norte (junho a agosto). Os estudantes trabalham em projetos reais e conhecem diferentes áreas do mercado financeiro. O programa costuma ser divulgado em parceria com a BRASA (Brazilian Student Association).",
+    type: "Summer Internship",
     target: "Brasileiros em universidades no exterior",
-    duration: "2–3 meses (jun–ago)",
+    duration: "Jun–ago",
     paid: true,
     audience: "Brasileiros em universidades no exterior",
-    link: "https://genial.gupy.io",
-  },
-  {
-    id: "citi",
-    name: "Citi",
-    sector: "Banco de Investimento",
-    cities: ["São Paulo"],
-    shortDescription:
-      "Internships em 4 áreas diferentes: Corporate Banking, Sales & Trading, Equity Research e Debt Capital Markets.",
-    type: "Internship",
-    target: "Universitários",
-    paid: true,
-    audience: "Universitários no Brasil",
-    areas: [
-      {
-        area: "Corporate Banking",
-        description:
-          "O time de Corporate Banking é responsável pela gestão de relacionamento com grandes empresas, oferecendo soluções de financiamento e advisory. O estagiário terá contato direto com análise de crédito, modelagem financeira e relacionamento com clientes corporativos.",
-        link: "https://jobs.citi.com/job/sao-paulo/banking-corporate-banking-internship-sao-paulo-brazil-2026/287/94698284736",
-      },
-      {
-        area: "Sales & Trading",
-        description:
-          "O time de Markets busca estagiários para a área de Sales. Como parte de Markets, seu trabalho pode ter impacto imediato — desde suporte a soluções de financiamento até oferecer ideias e soluções para clientes em mercados globais.",
-        link: "https://jobs.citi.com/job/sao-paulo/markets-sales-and-trading-internship-sao-paulo-brazil-2026/287/95588407696",
-      },
-      {
-        area: "Equity Research",
-        description:
-          "O time de Equity Research monitora empresas de capital aberto dentro de um setor específico, oferecendo recomendações de ações para investidores institucionais. O estagiário participará de modelagem financeira, pesquisa, conferências do setor e produção de relatórios.",
-        link: "https://jobs.citi.com/job/sao-paulo/client-equity-research-internship-sao-paulo-brazil-2026/287/94960976896",
-      },
-      {
-        area: "Debt Capital Markets (DCM)",
-        description:
-          "O time de DCM é responsável pela originação e execução de instrumentos no mercado de dívida e empréstimos sindicalizados. O estagiário terá exposição a operações de renda fixa e financiamento estruturado.",
-        link: "https://jobs.citi.com/job/sao-paulo/banking-debt-capital-markets-internship-sao-paulo-brazil-2026/287/89374412592",
-      },
-    ],
-  },
-  {
-    id: "mattos-filho-jovens-talentos",
-    name: "Mattos Filho — Jovens Talentos",
-    sector: "Direito",
-    cities: ["São Paulo", "Rio de Janeiro"],
-    shortDescription:
-      "Programa de estágio do maior escritório de advocacia do Brasil para estudantes de Direito.",
-    fullDescription:
-      "Jovens Talentos é o programa de estágio do Mattos Filho, o maior escritório de advocacia do Brasil. O programa tem duração de até dois anos e contempla oportunidades de estágio nos escritórios de São Paulo, Rio de Janeiro e Brasília. A iniciativa seleciona estagiários que serão preparados para se tornarem advogados de excelência no futuro, aptos a lidar com todas as esferas do Direito de forma humana e engajada no propósito do escritório. O programa está em sua sexta edição.",
-    type: "Estágio",
-    target: "Estudantes de Direito",
-    duration: "Até 2 anos",
-    paid: true,
-    audience: "Universitários no Brasil",
-    link: "https://jtmattosfilho.gupy.io",
+    status: "em-breve",
+    opensWhen: "Divulgado via BRASA — inscrições 2027 ainda não abriram",
   },
 ];
 
