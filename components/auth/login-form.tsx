@@ -30,7 +30,7 @@ export default function LoginForm() {
   }
 
   return (
-    <PanelCard className="mx-auto max-w-md p-8">
+    <PanelCard className="mx-auto max-w-md p-7">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <Field label="E-mail">
           <Input
@@ -51,13 +51,17 @@ export default function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Field>
-        {error && <p className="text-sm text-danger">{error}</p>}
+        {error && (
+          <p className="rounded-control border border-danger/50 bg-danger/8 px-3 py-2 font-mono text-xs text-danger">
+            {error}
+          </p>
+        )}
         <Button type="submit" disabled={loading} className="w-full">
           {loading ? "Entrando..." : "Entrar"}
         </Button>
         <p className="text-center text-sm text-ink-soft">
           Ainda não tem conta?{" "}
-          <Link href="/cadastro" className="text-accent-deep hover:underline">
+          <Link href="/cadastro" className="focus-ring rounded-control text-accent-deep underline-offset-4 hover:underline">
             Cadastre-se
           </Link>
         </p>

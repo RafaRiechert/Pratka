@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat, Fraunces, JetBrains_Mono, Work_Sans } from "next/font/google";
-import localFont from "next/font/local";
+import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
@@ -9,62 +8,47 @@ import SmoothScroll from "@/components/providers/smooth-scroll";
 import GrainOverlay from "@/components/ui/grain-overlay";
 import CursorGlow from "@/components/ui/cursor-glow";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  weight: "variable",
-  style: ["normal", "italic"],
-  axes: ["SOFT", "WONK", "opsz"],
-  display: "swap",
-});
+/**
+ * DUAS VOZES + A MONO FUNCIONAL.
+ *
+ * A identidade "Terminal" fala a língua de quem lê tela de mercado: uma
+ * grotesca técnica para texto e uma monoespaçada para TODO dado. Fraunces
+ * (serifada wonky), Caveat (manuscrita) e Clash Display saíram — nenhuma das
+ * três diz "preciso e de dentro", que é o que esta direção precisa dizer.
+ */
 
-const workSans = Work_Sans({
-  variable: "--font-work-sans",
+/** Corpo. Inter é a grotesca de tela: alta x-height, números legíveis. */
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: "variable",
   display: "swap",
 });
 
 /**
- * Voz monoespaçada — o terceiro slot, e o único que se justifica por ser
- * funcional: data, prazo, contador, cidade. Fica atrás de --font-mono em
- * globals.css, então trocar a mono da identidade é trocar só este import.
+ * Display. Inter Tight é o corte estreito da MESMA superfamília, então o
+ * teto de "duas vozes" continua valendo: é uma voz em dois registros. Nos
+ * 68px do herói o corte estreito é o que dá a densidade de manchete
+ * financeira. Preloaded: o headline do herói é o elemento de LCP.
+ */
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
+  subsets: ["latin"],
+  weight: "variable",
+  display: "swap",
+});
+
+/**
+ * A ASSINATURA da direção. Não é decoração: prazo, contador, cidade, setor,
+ * status, índice e ticker são dado, e dado nesta pele é sempre mono. Por
+ * isso, ao contrário da identidade anterior, ela é preloaded — aparece no
+ * painel do herói, acima da dobra.
  */
 const mono = JetBrains_Mono({
   variable: "--font-mono-stack",
   subsets: ["latin"],
   weight: "variable",
   display: "swap",
-  preload: false,
-});
-
-/**
- * Clash Display (Fontshare / ITF, free license) — the heavy display voice for
- * headlines. Self-hosted rather than CDN-linked so it ships from our own
- * origin with the static export: two weights, 29KB total, preloaded because
- * the hero headline is the LCP element.
- */
-const clashDisplay = localFont({
-  variable: "--font-clash",
-  display: "swap",
-  preload: true,
-  src: [
-    { path: "../public/fonts/ClashDisplay-Semibold.woff2", weight: "600", style: "normal" },
-    { path: "../public/fonts/ClashDisplay-Bold.woff2", weight: "700", style: "normal" },
-  ],
-});
-
-/**
- * Script accent — deliberately rationed to one or two words at a time.
- * Not preloaded: it decorates three words, and preloading it would put it
- * in the critical path against Clash, which draws the LCP headline.
- */
-const caveat = Caveat({
-  variable: "--font-caveat",
-  subsets: ["latin"],
-  weight: "variable",
-  display: "swap",
-  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -81,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${clashDisplay.variable} ${fraunces.variable} ${workSans.variable} ${mono.variable} ${caveat.variable} h-full`}
+      className={`${interTight.variable} ${inter.variable} ${mono.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-surface text-ink font-body antialiased">
         <MotionConfig reducedMotion="user">

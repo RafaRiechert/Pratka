@@ -4,106 +4,133 @@
  * ============================================================================
  * DESIGN TOKENS — a camada única de identidade
  * ============================================================================
+ * IDENTIDADE: "Terminal". A Pratka como o terminal de mercado dos summer
+ * internships. Fundo escuro chapado, hierarquia por BORDA e SUPERFÍCIE (nunca
+ * por gradiente ou sombra difusa), dado sempre em monoespaçada.
+ *
  * Nenhum componente escolhe cor, raio ou fonte por conta própria: todos
- * consomem os tokens semânticos abaixo. Trocar a identidade do site inteiro
- * é trocar os VALORES deste bloco (mais os componentes de forma), nunca
- * caçar hex espalhado pelos componentes.
+ * consomem os tokens semânticos abaixo.
  *
  * Papéis, e o contrato de contraste de cada um (tudo AA, 4.5:1, no mínimo):
  *   surface / surface-2 / surface-3  fundos; sempre com texto `ink`
  *   inverse / inverse-2              o bloco de contraste; texto `on-inverse`
  *   ink / ink-2 / ink-soft           texto sobre surface
  *   line / line-strong               fios, bordas, réguas
- *   accent                           SUPERFÍCIE de acento; texto `ink` em cima
+ *   accent                           SUPERFÍCIE de acento; texto `on-accent`
  *   accent-deep                      TEXTO e CTA preenchido; `on-accent` em cima
  *   accent-soft                      tinta decorativa; nunca carrega texto
  *   support / support-deep           acento frio; texto `on-support` em cima
  *   signal / signal-deep             prazos e urgência; texto `on-signal`
  *   danger                           erro de formulário
+ *
+ * ⚠️ DUAS INVERSÕES DELIBERADAS DESTA IDENTIDADE, porque o nome não pode mentir:
+ *
+ * 1. `inverse` é o BLOCO CLARO. Numa pele escura, o bloco de contraste é
+ *    papel, não breu. `inverse`/`on-inverse` continuam significando "o
+ *    contrário da superfície corrente" — só que a superfície corrente agora
+ *    é escura. O helper de navegação acompanhou: virou `useNavOverLight` e
+ *    lê `data-nav-theme="light"` (ver lib/use-nav-over-light.ts).
+ *
+ * 2. `accent` deixou de carregar `ink` e passou a carregar `on-accent`. O
+ *    verde de terminal é uma superfície CLARA; sobre ela o texto tem que ser
+ *    escuro, e `ink` aqui é quase branco. Os componentes que escreviam
+ *    `bg-accent text-ink` foram para `bg-accent text-on-accent`.
  */
 
 @theme {
   /* --- superfícies ------------------------------------------------------ */
-  --color-surface: #fdf6ec;
-  --color-surface-2: #fffbf3;
-  --color-surface-3: #f5e7d0;
-  --color-surface-inset: #ead9bd;
+  /* Chapadas. Toda a hierarquia sai daqui e da borda — zero gradiente. */
+  --color-surface: #0b0e14;
+  --color-surface-2: #151a23;
+  --color-surface-3: #10151d;
+  --color-surface-inset: #1c2330;
 
-  /* --- bloco de contraste ----------------------------------------------- */
-  --color-inverse: #241a12;
-  --color-inverse-2: #34251a;
-  --color-on-inverse: #fdf6ec;
+  /* --- bloco de contraste: numa pele escura, o contraste é o CLARO ------ */
+  --color-inverse: #eef1f5;
+  --color-inverse-2: #e3e8ef;
+  --color-on-inverse: #121821;
 
   /* --- texto ------------------------------------------------------------ */
-  --color-ink: #241a12;
-  --color-ink-2: #34251a;
-  --color-ink-soft: #6b5642;
+  /* Nunca #fff sobre #000: branco puro em preto puro vibra e cansa. */
+  --color-ink: #e8eaed;
+  --color-ink-2: #c3c9d4;
+  --color-ink-soft: #93a0b4;
 
   /* --- fios ------------------------------------------------------------- */
-  --color-line: rgba(36, 26, 18, 0.1);
-  --color-line-strong: rgba(36, 26, 18, 0.24);
+  /* `line` é o fio de tabela e de card. `line-strong` é a borda de CONTROLE
+     (input, select, botão outline): 3.8:1 contra a superfície, como manda o
+     critério 1.4.11 de componentes não-textuais. */
+  --color-line: #232a36;
+  --color-line-strong: #6b7688;
 
-  /* --- acento principal ------------------------------------------------- */
-  --color-accent: #ff5a1f;
-  --color-accent-deep: #b8380f;
-  --color-accent-soft: #ff8b66;
-  --color-on-accent: #fdf6ec;
+  /* --- acento principal: verde de terminal ------------------------------ */
+  --color-accent: #00b87c;
+  --color-accent-deep: #00d68f;
+  --color-accent-soft: #0a6e53;
+  --color-on-accent: #04140e;
 
   /* --- acento de apoio (o contrapeso frio) ------------------------------ */
-  --color-support: #0f4c4a;
-  --color-support-deep: #0b3b42;
-  --color-on-support: #fdf6ec;
+  --color-support: #1b3a5c;
+  --color-support-deep: #24507e;
+  --color-on-support: #e6eef8;
 
   /* --- sinal: prazos, urgência, contagem -------------------------------- */
-  --color-signal: #ffc53d;
-  --color-signal-deep: #8a5a00;
-  --color-on-signal: #241a12;
+  --color-signal: #ffb020;
+  --color-signal-deep: #ffc45c;
+  --color-on-signal: #1a1206;
 
-  --color-danger: #c43d3d;
+  --color-danger: #ff6b6b;
+
+  /* --- foco ------------------------------------------------------------- */
+  /* Papel próprio: o anel de foco precisa brilhar sobre fundo escuro, e
+     `support` (azul profundo) sumiria. Redefinido dentro de .read-surface. */
+  --color-focus: #5ea8ff;
 
   /* --- tipografia ------------------------------------------------------- */
-  /* Três slots no máximo: display (títulos), body (leitura) e mono (dado). */
-  --font-display: var(--font-clash), "Clash Display", ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-work-sans), "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  /*
+   * Duas vozes + a mono funcional:
+   *   display = Inter Tight (grotesca técnica, corte estreito, títulos)
+   *   body    = Inter        (leitura)
+   *   mono    = JetBrains Mono — a ASSINATURA da direção. Todo DADO é mono:
+   *             contador, prazo, cidade, setor, status, índice, ticker.
+   * Fraunces e Caveat saíram: um serifado wonky e uma manuscrita não têm o
+   * que fazer num terminal de mercado. O wordmark foi para a mono.
+   */
+  --font-display: var(--font-inter-tight), "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono-stack), ui-monospace, SFMono-Regular, Menlo, monospace;
-  /* Vozes extras da identidade atual — cada direção decide se sobrevivem. */
-  --font-editorial: var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
-  --font-script: var(--font-caveat), "Caveat", ui-serif, cursive;
 
   /* --- forma ------------------------------------------------------------ */
-  --radius-card: 1.5rem;
-  --radius-panel: 1rem;
-  --radius-control: 0.75rem;
-  --radius-tag: 999px;
-  --radius-pill: 999px;
+  /* Quase reto. Um terminal não tem cantos gordos. */
+  --radius-card: 0.25rem;
+  --radius-panel: 0.1875rem;
+  --radius-control: 0.1875rem;
+  --radius-input: 0.1875rem;
+  --radius-tag: 0.125rem;
+  --radius-pill: 0.125rem;
 
   /* --- elevação --------------------------------------------------------- */
-  --shadow-card: 0 20px 50px -22px rgba(36, 26, 18, 0.35), 0 1px 0 0 rgba(255, 255, 255, 0.5) inset;
-  --shadow-glow-accent: 0 0 0 1px rgba(255, 90, 31, 0.28), 0 10px 32px -8px rgba(255, 90, 31, 0.45);
-  --shadow-glow-signal: 0 0 0 1px rgba(255, 197, 61, 0.32), 0 10px 30px -8px rgba(255, 197, 61, 0.4);
-  --shadow-glow-support: 0 0 0 1px rgba(15, 76, 74, 0.3), 0 10px 30px -8px rgba(15, 76, 74, 0.45);
+  /* Não existe sombra difusa nesta identidade: no escuro ela vira sujeira.
+     "Elevação" aqui é um fio a mais, e o hover realça a borda. */
+  --shadow-card: 0 1px 0 0 rgba(0, 0, 0, 0.6);
+  --shadow-glow-accent: 0 0 0 1px var(--color-accent-deep);
+  --shadow-glow-signal: 0 0 0 1px var(--color-signal);
+  --shadow-glow-support: 0 0 0 1px var(--color-support-deep);
 
-  --animate-float-slow: float 9s ease-in-out infinite;
-  --animate-float-slower: float 14s ease-in-out infinite;
-  --animate-shimmer: shimmer 2.4s linear infinite;
-  --animate-pulse-glow: pulse-glow 3.2s ease-in-out infinite;
+  /* Ticker do herói. `linear` e infinito: é um fita de cotação, não um
+     carrossel. Desligado por completo sob prefers-reduced-motion. */
+  --animate-ticker: ticker 42s linear infinite;
 
-  @keyframes float {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(0, -22px, 0) scale(1.03); }
-  }
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-  @keyframes pulse-glow {
-    0%, 100% { opacity: 0.45; }
-    50% { opacity: 0.85; }
+  @keyframes ticker {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
   }
 }
 
 :root {
-  color-scheme: light;
+  /* Pele escura: sem isto o navegador pinta scrollbar, select e autofill
+     como se a página fosse clara. */
+  color-scheme: dark;
 
   /*
    * Motion tokens. Same numbers as lib/motion.ts so CSS transitions and
@@ -114,8 +141,10 @@
   --dur-fast: 180ms;
   --dur-base: 320ms;
   --dur-slow: 620ms;
-  --hover-lift: -2px;
-  --hover-scale: 1.03;
+  /* O "pulo" da identidade anterior foi quase zerado: precisão, não elástico.
+     O que responde ao hover nesta pele é a BORDA. */
+  --hover-lift: -1px;
+  --hover-scale: 1;
 
   /*
    * ------------------------------------------------------------------
@@ -123,19 +152,86 @@
    * ------------------------------------------------------------------
    */
 
-  /* Textura de fundo. Grão, nunca gradiente. Uma direção pode zerar. */
-  --grain-opacity: 0.045;
+  /* Textura de fundo. Grão fino em `overlay`, que é o que se vê no escuro
+     (`multiply`, da pele clara, some). Nunca gradiente. */
+  --grain-opacity: 0.055;
+  --grain-blend: overlay;
+
+  /* Superfície elevada (.panel): painel de BORDA, chapado. Sem desfoque —
+     vidro fosco é o oposto do que esta direção quer dizer. */
+  --panel-bg: var(--color-surface-2);
+  --panel-border: var(--color-line);
+  --panel-filter: none;
+  --panel-glow-bg: var(--color-accent-deep);
+
+  /* Brilho de cursor DESLIGADO: é literalmente um orb radial desfocado, e a
+     rodada proibiu isso. O componente lê `transparent` e não monta nada. */
+  --cursor-glow-color: transparent;
+  --cursor-glow-blend: normal;
+}
+
+/*
+ * ============================================================================
+ * .read-surface — a zona de leitura longa
+ * ============================================================================
+ * O ponto mais difícil desta direção: O Problema, A Solução, os três passos
+ * do Como funciona, o FAQ e a /sobre são texto CORRIDO, e parágrafo longo em
+ * fundo escuro cansa a vista de verdade (halation: o branco "sangra" no
+ * preto e as linhas tremem).
+ *
+ * A escolha foi explícita: terminal onde há DADO, papel onde há LEITURA.
+ * Esta classe não é um tema alternativo — é o mesmo sistema de tokens com os
+ * valores recalculados para papel. Todo componente dentro dela continua
+ * escrevendo `text-ink`, `bg-surface-2`, `border-line`; os utilitários do
+ * Tailwind leem `var(--color-*)` em tempo de execução, então basta
+ * redeclarar as variáveis no escopo e a subárvore inteira acompanha.
+ *
+ * Os hues não mudam — mesmo verde, mesmo âmbar, mesma mono, mesma borda de
+ * 1px, mesmos cantos retos. Muda o polo. É uma folha impressa pelo terminal,
+ * não outro site.
+ */
+.read-surface {
+  color-scheme: light;
+
+  --color-surface: #eef1f5;
+  --color-surface-2: #f8fafc;
+  --color-surface-3: #e3e8ef;
+  --color-surface-inset: #d4dbe5;
+
+  /* Dentro do claro, o bloco de contraste volta a ser o escuro. */
+  --color-inverse: #0b0e14;
+  --color-inverse-2: #151a23;
+  --color-on-inverse: #e8eaed;
+
+  --color-ink: #121821;
+  --color-ink-2: #2a3340;
+  --color-ink-soft: #4e5b6e;
+
+  --color-line: rgba(18, 24, 33, 0.14);
+  --color-line-strong: rgba(18, 24, 33, 0.45);
+
+  /* Mesmo verde, escurecido até passar AA como TEXTO sobre papel. */
+  --color-accent: #00704b;
+  --color-accent-deep: #046b47;
+  --color-accent-soft: #9fe3c9;
+  --color-on-accent: #f0fdf8;
+
+  --color-signal: #ffb020;
+  --color-signal-deep: #7a4e00;
+  --color-on-signal: #1a1206;
+
+  --color-danger: #b02020;
+  --color-focus: #0b5fcc;
+
+  --panel-bg: var(--color-surface-2);
+  --panel-border: var(--color-line);
+  --panel-glow-bg: var(--color-accent-deep);
   --grain-blend: multiply;
 
-  /* Superfície elevada (.panel): vidro, papel chapado ou painel de borda. */
-  --panel-bg: color-mix(in srgb, var(--color-surface-2) 78%, transparent);
-  --panel-border: var(--color-line);
-  --panel-filter: blur(16px);
-  --panel-glow-bg: var(--color-accent);
-
-  /* Brilho que segue o cursor. Alpha 0 desliga o efeito por completo. */
-  --cursor-glow-color: color-mix(in srgb, var(--color-accent) 14%, transparent);
-  --cursor-glow-blend: multiply;
+  /* Só a cor herdada. O FUNDO fica com a utilitária de quem usa a classe
+     (`read-surface bg-surface`), senão esta regra — que é unlayered e por
+     isso ganha de toda utilitária do Tailwind — travaria o fundo do bloco. */
+  color: var(--color-ink);
 }
 
 * {
@@ -147,6 +243,7 @@
    Lenis never starts and the browser's instant jump is exactly what we want. */
 html {
   scroll-behavior: auto;
+  background-color: var(--color-surface);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -171,31 +268,43 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Clash Display is drawn tight already — Tailwind's tracking-tight on top of
-   it closes the word spaces at display sizes. Optical correction lives here
-   so every headline gets it without per-heading tuning. Clash ships no
-   italic: never set italic on .font-display or the browser fakes an oblique
-   (use .font-editorial, which has a real one). */
+/* Inter Tight já vem estreita; o fechamento extra é o que dá a leitura
+   "técnica" nos tamanhos de display. Sem hack de word-spacing (aquilo era
+   correção óptica da Clash, que saiu). */
 .font-display {
-  letter-spacing: -0.015em;
-  word-spacing: 0.06em;
+  letter-spacing: -0.025em;
   font-synthesis: none;
 }
 
-.font-editorial {
-  font-variation-settings: "SOFT" 40, "WONK" 0;
+/*
+ * Medida de leitura. Parágrafo longo só é confortável entre 60 e 75
+ * caracteres — no escuro, menos ainda. Toda coluna de texto corrido usa
+ * isto em vez de esticar até a largura do contêiner.
+ */
+.measure {
+  max-width: 68ch;
 }
 
-/* Metadados em caixa alta — setor, cidade, status, rótulo de painel. */
+/* Metadados em caixa alta — setor, cidade, status, rótulo de painel.
+   Na direção Terminal, metadado é DADO: vai na mono. */
 .label-meta {
+  font-family: var(--font-mono);
   font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
+/* Número grande de contador: mono, tabular, apertado. */
+.data-figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
 ::selection {
-  background: var(--color-accent);
+  background: var(--color-accent-deep);
   color: var(--color-on-accent);
 }
 
@@ -207,15 +316,15 @@ body {
   background: var(--color-surface);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-accent-soft);
+  background: var(--color-line-strong);
   border-radius: var(--radius-pill);
-  border: 2px solid var(--color-surface);
+  border: 3px solid var(--color-surface);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+  background: var(--color-accent-deep);
 }
 
-/* Textura fina de papel. Grão, não gradiente. */
+/* Textura fina. Grão, não gradiente. */
 .grain-overlay {
   position: fixed;
   inset: 0;
@@ -228,9 +337,7 @@ body {
 }
 
 /*
- * Superfície elevada padrão do site. Cada direção redefine as três
- * variáveis abaixo — vidro fosco, papel chapado ou painel de borda — sem
- * que nenhum componente precise saber qual identidade está no ar.
+ * Superfície elevada padrão do site: painel de borda, chapado, sem desfoque.
  */
 .panel {
   background: var(--panel-bg, var(--color-surface-2));
@@ -239,6 +346,10 @@ body {
   -webkit-backdrop-filter: var(--panel-filter, none);
 }
 
+/*
+ * O realce de hover desta identidade. Não é brilho: é a borda do painel
+ * trocando para o verde do acento, como uma célula selecionada.
+ */
 .panel-glow {
   position: relative;
 }
@@ -248,65 +359,92 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: var(--panel-glow-bg, var(--color-accent));
+  background: var(--panel-glow-bg, var(--color-accent-deep));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--dur-fast) linear;
   pointer-events: none;
 }
-.panel-glow:hover::before {
+.panel-glow:hover::before,
+.panel-glow:focus-within::before {
   opacity: 1;
 }
 
-/*
- * Ênfase tipográfica do acento. A identidade atual pinta com gradiente de
- * texto; direções que não querem gradiente nenhum sobrescrevem para cor
- * chapada e o markup não muda.
- */
+/* Ênfase tipográfica do acento: cor chapada, zero gradiente de texto. */
 .text-accent-emphasis {
   color: var(--color-accent-deep);
 }
 
-.shimmer-bg {
-  background-image: linear-gradient(
-    100deg,
-    rgba(255, 251, 243, 0) 35%,
-    rgba(255, 251, 243, 0.5) 50%,
-    rgba(255, 251, 243, 0) 65%
-  );
-  background-size: 200% 100%;
-}
-
 /*
- * Fundo do herói e das seções de topo. REGRA DA RODADA: sem gradiente
- * suave / mesh. Chapado, com a textura fina do grão por cima.
+ * Fundo do herói e das seções de topo. Chapado + malha de fios de 1px
+ * desenhada em SVG (linhas de borda dura — não é gradiente de fundo).
  */
 .bg-hero {
   background-color: var(--color-surface);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><path d='M48 0H0v48' fill='none' stroke='rgb(107,118,136)' stroke-opacity='0.11' stroke-width='1'/></svg>");
+  background-repeat: repeat;
+}
+
+/* Régua de dado: a linha fina que separa linhas de tabela no painel. */
+.rule-data {
+  border-bottom: 1px solid var(--color-line);
 }
 
 /*
- * Springy interaction system — the reference's "ear-popping" button hover,
- * dialed back to a 3% pop.
+ * Ticker do herói. A faixa duplica o conteúdo e desliza -50%, então a
+ * emenda é invisível. Sob reduced-motion a animação é DESLIGADA (não
+ * acelerada) e a faixa vira uma lista rolável na horizontal.
+ */
+.ticker-viewport {
+  overflow: hidden;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: var(--animate-ticker);
+}
+.ticker-viewport:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-viewport {
+    overflow-x: auto;
+  }
+  .ticker-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/*
+ * Sistema de interação. O "pulo" elástico da identidade anterior foi
+ * aposentado: aqui o feedback é um pixel de deslocamento e, sobretudo, a
+ * troca de borda. Precisão em vez de brinquedo.
+ */
+/*
+ * ⚠️ Só `transform` e `box-shadow` transicionam. Cor, fundo e borda trocam
+ * NA HORA, por dois motivos que apontam para o mesmo lado:
  *
- * Guards, in order: only where a real pointer exists (never on touch, where
- * :hover sticks after a tap), and never under reduced motion.
+ * 1. Corretude. A barra de navegação inverte de polo entrando em
+ *    `.read-surface`, o que muda o VALOR das custom properties sem mudar o
+ *    texto da declaração (`var(--color-ink)` continua `var(--color-ink)`).
+ *    O Chrome, nesse caso, inicia uma transição que nunca avança, e o
+ *    elemento congela na cor antiga — botões do header ficavam ilegíveis
+ *    sobre o bloco claro.
+ * 2. Identidade. Um terminal não dissolve entre estados, ele comuta.
  */
 .pop {
   transition:
-    transform var(--dur-base) var(--ease-pop),
-    box-shadow var(--dur-base) var(--ease-soft),
-    background-color var(--dur-fast) linear,
-    border-color var(--dur-fast) linear,
-    color var(--dur-fast) linear;
-  will-change: transform;
+    transform var(--dur-fast) var(--ease-soft),
+    box-shadow var(--dur-fast) linear;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .pop:hover {
-    transform: translateY(var(--hover-lift)) scale(var(--hover-scale));
+    transform: translateY(var(--hover-lift));
   }
   /* Trailing icons lean into the direction of travel. */
   .pop:hover .pop-nudge {
@@ -315,7 +453,7 @@ body {
 }
 
 .pop:active {
-  transform: scale(0.97);
+  transform: translateY(0);
 }
 
 .pop-nudge {
@@ -334,9 +472,10 @@ body {
   }
 }
 
-/* One focus ring for the whole site, on every accent background. */
+/* One focus ring for the whole site, on every surface — claro ou escuro.
+   `--color-focus` é redefinido dentro de .read-surface. */
 .focus-ring:focus-visible {
-  outline: 3px solid var(--color-support);
-  outline-offset: 3px;
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
   border-radius: inherit;
 }

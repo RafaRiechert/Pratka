@@ -15,30 +15,37 @@ const socials = [
   { href: "#", label: "Twitter", icon: Send },
 ];
 
+/**
+ * O rodapé era o bloco `inverse` da pele clara. Aqui a pele já é escura, e
+ * `inverse` passou a significar o CLARO — então o rodapé usa `surface-3`,
+ * uma superfície do próprio sistema, e se separa do CTA por um fio, não por
+ * uma troca de polo. Sem `data-nav-theme`: o header já está no modo escuro.
+ */
 export default function Footer() {
   return (
-    <footer data-nav-theme="dark" className="relative mt-32 border-t border-on-inverse/10 bg-inverse">
+    <footer className="relative mt-24 border-t border-line bg-surface-3">
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
-            <span className="font-editorial text-2xl font-extrabold tracking-tight text-on-inverse">
+            <span className="font-mono text-xl font-bold tracking-tight text-ink">
               Pratka
+              <span aria-hidden="true" className="text-accent-deep">
+                _
+              </span>
             </span>
-            <p className="mt-3 max-w-xs text-sm text-on-inverse/55">
+            <p className="mt-3 max-w-xs text-sm text-ink-soft">
               Feito no Brasil para universitários brasileiros.
             </p>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-on-inverse/45">
-              Navegação
-            </h4>
+            <h4 className="label-meta text-ink-soft">Navegação</h4>
             <ul className="mt-4 space-y-2.5">
               {footerLinks.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="focus-ring rounded text-sm text-on-inverse/70 transition-colors hover:text-signal"
+                    className="focus-ring rounded-control text-sm text-ink-2 transition-colors hover:text-accent-deep"
                   >
                     {l.label}
                   </Link>
@@ -48,25 +55,23 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-on-inverse/45">
-              Redes sociais
-            </h4>
-            <div className="mt-4 flex gap-3">
+            <h4 className="label-meta text-ink-soft">Redes sociais</h4>
+            <div className="mt-4 flex gap-2">
               {socials.map(({ href, label, icon: Icon }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="pop focus-ring flex h-10 w-10 items-center justify-center rounded-full bg-on-inverse/10 text-on-inverse/70 hover:bg-signal hover:text-ink"
+                  className="pop focus-ring flex h-10 w-10 items-center justify-center rounded-control border border-line bg-surface-2 text-ink-soft hover:border-accent-deep hover:text-accent-deep"
                 >
-                  <Icon size={18} />
+                  <Icon size={17} />
                 </a>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-on-inverse/10 pt-6 text-center text-xs text-on-inverse/35">
+        <div className="mt-12 border-t border-line pt-6 text-center font-mono text-[11px] text-ink-soft">
           © {new Date().getFullYear()} Pratka. Todos os direitos reservados.
         </div>
       </div>

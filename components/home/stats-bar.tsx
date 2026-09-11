@@ -6,6 +6,11 @@ import { cities, companies } from "@/lib/companies";
 /**
  * Every figure here is derived from lib/companies, so the strip cannot drift
  * out of step with the listing. Nothing is hardcoded.
+ *
+ * Na identidade "Terminal" a faixa deixou de flutuar sobre o herói (o card
+ * com -mt-16 e sombra) e passou a ser uma RÉGUA: quatro células separadas
+ * por fio de 1px, encaixadas logo abaixo da fita de cotação. Números em mono
+ * tabular, rótulos em caixa alta. É a linha de resumo de um monitor.
  */
 
 /** Distinct companies, which is what the label claims. Not programmes. */
@@ -31,52 +36,59 @@ const lastUpdated = `${new Intl.DateTimeFormat("pt-BR", { month: "short" })
   .format(buildDate)
   .replace(".", "")}/${buildDate.getFullYear()}`;
 
+function Cell({
+  children,
+  label,
+  className,
+}: {
+  children: React.ReactNode;
+  label: string;
+  className?: string;
+}) {
+  return (
+    <div className={`px-3 py-6 text-center sm:px-6 sm:py-7 ${className ?? ""}`}>
+      <div className="data-figure flex flex-wrap items-center justify-center gap-x-2 text-xl leading-none text-ink sm:text-3xl">
+        {children}
+      </div>
+      <p className="label-meta mt-3 text-ink-soft">{label}</p>
+    </div>
+  );
+}
+
 export default function StatsBar() {
   return (
-    <section className="relative -mt-16 px-6">
-      <AnimatedSection className="mx-auto max-w-6xl">
-        <div className="panel grid grid-cols-2 gap-8 rounded-card px-8 py-10 shadow-card sm:grid-cols-4">
-          <div className="text-center">
-            <div className="font-display text-4xl font-bold text-accent-deep sm:text-5xl">
+    <section className="border-b border-line bg-surface-3">
+      <AnimatedSection className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-2 divide-x divide-y divide-line border-x border-line sm:grid-cols-4 sm:divide-y-0">
+          <Cell label={companyCount === 1 ? "empresa mapeada" : "empresas mapeadas"}>
+            <span className="text-accent-deep">
               {/* The "+" only makes sense alongside a real count. */}
               <CountUp value={companyCount} suffix={companyCount > 0 ? "+" : ""} />
-            </div>
-            <p className="mt-2 text-sm text-ink-soft">
-              {companyCount === 1 ? "empresa mapeada" : "empresas mapeadas"}
-            </p>
-          </div>
+            </span>
+          </Cell>
 
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-accent-deep sm:text-3xl">
-              <MapPin size={22} className="shrink-0" aria-hidden="true" />
-              {coverage}
-            </div>
-            <p className="mt-2 text-sm text-ink-soft">cobertura principal</p>
-          </div>
+          <Cell label="cobertura principal">
+            <MapPin size={18} className="shrink-0 text-ink-soft" aria-hidden="true" />
+            {coverage}
+          </Cell>
 
-          <div className="text-center">
-            {/*
-              Era "Diretos / links para inscrição". Com 6 das 10 empresas em
-              "em breve", só 4 cards têm link de inscrição — a alegação
-              deixou de ser verdadeira. Esta conta é derivada do mesmo dado
-              que alimenta os cards, então acompanha a lista sozinha.
-            */}
-            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-accent-deep sm:text-3xl">
-              <Link2 size={22} className="shrink-0" aria-hidden="true" />
+          {/*
+            Era "Diretos / links para inscrição". Com a maioria das empresas
+            em "em breve", só parte dos cards tem link de inscrição — a
+            alegação deixou de ser verdadeira. Esta conta é derivada do mesmo
+            dado que alimenta os cards, então acompanha a lista sozinha.
+          */}
+          <Cell label={openCount === 1 ? "com inscrição aberta" : "com inscrições abertas"}>
+            <Link2 size={18} className="shrink-0 text-ink-soft" aria-hidden="true" />
+            <span className="text-accent-deep">
               <CountUp value={openCount} />
-            </div>
-            <p className="mt-2 text-sm text-ink-soft">
-              {openCount === 1 ? "com inscrição aberta" : "com inscrições abertas"}
-            </p>
-          </div>
+            </span>
+          </Cell>
 
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-accent-deep sm:text-3xl">
-              <RefreshCw size={22} className="shrink-0" aria-hidden="true" />
-              {lastUpdated}
-            </div>
-            <p className="mt-2 text-sm text-ink-soft">última atualização</p>
-          </div>
+          <Cell label="última atualização">
+            <RefreshCw size={18} className="shrink-0 text-ink-soft" aria-hidden="true" />
+            {lastUpdated}
+          </Cell>
         </div>
       </AnimatedSection>
     </section>

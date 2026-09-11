@@ -17,9 +17,10 @@ export function Tag({
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-wide",
-        variant === "accent" && "bg-accent/15 text-accent-deep",
-        variant === "ink" && "bg-ink/10 text-ink-soft",
+        // Metadado é dado: mono, caixa alta, caixa de 1px. Nada de pílula.
+        "label-meta inline-flex items-center rounded-tag border px-2 py-0.5",
+        variant === "accent" && "border-accent-deep/40 bg-accent-deep/10 text-accent-deep",
+        variant === "ink" && "border-line bg-surface-inset text-ink-soft",
         className
       )}
     >

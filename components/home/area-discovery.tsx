@@ -62,14 +62,14 @@ function FloatingProgrammes({
         <motion.li
           key={company.id}
           initial={reduced ? false : { opacity: 0, y: 14, rotate: 0 }}
-          animate={{ opacity: 1, y: 0, rotate: i % 2 === 0 ? -2 : 2.5 }}
+          animate={{ opacity: 1, y: 0, rotate: 0 }}
           transition={{ ...springPop, delay: reduced ? 0 : i * stagger.tight }}
-          className="rounded-panel border border-ink/8 bg-surface-2 p-4 shadow-card"
+          className="rounded-panel border border-line bg-surface-2 p-4"
         >
           <p className="font-display text-sm font-bold leading-tight text-ink">
             {company.name}
           </p>
-          <p className="mt-1.5 flex items-center gap-1.5 text-xs text-ink-soft">
+          <p className="mt-1.5 flex items-center gap-1.5 font-mono text-[11px] text-ink-soft">
             <MapPin size={11} aria-hidden="true" />
             {company.cities.join(", ")}
           </p>
@@ -99,7 +99,7 @@ function AreaRow({
   const label = (
     <span className="relative z-10 flex flex-wrap items-baseline gap-x-4 gap-y-1">
       <span
-        className={`font-display text-2xl font-bold transition-colors duration-300 sm:text-3xl ${
+        className={`font-display text-2xl font-bold transition-colors duration-200 sm:text-3xl ${
           active ? "text-accent-deep" : "text-ink"
         }`}
       >
@@ -116,7 +116,7 @@ function AreaRow({
             animate={{ opacity: 1, x: 0 }}
             exit={reduced ? undefined : { opacity: 0, x: -8 }}
             transition={{ duration: duration.fast, ease: ease.soft }}
-            className="font-script text-xl leading-none text-accent-deep sm:text-2xl"
+            className="font-mono text-xs leading-none tracking-wide text-accent-deep sm:text-sm"
           >
             {area.pitch}
           </motion.span>
@@ -124,7 +124,7 @@ function AreaRow({
       </AnimatePresence>
 
       {!area.interactive && (
-        <span className="rounded-full bg-ink/8 px-2.5 py-1 text-xs font-semibold text-ink-soft">
+        <span className="label-meta rounded-tag border border-line px-2 py-0.5 text-ink-soft">
           Em breve
         </span>
       )}
@@ -135,14 +135,14 @@ function AreaRow({
   // does nothing is worse for keyboard users than no control at all.
   if (!area.interactive) {
     return (
-      <li className="border-b border-ink/10">
+      <li className="border-b border-line">
         <div className="min-w-0 py-5 opacity-70 lg:pr-[20rem]">{label}</div>
       </li>
     );
   }
 
   return (
-    <li className="relative border-b border-ink/10">
+    <li className="relative border-b border-line">
       <button
         type="button"
         onClick={onActivate}
@@ -157,7 +157,7 @@ function AreaRow({
         <ArrowUp
           size={20}
           aria-hidden="true"
-          className={`pop-nudge relative z-10 shrink-0 transition-colors duration-300 ${
+          className={`pop-nudge relative z-10 shrink-0 transition-colors duration-200 ${
             active ? "text-accent-deep" : "text-ink-soft"
           }`}
         />
@@ -179,17 +179,17 @@ export default function AreaDiscovery() {
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
-    <section id="areas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
+    <section id="areas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-24">
       <AnimatedSection className="mx-auto max-w-2xl text-center">
         <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
           Descubra por área
         </h2>
-        <p className="mt-5 text-lg text-ink-soft">
+        <p className="measure mx-auto mt-5 text-lg text-ink-2">
           Doze áreas do mercado, os programas que combinam com cada uma.
         </p>
       </AnimatedSection>
 
-      <ul className="mt-14 min-w-0 border-t border-ink/10">
+      <ul className="mt-12 min-w-0 border-t border-line">
         {areaProgrammes.map((area) => (
           <AreaRow
             key={area.code}

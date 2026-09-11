@@ -60,7 +60,8 @@ export default function QuizResult({
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="mx-auto w-full max-w-2xl text-center"
     >
-      <span className="text-sm font-semibold uppercase tracking-widest text-accent-deep">
+      <span className="label-meta inline-flex items-center gap-2 text-accent-deep">
+        <span aria-hidden="true" className="h-1.5 w-1.5 bg-accent-deep" />
         Seu resultado
       </span>
       <motion.h2
@@ -75,7 +76,7 @@ export default function QuizResult({
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink-soft"
+        className="measure mx-auto mt-5 text-lg leading-[1.75] text-ink-2"
       >
         {primaryInfo.description}
       </motion.p>
@@ -85,14 +86,14 @@ export default function QuizResult({
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.45 }}
-          className="mx-auto mt-8 max-w-xl rounded-card border border-surface-inset bg-surface-2/60 p-6 text-left"
+          className="mx-auto mt-8 max-w-xl rounded-card border border-line bg-surface-2 p-6 text-left"
         >
           <h3 className="font-display text-base font-bold text-ink">
             Por que essa área combina com você
           </h3>
           <ul className="mt-3 space-y-2.5">
             {insights.map((sentence, i) => (
-              <li key={i} className="text-sm leading-relaxed text-ink-soft">
+              <li key={i} className="text-sm leading-relaxed text-ink-2">
                 {sentence}
               </li>
             ))}
@@ -107,18 +108,18 @@ export default function QuizResult({
         className="mx-auto mt-6 flex max-w-xl flex-col gap-3 sm:flex-row"
       >
         {secondaryInfo && (
-          <div className="flex-1 rounded-panel border border-surface-inset bg-surface-2/60 p-5 text-left">
+          <div className="flex-1 rounded-panel border border-line bg-surface-2 p-5 text-left">
             <p className="text-sm text-ink-soft">
               Você também tem perfil para{" "}
               <span className="font-semibold text-ink">{secondaryInfo.name}</span>.
             </p>
-            <p className="mt-1.5 text-xs text-ink-soft/80">
+            <p className="mt-1.5 font-mono text-xs text-ink-soft">
               {secondaryInfo.description.split(".")[0]}.
             </p>
           </div>
         )}
         {tertiaryInfo && (
-          <div className="flex-1 rounded-panel border border-surface-inset bg-surface-2/40 p-5 text-left">
+          <div className="flex-1 rounded-panel border border-line bg-surface-3 p-5 text-left">
             <p className="text-sm text-ink-soft">
               Outra área para ficar de olho:{" "}
               <span className="font-semibold text-ink">{tertiaryInfo.name}</span>.
@@ -135,7 +136,7 @@ export default function QuizResult({
       >
         <Button href={companiesHref} variant="primary" size="md">
           Ver programas nessa área
-          <ArrowUpRight size={16} />
+          <ArrowUpRight size={15} />
         </Button>
         <Button variant="outline" size="md" onClick={onRetake}>
           <RotateCcw size={16} />

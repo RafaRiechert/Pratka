@@ -62,25 +62,25 @@ export default function IntroLoader() {
           // Decorative: the hero underneath is the real content, and a
           // screen reader should never be held behind a curtain.
           aria-hidden="true"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-support"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-surface"
           initial={{ y: 0 }}
           exit={{ y: "-100%" }}
           transition={{ duration: duration.slow, ease: ease.soft }}
         >
           <motion.span
-            className="font-editorial text-6xl font-extrabold text-on-inverse sm:text-8xl"
+            className="font-mono text-5xl font-bold tracking-tight text-ink sm:text-7xl"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: duration.base, ease: ease.soft }}
           >
             Pratka
             <motion.span
-              className="text-signal"
+              className="text-accent-deep"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: duration.fast }}
             >
-              .
+              _
             </motion.span>
           </motion.span>
         </motion.div>

@@ -77,7 +77,7 @@ export default function CompanyListing() {
   ];
 
   return (
-    <section id="empresas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
+    <section id="empresas" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24">
       <Suspense fallback={null}>
         <SectorFromQuery onSector={(next) => setSector(next)} />
       </Suspense>
@@ -86,7 +86,7 @@ export default function CompanyListing() {
         <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
           Programas de Summer Internship no Brasil
         </h2>
-        <p className="mt-5 text-lg text-ink-soft">
+        <p className="measure mx-auto mt-5 text-lg text-ink-2">
           Todas as empresas que oferecem oportunidades de verão para
           universitários, atualizadas e com link direto.
         </p>
@@ -105,15 +105,15 @@ export default function CompanyListing() {
               type="button"
               aria-pressed={selected}
               onClick={() => setStatus(chip.value)}
-              className={`pop focus-ring rounded-full px-4 py-2 text-sm font-semibold ${
+              className={`pop focus-ring label-meta rounded-control border px-3 py-2 ${
                 selected
-                  ? "bg-inverse text-on-inverse"
-                  : "border border-ink/15 bg-surface-2/60 text-ink-soft hover:border-ink/30"
+                  ? "border-accent-deep bg-accent-deep/12 text-accent-deep"
+                  : "border-line bg-surface-2 text-ink-soft hover:border-line-strong hover:text-ink-2"
               }`}
             >
               {chip.label}
-              <span className={selected ? "ml-1.5 text-on-inverse/60" : "ml-1.5 text-ink/35"}>
-                {chip.count}
+              <span className={selected ? "ml-2 text-accent-deep/70" : "ml-2 text-ink-soft/60"}>
+                {String(chip.count).padStart(2, "0")}
               </span>
             </button>
           );
@@ -132,15 +132,15 @@ export default function CompanyListing() {
 
       {filtered.length === 0 ? (
         <div className="panel flex flex-col items-center gap-3 rounded-card px-8 py-20 text-center">
-          <Building2 size={28} className="text-ink/30" />
-          <p className="text-ink-soft">
+          <Building2 size={26} className="text-ink-soft" aria-hidden="true" />
+          <p className="font-mono text-sm text-ink-soft">
             Nenhuma empresa encontrada com esses filtros.
           </p>
         </div>
       ) : (
         <Stagger
           scrollTrigger={false}
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
           {filtered.map((company) => (
             <StaggerItem key={company.id}>

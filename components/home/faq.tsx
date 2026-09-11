@@ -51,10 +51,10 @@ function FaqRow({ q, a }: { q: string; a: string }) {
 
   return (
     <div
-      className={`overflow-hidden rounded-card border transition-colors duration-300 ${
+      className={`overflow-hidden rounded-card border transition-colors duration-200 ${
         open
-          ? "border-accent/35 bg-surface-2"
-          : "border-ink/10 bg-surface-2/60 hover:border-ink/20"
+          ? "border-accent-deep bg-surface-2"
+          : "border-line bg-surface-2 hover:border-line-strong"
       }`}
     >
       <h3>
@@ -73,11 +73,13 @@ function FaqRow({ q, a }: { q: string; a: string }) {
             aria-hidden="true"
             animate={{ rotate: open ? 45 : 0 }}
             transition={springPop}
-            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
-              open ? "bg-accent text-ink" : "bg-ink/8 text-ink-soft"
+            className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-control border transition-colors duration-200 ${
+              open
+                ? "border-accent-deep bg-accent text-on-accent"
+                : "border-line text-ink-soft"
             }`}
           >
-            <Plus size={17} />
+            <Plus size={16} />
           </motion.span>
         </button>
       </h3>
@@ -97,7 +99,7 @@ function FaqRow({ q, a }: { q: string; a: string }) {
               opacity: { duration: duration.fast, ease: ease.soft },
             }}
           >
-            <p className="px-6 pb-6 text-base leading-relaxed text-ink-soft">
+            <p className="measure px-6 pb-6 text-base leading-[1.75] text-ink-2">
               {a}
             </p>
           </motion.div>
@@ -109,20 +111,27 @@ function FaqRow({ q, a }: { q: string; a: string }) {
 
 export default function Faq() {
   return (
-    <section id="faq" className="mx-auto max-w-3xl scroll-mt-24 px-6 py-28">
-      <AnimatedSection className="text-center">
-        <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
-          Perguntas frequentes
-        </h2>
-      </AnimatedSection>
+    // Respostas longas: mesma regra do Problema/Solução — papel, não breu.
+    <section
+      id="faq"
+      data-nav-theme="light"
+      className="read-surface bg-surface scroll-mt-24 border-b border-line px-6 py-28"
+    >
+      <div className="mx-auto max-w-3xl">
+        <AnimatedSection className="text-center">
+          <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
+            Perguntas frequentes
+          </h2>
+        </AnimatedSection>
 
-      <Stagger className="mt-12 space-y-3">
-        {faqs.map((faq) => (
-          <StaggerItem key={faq.q}>
-            <FaqRow {...faq} />
-          </StaggerItem>
-        ))}
-      </Stagger>
+        <Stagger className="mt-12 space-y-2">
+          {faqs.map((faq) => (
+            <StaggerItem key={faq.q}>
+              <FaqRow {...faq} />
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </div>
     </section>
   );
 }

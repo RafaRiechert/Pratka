@@ -17,50 +17,64 @@ const quemSomosParagraphs = [
   `A Pratka é uma startup brasileira com uma missão clara: democratizar o acesso aos programas de summer internship. Acreditamos que o primeiro passo de uma carreira extraordinária deve estar ao alcance de qualquer universitário, independentemente de onde ele estuda ou de onde ele mora.`,
 ];
 
+/**
+ * A /sobre é a página mais textual do site: cinco parágrafos longos e nada
+ * de dado. Por isso o corpo inteiro dela é `read-surface` — o herói escuro
+ * em cima, o texto em papel embaixo, que é exatamente a regra do site.
+ *
+ * Os títulos serifados (Fraunces) foram para a display, e a réguazinha
+ * amarela virou um fio verde do acento: nesta identidade a hierarquia de
+ * seção é um fio, não um ornamento.
+ */
 export default function SobrePage() {
   return (
     <>
       <PageHero eyebrow="Nossa história" title="Sobre" />
 
-      <section className="mx-auto max-w-3xl px-6 pb-16">
-        <AnimatedSection className="mb-8">
-          <h2 className="font-editorial text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
-            Sobre
-          </h2>
-          <span aria-hidden="true" className="mt-3 block h-1 w-14 rounded-full bg-signal" />
-        </AnimatedSection>
-        <div className="space-y-6">
-          {sobreParagraphs.map((p, i) => (
-            <AnimatedSection key={i} delay={i * 0.05}>
-              <p
-                className={
-                  i === 0
-                    ? "font-editorial text-xl leading-relaxed text-ink sm:text-2xl"
-                    : "text-lg leading-relaxed text-ink/80"
-                }
-              >
-                {p}
-              </p>
-            </AnimatedSection>
-          ))}
-        </div>
-      </section>
+      <div
+        data-nav-theme="light"
+        className="read-surface bg-surface border-t border-line"
+      >
+        <section className="mx-auto max-w-3xl px-6 pt-20 pb-14">
+          <AnimatedSection className="mb-8">
+            <span aria-hidden="true" className="mb-4 block h-0.5 w-12 bg-accent-deep" />
+            <h2 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+              Sobre
+            </h2>
+          </AnimatedSection>
+          <div className="space-y-6">
+            {sobreParagraphs.map((p, i) => (
+              <AnimatedSection key={i} delay={i * 0.05}>
+                <p
+                  className={
+                    i === 0
+                      ? "measure text-xl leading-[1.7] text-ink sm:text-[22px]"
+                      : "measure text-lg leading-[1.75] text-ink-2"
+                  }
+                >
+                  {p}
+                </p>
+              </AnimatedSection>
+            ))}
+          </div>
+        </section>
 
-      <section className="mx-auto max-w-3xl px-6 pb-28">
-        <AnimatedSection className="mb-8">
-          <h2 className="font-editorial text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
-            Quem somos nós
-          </h2>
-          <span aria-hidden="true" className="mt-3 block h-1 w-14 rounded-full bg-signal" />
-        </AnimatedSection>
-        <div className="space-y-6">
-          {quemSomosParagraphs.map((p, i) => (
-            <AnimatedSection key={i} delay={i * 0.05}>
-              <p className="text-lg leading-relaxed text-ink/80">{p}</p>
-            </AnimatedSection>
-          ))}
-        </div>
-      </section>
+        <section className="mx-auto max-w-3xl px-6 pb-28">
+          <AnimatedSection className="mb-8">
+            <span aria-hidden="true" className="mb-4 block h-0.5 w-12 bg-accent-deep" />
+            <h2 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+              Quem somos nós
+            </h2>
+          </AnimatedSection>
+          <div className="space-y-6">
+            {quemSomosParagraphs.map((p, i) => (
+              <AnimatedSection key={i} delay={i * 0.05}>
+                <p className="measure text-lg leading-[1.75] text-ink-2">{p}</p>
+              </AnimatedSection>
+            ))}
+          </div>
+        </section>
+      </div>
     </>
   );
 }

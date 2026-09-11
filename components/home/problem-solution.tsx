@@ -13,43 +13,65 @@ const solutionParagraphs = [
   "Acreditamos que a melhor tecnologia é aquela que sai do caminho. Você não precisa de mais uma conta, mais uma senha, mais um formulário. Você precisa da informação certa, no formato certo, na hora certa. É exatamente isso que a Pratka entrega.",
 ];
 
+/**
+ * A ZONA DE LEITURA MAIS LONGA DO SITE — cinco parágrafos densos.
+ *
+ * É aqui que a identidade escura teria quebrado. A decisão da direção:
+ * terminal onde há dado, papel onde há leitura. A seção inteira entra em
+ * `read-surface`, que recalcula os tokens para claro sem que nenhum
+ * componente filho precise saber, e marca `data-nav-theme="light"` para o
+ * header flutuante acompanhar.
+ *
+ * Dentro do claro, `inverse` volta a significar "o escuro" — por isso as
+ * pílulas de benefício continuam funcionando sem tocar em nada.
+ *
+ * A medida de linha (`.measure`, 68ch) e a entrelinha relaxada são o resto
+ * do trabalho: 60–75 caracteres é onde o olho acha a linha seguinte sozinho.
+ */
 export default function ProblemSolution() {
   return (
-    <section id="problema-solucao" className="scroll-mt-24">
-      <div data-nav-theme="dark" className="border-b border-on-inverse/5 bg-inverse py-24">
+    <section
+      id="problema-solucao"
+      data-nav-theme="light"
+      className="read-surface bg-surface scroll-mt-24 border-y border-line"
+    >
+      <div className="border-b border-line bg-surface-3 py-24">
         <div className="mx-auto max-w-3xl px-6">
           <AnimatedSection className="mb-10 flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-control bg-on-inverse/10 text-on-inverse/60">
-              <CircleAlert size={20} />
+            <div className="flex h-10 w-10 items-center justify-center rounded-control border border-line-strong/40 bg-surface text-ink-soft">
+              <CircleAlert size={19} />
             </div>
-            <h2 className="font-display text-4xl font-bold text-on-inverse sm:text-5xl">
+            <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
               O Problema
             </h2>
           </AnimatedSection>
-          <div className="space-y-5">
+          <div className="space-y-6">
             {problemParagraphs.map((p, i) => (
               <AnimatedSection key={i} delay={i * 0.05}>
-                <p className="text-lg leading-relaxed text-on-inverse/65">{p}</p>
+                <p className="measure text-lg leading-[1.75] text-ink-2">{p}</p>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Sem o amarelo emprestado e sem o gradiente radial: a seção agora
-          usa uma superfície do próprio sistema. O ícone de sparkle saiu
-          junto com a badge do herói — mesmo motivo. */}
-      <div className="relative overflow-hidden bg-surface-3 py-24">
+      {/* Sem gradiente radial e sem o amarelo emprestado: a virada de
+          Problema para Solução é uma troca de superfície e um fio verde. */}
+      <div className="relative overflow-hidden bg-surface-2 py-24">
         <div className="relative z-10 mx-auto max-w-3xl px-6">
           <AnimatedSection className="mb-10">
+            <span
+              aria-hidden="true"
+              className="mb-5 block h-0.5 w-12 bg-accent-deep"
+            />
             <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
               A Solução
             </h2>
           </AnimatedSection>
-          <div className="space-y-5">
+          <div className="space-y-6">
             {solutionParagraphs.map((p, i) => (
               <AnimatedSection key={i} delay={i * 0.05}>
-                <p className="text-lg leading-relaxed text-ink/85">{p}</p>
+                <p className="measure text-lg leading-[1.75] text-ink-2">{p}</p>
               </AnimatedSection>
             ))}
           </div>

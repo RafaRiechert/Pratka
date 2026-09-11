@@ -15,9 +15,11 @@ export default function PanelCard({
 }) {
   return (
     <motion.div
-      className={cn("panel panel-glow rounded-panel shadow-card", className)}
-      whileHover={interactive ? { y: -6, scale: 1.015 } : undefined}
-      transition={{ type: "spring", stiffness: 220, damping: 18 }}
+      className={cn("panel panel-glow rounded-card", className)}
+      // O realce de hover desta identidade é a BORDA (.panel-glow), não um
+      // salto: 1px de deslocamento é o bastante para dizer "selecionado".
+      whileHover={interactive ? { y: -1 } : undefined}
+      transition={{ type: "spring", stiffness: 400, damping: 30 }}
     >
       {children}
     </motion.div>

@@ -8,21 +8,26 @@ const BAND_TOP = 20;
 const BAND_BOTTOM = 96;
 
 /**
- * True while a dark surface sits under the floating header.
+ * True while a LIGHT surface sits under the floating header.
  *
- * This is the reference's per-section menu recolouring, cut down to two
- * states instead of a colour per section — cream-on-dark and ink-on-cream.
- * A careers site can carry one deliberate inversion; a rainbow header reads
- * as a toy.
+ * ⚠️ Este helper era `useNavOverDark` e lia `data-nav-theme="dark"`. Na
+ * identidade "Terminal" o site é escuro por padrão e as exceções são as
+ * zonas de LEITURA, que são claras — então a pergunta se inverteu junto com
+ * a pele. Manter o nome antigo seria deixar o código mentir: o estado raro,
+ * o que exige recolorir o menu, agora é "sobre o claro".
  *
- * Sections opt in with `data-nav-theme="dark"`. An IntersectionObserver
+ * Continuam sendo dois estados apenas — ink-sobre-escuro (o padrão) e
+ * on-inverse-sobre-claro — e não uma cor por seção: um site de carreira
+ * carrega uma inversão deliberada; um header arco-íris lê como brinquedo.
+ *
+ * Sections opt in with `data-nav-theme="light"`. An IntersectionObserver
  * whose root margin collapses the viewport to the header's own band tells
  * us which of them is currently behind it — cheaper and steadier than
  * measuring on every scroll frame, and it rides Lenis without extra work.
  */
-export function useNavOverDark(): boolean {
+export function useNavOverLight(): boolean {
   const pathname = usePathname();
-  const [overDark, setOverDark] = useState(false);
+  const [overLight, setOverLight] = useState(false);
 
   useEffect(() => {
     let observer: IntersectionObserver | null = null;
@@ -32,9 +37,9 @@ export function useNavOverDark(): boolean {
       observer?.disconnect();
       intersecting.clear();
 
-      const targets = document.querySelectorAll('[data-nav-theme="dark"]');
+      const targets = document.querySelectorAll('[data-nav-theme="light"]');
       if (targets.length === 0) {
-        setOverDark(false);
+        setOverLight(false);
         return;
       }
 
@@ -44,7 +49,7 @@ export function useNavOverDark(): boolean {
             if (entry.isIntersecting) intersecting.add(entry.target);
             else intersecting.delete(entry.target);
           }
-          setOverDark(intersecting.size > 0);
+          setOverLight(intersecting.size > 0);
         },
         {
           rootMargin: `-${BAND_TOP}px 0px -${Math.max(
@@ -77,5 +82,5 @@ export function useNavOverDark(): boolean {
     };
   }, [pathname]);
 
-  return overDark;
+  return overLight;
 }

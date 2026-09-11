@@ -15,27 +15,32 @@ type Size = "sm" | "md" | "lg";
 
 /*
  * Nenhuma cor aqui é escolhida: cada variante nomeia um PAPEL do sistema de
- * tokens. O contrato de contraste vive em globals.css — `accent` é
- * superfície e carrega `ink`; `accent-deep` é preenchimento e carrega
- * `on-accent`. Trocar a identidade não deve exigir tocar neste arquivo.
+ * tokens. O contrato de contraste vive em globals.css.
+ *
+ * Nota da identidade "Terminal": `accent` deixou de carregar `ink` e passou
+ * a carregar `on-accent` (ver o cabeçalho de globals.css). E o hover deixou
+ * de ser sombra difusa — virou BORDA, que é como um terminal marca o que
+ * está sob o cursor.
  */
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-accent-deep text-on-accent hover:shadow-glow-accent",
-  secondary: "bg-inverse text-on-inverse hover:bg-inverse-2 hover:shadow-card",
-  support: "bg-support text-on-support hover:bg-support-deep hover:shadow-glow-support",
-  signal: "bg-signal text-on-signal hover:shadow-glow-signal",
+    "bg-accent-deep text-on-accent border border-accent-deep hover:bg-accent",
+  secondary:
+    "bg-inverse text-on-inverse border border-inverse hover:bg-inverse-2 hover:border-inverse-2",
+  support:
+    "bg-support text-on-support border border-support hover:bg-support-deep hover:border-support-deep",
+  signal: "bg-signal text-on-signal border border-signal hover:bg-signal-deep",
   outline:
-    "border border-ink/25 text-ink bg-transparent hover:border-accent-deep hover:text-accent-deep",
-  ghost: "bg-transparent text-ink hover:bg-ink/5",
+    "border border-line-strong text-ink bg-transparent hover:border-accent-deep hover:text-accent-deep",
+  ghost: "border border-transparent bg-transparent text-ink-2 hover:text-ink hover:border-line",
   danger:
-    "bg-danger/10 text-danger border border-danger/40 hover:bg-danger/20",
+    "bg-transparent text-danger border border-danger/60 hover:border-danger",
 };
 
 const sizeClasses: Record<Size, string> = {
-  sm: "px-4 py-2 text-sm",
-  md: "px-6 py-3 text-base",
-  lg: "px-8 py-4 text-base",
+  sm: "px-3.5 py-1.5 text-sm",
+  md: "px-5 py-2.5 text-sm",
+  lg: "px-7 py-3.5 text-base",
 };
 
 interface ButtonProps {

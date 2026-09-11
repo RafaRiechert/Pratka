@@ -28,13 +28,16 @@ export default function CompanyFilters({
   value: FilterState;
   onChange: (next: FilterState) => void;
 }) {
+  // Select de terminal: borda de controle visível (line-strong, 3.8:1),
+  // rótulo em mono, foco em verde. `color-scheme: dark` em globals.css é o
+  // que faz o menu nativo do navegador abrir escuro junto.
   const selectClass =
-    "panel rounded-control border-0 bg-transparent px-4 py-2.5 text-sm text-ink/80 outline-none focus:ring-2 focus:ring-accent/40";
+    "focus-ring rounded-input border border-line-strong bg-surface-2 px-3 py-2 font-mono text-xs text-ink-2 outline-none transition-colors hover:border-line-strong focus:border-accent-deep";
 
   return (
     <div className="flex flex-wrap items-center gap-3">
-      <div className="flex items-center gap-2 text-sm font-medium text-ink-soft">
-        <Filter size={16} />
+      <div className="label-meta flex items-center gap-2 text-ink-soft">
+        <Filter size={14} aria-hidden="true" />
         Filtrar:
       </div>
       <select
@@ -82,7 +85,7 @@ export default function CompanyFilters({
       {(value.sector || value.city || value.audience) && (
         <button
           onClick={() => onChange(EMPTY_FILTERS)}
-          className="text-sm text-ink-soft underline-offset-2 hover:text-accent-deep hover:underline"
+          className="focus-ring rounded-control font-mono text-xs text-ink-soft underline underline-offset-4 transition-colors hover:text-accent-deep"
         >
           Limpar filtros
         </button>
