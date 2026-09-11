@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { Compass } from "lucide-react";
 import QuizProgress from "@/components/quiz/quiz-progress";
 import QuizQuestionCard from "@/components/quiz/quiz-question-card";
 import QuizResult from "@/components/quiz/quiz-result";
@@ -113,11 +113,12 @@ export default function QuizFlow() {
     return (
       <div className="flex min-h-[40vh] flex-col items-center justify-center gap-4 text-center">
         <motion.div
+          aria-hidden="true"
           animate={{ rotate: 360 }}
           transition={{ duration: 1.1, repeat: Infinity, ease: "linear" }}
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent-deep"
+          className="flex h-14 w-14 items-center justify-center rounded-pill bg-accent text-ink"
         >
-          <Sparkles size={22} />
+          <Compass size={24} />
         </motion.div>
         <p className="font-display text-xl font-semibold text-ink">
           Analisando suas respostas...

@@ -51,10 +51,10 @@ function FaqRow({ q, a }: { q: string; a: string }) {
 
   return (
     <div
-      className={`overflow-hidden rounded-card border transition-colors duration-300 ${
+      className={`overflow-hidden rounded-card border-2 transition-colors duration-300 ${
         open
-          ? "border-accent/35 bg-surface-2"
-          : "border-ink/10 bg-surface-2/60 hover:border-ink/20"
+          ? "border-accent bg-surface-2"
+          : "border-line bg-surface-2 hover:border-line-strong"
       }`}
     >
       <h3>
@@ -73,8 +73,8 @@ function FaqRow({ q, a }: { q: string; a: string }) {
             aria-hidden="true"
             animate={{ rotate: open ? 45 : 0 }}
             transition={springPop}
-            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
-              open ? "bg-accent text-ink" : "bg-ink/8 text-ink-soft"
+            className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-pill transition-colors duration-300 ${
+              open ? "bg-accent text-ink" : "bg-ink/10 text-ink-soft"
             }`}
           >
             <Plus size={17} />
@@ -114,6 +114,10 @@ export default function Faq() {
         <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
           Perguntas frequentes
         </h2>
+        <span
+          aria-hidden="true"
+          className="mx-auto mt-6 block h-1.5 w-20 rounded-pill bg-accent"
+        />
       </AnimatedSection>
 
       <Stagger className="mt-12 space-y-3">

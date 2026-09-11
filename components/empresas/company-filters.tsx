@@ -28,13 +28,16 @@ export default function CompanyFilters({
   value: FilterState;
   onChange: (next: FilterState) => void;
 }) {
+  // Cápsula de papel com fio de tinta — a mesma forma do botão, para que a
+  // barra de filtros leia como uma fileira de controles e não como campos
+  // de formulário perdidos no meio da listagem.
   const selectClass =
-    "panel rounded-control border-0 bg-transparent px-4 py-2.5 text-sm text-ink/80 outline-none focus:ring-2 focus:ring-accent/40";
+    "focus-ring rounded-control border-2 border-line-strong bg-surface-2 px-4 py-2.5 text-sm font-medium text-ink outline-none transition-colors hover:border-ink/45";
 
   return (
     <div className="flex flex-wrap items-center gap-3">
-      <div className="flex items-center gap-2 text-sm font-medium text-ink-soft">
-        <Filter size={16} />
+      <div className="flex items-center gap-2 text-sm font-semibold text-ink-soft">
+        <Filter size={16} aria-hidden="true" />
         Filtrar:
       </div>
       <select
@@ -82,7 +85,7 @@ export default function CompanyFilters({
       {(value.sector || value.city || value.audience) && (
         <button
           onClick={() => onChange(EMPTY_FILTERS)}
-          className="text-sm text-ink-soft underline-offset-2 hover:text-accent-deep hover:underline"
+          className="focus-ring rounded-control px-2 py-1 text-sm font-semibold text-accent-deep underline-offset-4 hover:underline"
         >
           Limpar filtros
         </button>

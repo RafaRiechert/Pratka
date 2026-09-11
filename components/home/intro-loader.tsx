@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { Arch, ArcField } from "@/components/ui/arc";
 import { duration, ease } from "@/lib/motion";
 
 const SPLASH_KEY = "pratka_splash_shown";
@@ -62,20 +63,30 @@ export default function IntroLoader() {
           // Decorative: the hero underneath is the real content, and a
           // screen reader should never be held behind a curtain.
           aria-hidden="true"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-support"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-support"
           initial={{ y: 0 }}
           exit={{ y: "-100%" }}
           transition={{ duration: duration.slow, ease: ease.soft }}
         >
+          {/* O sol da cortina: o mesmo arco do herói, em escala de tela
+              inteira. A cortina sobe e ele sai junto. */}
+          <ArcField>
+            <Arch
+              tone="accent"
+              side="top"
+              className="-bottom-32 left-1/2 h-64 w-[150vw] max-w-[52rem] -translate-x-1/2"
+            />
+          </ArcField>
+
           <motion.span
-            className="font-editorial text-6xl font-extrabold text-on-inverse sm:text-8xl"
+            className="wordmark relative z-10 text-6xl text-on-support sm:text-8xl"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: duration.base, ease: ease.soft }}
           >
             Pratka
             <motion.span
-              className="text-signal"
+              className="text-accent-on-inverse"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: duration.fast }}

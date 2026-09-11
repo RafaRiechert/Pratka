@@ -11,7 +11,7 @@ export default function NavLink({
   href: string;
   children: ReactNode;
   onClick?: () => void;
-  /** Inverted palette while the header sits over a dark section. */
+  /** `true` quando a CÁPSULA do header é escura (tinta), não a seção. */
   onDark?: boolean;
 }) {
   return (
@@ -20,14 +20,16 @@ export default function NavLink({
       onClick={onClick}
       className={cn(
         "focus-ring group relative rounded-input px-3 py-2 text-sm font-medium transition-colors duration-500",
-        onDark ? "text-on-inverse/75 hover:text-on-inverse" : "text-ink/75 hover:text-ink"
+        onDark ? "text-on-inverse/80 hover:text-on-inverse" : "text-ink-soft hover:text-ink"
       )}
     >
       {children}
+      {/* O fio de acento embaixo do link: laranja cheio sobre tinta,
+          laranja escuro sobre areia — cada um no fundo onde ele lê. */}
       <span
         className={cn(
-          "absolute left-3 right-3 -bottom-0.5 h-[2px] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100",
-          onDark ? "bg-signal" : "bg-accent"
+          "absolute left-3 right-3 -bottom-0.5 h-[2px] origin-left scale-x-0 rounded-pill transition-transform duration-300 ease-out group-hover:scale-x-100",
+          onDark ? "bg-accent" : "bg-accent-deep"
         )}
       />
     </Link>

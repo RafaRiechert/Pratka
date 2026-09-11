@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat, Fraunces, JetBrains_Mono, Work_Sans } from "next/font/google";
+import { JetBrains_Mono, Work_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
@@ -9,15 +9,13 @@ import SmoothScroll from "@/components/providers/smooth-scroll";
 import GrainOverlay from "@/components/ui/grain-overlay";
 import CursorGlow from "@/components/ui/cursor-glow";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  weight: "variable",
-  style: ["normal", "italic"],
-  axes: ["SOFT", "WONK", "opsz"],
-  display: "swap",
-});
-
+/**
+ * Duas vozes, e só. A direção "Verão" é modernista brasileira: geometria,
+ * peso e curva. Fraunces (serifada editorial) e Caveat (manuscrita) saíram
+ * junto com a identidade anterior — a manuscrita em especial puxava a marca
+ * para um registro adolescente que este público (BTG, Itaú, Morgan Stanley,
+ * Mattos Filho) não compra.
+ */
 const workSans = Work_Sans({
   variable: "--font-work-sans",
   subsets: ["latin"],
@@ -27,8 +25,8 @@ const workSans = Work_Sans({
 
 /**
  * Voz monoespaçada — o terceiro slot, e o único que se justifica por ser
- * funcional: data, prazo, contador, cidade. Fica atrás de --font-mono em
- * globals.css, então trocar a mono da identidade é trocar só este import.
+ * funcional: janela de inscrição, contagem, cidade. É o que dá à linha do
+ * tempo do herói o ar de tabela de dados em vez de enfeite.
  */
 const mono = JetBrains_Mono({
   variable: "--font-mono-stack",
@@ -39,10 +37,11 @@ const mono = JetBrains_Mono({
 });
 
 /**
- * Clash Display (Fontshare / ITF, free license) — the heavy display voice for
- * headlines. Self-hosted rather than CDN-linked so it ships from our own
- * origin with the static export: two weights, 29KB total, preloaded because
- * the hero headline is the LCP element.
+ * Clash Display (Fontshare / ITF, free license) — a display geométrica de
+ * peso alto que assina as manchetes E o wordmark. Self-hosted rather than
+ * CDN-linked so it ships from our own origin with the static export: two
+ * weights, 29KB total, preloaded because the hero headline is the LCP
+ * element.
  */
 const clashDisplay = localFont({
   variable: "--font-clash",
@@ -52,19 +51,6 @@ const clashDisplay = localFont({
     { path: "../public/fonts/ClashDisplay-Semibold.woff2", weight: "600", style: "normal" },
     { path: "../public/fonts/ClashDisplay-Bold.woff2", weight: "700", style: "normal" },
   ],
-});
-
-/**
- * Script accent — deliberately rationed to one or two words at a time.
- * Not preloaded: it decorates three words, and preloading it would put it
- * in the critical path against Clash, which draws the LCP headline.
- */
-const caveat = Caveat({
-  variable: "--font-caveat",
-  subsets: ["latin"],
-  weight: "variable",
-  display: "swap",
-  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -81,7 +67,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${clashDisplay.variable} ${fraunces.variable} ${workSans.variable} ${mono.variable} ${caveat.variable} h-full`}
+      className={`${clashDisplay.variable} ${workSans.variable} ${mono.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-surface text-ink font-body antialiased">
         <MotionConfig reducedMotion="user">

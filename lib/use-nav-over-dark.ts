@@ -8,17 +8,39 @@ const BAND_TOP = 20;
 const BAND_BOTTOM = 96;
 
 /**
- * True while a dark surface sits under the floating header.
+ * True while a SATURATED block sits under the floating header.
  *
- * This is the reference's per-section menu recolouring, cut down to two
- * states instead of a colour per section — cream-on-dark and ink-on-cream.
- * A careers site can carry one deliberate inversion; a rainbow header reads
- * as a toy.
+ * A direção "Verão" pinta a página como uma sequência de blocos de cor
+ * chapada — areia, verde folha, tinta, laranja queimado, azul profundo — e o
+ * header flutua por cima de todos eles. Um header translúcido seria ilegível
+ * em pelo menos três desses blocos, então ele não é translúcido: é uma
+ * cápsula opaca que INVERTE.
  *
- * Sections opt in with `data-nav-theme="dark"`. An IntersectionObserver
- * whose root margin collapses the viewport to the header's own band tells
- * us which of them is currently behind it — cheaper and steadier than
- * measuring on every scroll frame, and it rides Lenis without extra work.
+ *   sobre areia (o padrão) → cápsula de tinta, texto areia
+ *   sobre bloco de cor     → cápsula de areia, texto tinta
+ *
+ * Assim a separação entre a cápsula e o bloco de baixo nunca cai abaixo de
+ * 3:1 (areia vs laranja 3.19, vs verde 4.51, vs azul 9.66, vs tinta 14.93;
+ * tinta vs areia 14.93), e o texto dentro dela está sempre em 14.93. Era
+ * exatamente isso que o esquema anterior não garantia: tinta sobre azul
+ * profundo dá 1.54.
+ *
+ * Seções se declaram com `data-nav-theme="dark"` — que aqui significa "sou
+ * um bloco de cor saturada", não necessariamente escuro (o bloco laranja
+ * também se declara assim). Um IntersectionObserver cujo rootMargin colapsa
+ * a viewport à faixa do próprio header diz qual deles está atrás dele —
+ * mais barato e mais estável do que medir a cada frame de scroll, e pega
+ * carona no Lenis sem trabalho extra.
+ *
+ * A extensão desta rodada é o contrato, não a mecânica: antes bastava
+ * marcar o que era literalmente escuro, porque o resto da página era uma
+ * areia só. Agora `data-nav-theme="dark"` quer dizer "sou um bloco de cor
+ * saturada" e está em SEIS lugares — a barra de estatísticas (azul), "Como
+ * funciona" (verde), "O Problema" (tinta), "A Solução" (laranja), o CTA
+ * final (tinta) e o rodapé (azul). Esquecer a marcação em um bloco novo é
+ * o único jeito de o header perder contraste, e é por isso que o padrão
+ * (sem marcação) é a cápsula de tinta: ela lê sobre areia, que é o fundo
+ * de todo bloco não marcado.
  */
 export function useNavOverDark(): boolean {
   const pathname = usePathname();

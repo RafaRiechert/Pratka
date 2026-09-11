@@ -19,7 +19,7 @@ export default function CompanyCard({
             {company.name}
           </h3>
           {company.status === "em-breve" && (
-            <span className="mt-0.5 flex shrink-0 items-center gap-1 rounded-full border border-accent/45 bg-accent/12 px-2.5 py-1 text-[11px] font-semibold text-accent-deep">
+            <span className="mt-0.5 flex shrink-0 items-center gap-1 rounded-pill border-2 border-accent bg-accent/15 px-2.5 py-1 text-[11px] font-semibold text-accent-deep">
               <Clock3 size={11} aria-hidden="true" />
               Em breve
             </span>
@@ -35,14 +35,21 @@ export default function CompanyCard({
         {company.shortDescription}
       </p>
 
-      <div className="space-y-2 text-sm text-ink-soft">
-        <div className="flex items-center gap-2">
-          <MapPin size={15} className="shrink-0 text-ink/40" />
-          <span className="truncate">{company.cities.join(", ")}</span>
+      {/*
+        `min-w-0` nos dois: sem ele, a linha `truncate` (que é
+        white-space: nowrap) impõe seu comprimento inteiro como largura
+        mínima do cartão, o cartão empurra a coluna do grid e a página
+        inteira ganha rolagem horizontal abaixo de ~380px. Com ele o texto
+        faz o que a classe promete — corta com reticências.
+      */}
+      <div className="min-w-0 space-y-2 text-sm text-ink-soft">
+        <div className="flex min-w-0 items-center gap-2">
+          <MapPin size={15} className="shrink-0 text-ink-soft" aria-hidden="true" />
+          <span className="min-w-0 truncate">{company.cities.join(", ")}</span>
         </div>
-        <div className="flex items-center gap-2">
-          <Users2 size={15} className="shrink-0 text-ink/40" />
-          <span className="truncate">{company.target}</span>
+        <div className="flex min-w-0 items-center gap-2">
+          <Users2 size={15} className="shrink-0 text-ink-soft" aria-hidden="true" />
+          <span className="min-w-0 truncate">{company.target}</span>
         </div>
       </div>
 
@@ -59,7 +66,7 @@ export default function CompanyCard({
           // Sem link ativo: um texto informativo, não um botão morto — um
           // controle que parece clicável e não faz nada custa mais confiança
           // do que a informação que ele daria.
-          <p className="flex flex-1 items-center justify-center rounded-control border border-dashed border-ink/20 px-3 py-2 text-center text-xs font-medium text-ink-soft">
+          <p className="flex flex-1 items-center justify-center rounded-control border-2 border-dashed border-line-strong px-3 py-2 text-center text-xs font-medium text-ink-soft">
             {company.opensWhen ?? "Inscrições abrem em breve"}
           </p>
         ) : (

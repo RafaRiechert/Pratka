@@ -18,24 +18,30 @@ type Size = "sm" | "md" | "lg";
  * tokens. O contrato de contraste vive em globals.css — `accent` é
  * superfície e carrega `ink`; `accent-deep` é preenchimento e carrega
  * `on-accent`. Trocar a identidade não deve exigir tocar neste arquivo.
+ *
+ * Na direção "Verão" o botão é uma CÁPSULA (--radius-control: 999px) de cor
+ * chapada, e o hover troca o tom em vez de acender um halo: o halo é um
+ * gradiente difuso, que é o que esta rodada aposentou. O primário em
+ * repouso é o laranja escuro com texto areia (5.36); no hover ele abre para
+ * o laranja cheio com texto tinta (4.68) — o mesmo gesto de "esquentar",
+ * sem borrão.
  */
 const variantClasses: Record<Variant, string> = {
-  primary:
-    "bg-accent-deep text-on-accent hover:shadow-glow-accent",
-  secondary: "bg-inverse text-on-inverse hover:bg-inverse-2 hover:shadow-card",
-  support: "bg-support text-on-support hover:bg-support-deep hover:shadow-glow-support",
-  signal: "bg-signal text-on-signal hover:shadow-glow-signal",
+  primary: "bg-accent-deep text-on-accent hover:bg-accent hover:text-ink",
+  secondary: "bg-inverse text-on-inverse hover:bg-inverse-2",
+  support: "bg-support text-on-support hover:bg-support-deep",
+  signal: "bg-signal text-on-signal hover:bg-signal-deep",
   outline:
-    "border border-ink/25 text-ink bg-transparent hover:border-accent-deep hover:text-accent-deep",
-  ghost: "bg-transparent text-ink hover:bg-ink/5",
+    "border-2 border-ink/30 text-ink bg-transparent hover:border-accent-deep hover:bg-accent/12 hover:text-accent-deep",
+  ghost: "bg-transparent text-ink hover:bg-ink/8",
   danger:
-    "bg-danger/10 text-danger border border-danger/40 hover:bg-danger/20",
+    "bg-danger/10 text-danger border-2 border-danger/40 hover:bg-danger/20",
 };
 
 const sizeClasses: Record<Size, string> = {
   sm: "px-4 py-2 text-sm",
-  md: "px-6 py-3 text-base",
-  lg: "px-8 py-4 text-base",
+  md: "px-7 py-3 text-base",
+  lg: "px-9 py-4 text-base",
 };
 
 interface ButtonProps {
@@ -62,7 +68,7 @@ export function Button({
   disabled,
 }: ButtonProps) {
   const classes = cn(
-    "pop focus-ring inline-flex items-center justify-center gap-2 rounded-control font-semibold tracking-tight disabled:opacity-50 disabled:pointer-events-none",
+    "pop focus-ring inline-flex items-center justify-center gap-2 rounded-control font-semibold leading-none tracking-tight disabled:opacity-50 disabled:pointer-events-none",
     variantClasses[variant],
     sizeClasses[size],
     className

@@ -10,9 +10,7 @@ export function Field({
 }) {
   return (
     <div>
-      <label className="mb-1.5 block text-sm font-medium text-ink-soft">
-        {label}
-      </label>
+      <label className="label-meta mb-2 block text-ink-soft">{label}</label>
       {children}
     </div>
   );
@@ -22,7 +20,10 @@ export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElem
   return (
     <input
       className={cn(
-        "panel w-full rounded-control border-0 bg-transparent px-4 py-2.5 text-sm text-ink outline-none focus:ring-2 focus:ring-accent/40",
+        // Campo de papel com fio de tinta e canto de cápsula — a mesma forma
+        // do botão e do filtro, para que um formulário pareça feito das
+        // mesmas peças que o resto do site.
+        "focus-ring w-full rounded-input border-2 border-line-strong bg-surface-2 px-4 py-3 text-sm text-ink outline-none transition-colors hover:border-ink/45 focus:border-accent-deep",
         className
       )}
       {...props}

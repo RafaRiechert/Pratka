@@ -21,27 +21,33 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { user, signOut } = useAuth();
-  // Dois estados apenas: ink sobre surface, e on-inverse sobre o bloco escuro.
-  const overDark = useNavOverDark();
+  /*
+   * A página é feita de blocos de cor chapada e o header atravessa todos
+   * eles. Em vez de um painel translúcido (que some sobre metade deles), a
+   * cápsula é OPACA e inverte: tinta sobre areia, areia sobre bloco de cor.
+   * Ver lib/use-nav-over-dark.ts para os contrastes de cada combinação.
+   */
+  const overBlock = useNavOverDark();
+  // `true` quando a própria cápsula é escura — o que o conteúdo dela precisa
+  // saber. Sobre um bloco de cor a cápsula é clara, e vice-versa.
+  const capsuleDark = !overBlock;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40">
       <div className="mx-auto mt-4 max-w-7xl px-4">
         <nav
           className={cn(
-            "flex items-center justify-between rounded-panel px-5 py-3 shadow-card transition-colors duration-500",
-            overDark
-              // `support` em vez de `inverse`: as seções escuras já são
-              // `inverse`, e um painel inverse sobre elas sumia.
-              ? "border border-on-inverse/15 bg-support/85 backdrop-blur-lg"
-              : "panel"
+            "flex items-center justify-between rounded-control px-5 py-3 shadow-card transition-colors duration-500",
+            capsuleDark
+              ? "bg-inverse text-on-inverse"
+              : "border border-ink/15 bg-surface-2 text-ink"
           )}
         >
           <Link
             href="/"
             className={cn(
-              "font-editorial text-2xl font-extrabold tracking-tight transition-colors duration-500",
-              overDark ? "text-on-inverse" : "text-ink"
+              "wordmark focus-ring text-xl transition-colors duration-500 sm:text-2xl",
+              capsuleDark ? "text-on-inverse" : "text-ink"
             )}
           >
             Pratka
@@ -49,7 +55,7 @@ export default function Navbar() {
 
           <div className="hidden items-center gap-0.5 lg:flex">
             {links.map((l) => (
-              <NavLink key={l.href} href={l.href} onDark={overDark}>
+              <NavLink key={l.href} href={l.href} onDark={capsuleDark}>
                 {l.label}
               </NavLink>
             ))}
@@ -60,7 +66,7 @@ export default function Navbar() {
               <Button
                 variant="ghost"
                 size="sm"
-                className={overDark ? "text-on-inverse hover:bg-on-inverse/10" : undefined}
+                className={capsuleDark ? "text-on-inverse hover:bg-on-inverse/10" : undefined}
                 onClick={() => signOut()}
               >
                 Sair
@@ -72,14 +78,25 @@ export default function Navbar() {
                   variant="outline"
                   size="sm"
                   className={
-                    overDark
-                      ? "border-on-inverse/35 text-on-inverse hover:border-signal hover:text-signal"
+                    capsuleDark
+                      ? "border-on-inverse/40 text-on-inverse hover:border-accent-on-inverse hover:text-accent-on-inverse"
                       : undefined
                   }
                 >
                   Entrar
                 </Button>
-                <Button href="/cadastro" variant="primary" size="sm">
+                {/*
+                  Dentro da cápsula de tinta o laranja escuro (accent-deep)
+                  encosta no preto e some; o laranja cheio com texto tinta
+                  (4.68) é o par certo ali. Sobre a cápsula de areia vale o
+                  contrário, e aí a variante padrão serve.
+                */}
+                <Button
+                  href="/cadastro"
+                  variant="primary"
+                  size="sm"
+                  className={capsuleDark ? "bg-accent text-ink hover:shadow-none" : undefined}
+                >
                   Cadastrar
                 </Button>
               </>
@@ -88,8 +105,8 @@ export default function Navbar() {
 
           <button
             className={cn(
-              "transition-colors duration-500 lg:hidden",
-              overDark ? "text-on-inverse" : "text-ink"
+              "focus-ring rounded-control transition-colors duration-500 lg:hidden",
+              capsuleDark ? "text-on-inverse" : "text-ink"
             )}
             onClick={() => setOpen((o) => !o)}
             aria-label="Abrir menu"
@@ -114,12 +131,12 @@ export default function Navbar() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-input px-3 py-2.5 text-sm font-medium text-ink/85 hover:bg-ink/5"
+                  className="focus-ring rounded-input px-3 py-2.5 text-sm font-medium text-ink hover:bg-accent/15"
                 >
                   {l.label}
                 </Link>
               ))}
-              <div className="mt-2 flex flex-col gap-2 border-t border-ink/10 pt-3">
+              <div className="mt-2 flex flex-col gap-2 border-t border-line pt-3">
                 {user ? (
                   <Button
                     variant="ghost"

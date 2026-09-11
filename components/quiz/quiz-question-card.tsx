@@ -48,7 +48,7 @@ export default function QuizQuestionCard({
         <button
           type="button"
           onClick={onBack}
-          className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft transition-colors hover:text-accent-deep"
+          className="focus-ring mb-6 inline-flex items-center gap-1.5 rounded-control text-sm font-semibold text-ink-soft transition-colors hover:text-accent-deep"
         >
           <ArrowLeft size={16} />
           Voltar
@@ -67,9 +67,9 @@ export default function QuizQuestionCard({
             onClick={() => handleSelect(option)}
             disabled={justClicked !== null}
             className={cn(
-              "panel panel-glow rounded-panel px-6 py-4 text-left text-base text-ink shadow-card transition-all duration-200",
-              "hover:-translate-y-0.5 hover:shadow-glow-accent disabled:pointer-events-none",
-              highlighted === option.id && "border-2 border-accent bg-accent/10",
+              "focus-ring rounded-panel border-2 border-line-strong bg-surface-2 px-6 py-4 text-left text-base text-ink shadow-card transition-all duration-200",
+              "hover:-translate-y-0.5 hover:border-accent-deep disabled:pointer-events-none",
+              highlighted === option.id && "border-accent-deep bg-accent/15",
               justClicked !== null && justClicked !== option.id && "opacity-40"
             )}
           >

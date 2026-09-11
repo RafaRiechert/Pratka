@@ -18,17 +18,12 @@ const steps = [
     icon: Compass,
     title: "Explore as oportunidades",
     text: "Navegue pela nossa curadoria completa de programas de summer internship no Brasil. Filtre por setor — de bancos de investimento a consultorias estratégicas, de fintechs a empresas de entretenimento. Filtre por cidade, por temporada ou por público-alvo. Cada programa foi verificado e atualizado pela nossa equipe para garantir que você tenha informações precisas e confiáveis.",
-    /** One accent per panel — discreet, all AA against their own text. */
-    accent: {
-      chip: "bg-signal text-ink",
-      number: "text-signal",
-      edge: "before:bg-signal",
-    },
-  },
-  {
-    icon: Search,
-    title: "Descubra os detalhes",
-    text: "Clique em \"Mais informações\" e mergulhe nos detalhes de cada programa: o que o estagiário realmente faz no dia a dia, qual a duração, quais são os benefícios, quais áreas estão disponíveis e quais são os pré-requisitos. Nada de descrições genéricas — aqui você encontra o que precisa saber para tomar uma decisão informada.",
+    /*
+     * Um acento por painel. A seção inteira é um bloco de verde folha, então
+     * o verde sai da rotação dos acentos — sobraram os três que ainda
+     * cantam contra o papel de areia do cartão: laranja, azul e tinta.
+     * Cada par abaixo é um contrato do sistema, não uma cor escolhida.
+     */
     accent: {
       chip: "bg-accent text-ink",
       number: "text-accent",
@@ -36,13 +31,23 @@ const steps = [
     },
   },
   {
+    icon: Search,
+    title: "Descubra os detalhes",
+    text: "Clique em \"Mais informações\" e mergulhe nos detalhes de cada programa: o que o estagiário realmente faz no dia a dia, qual a duração, quais são os benefícios, quais áreas estão disponíveis e quais são os pré-requisitos. Nada de descrições genéricas — aqui você encontra o que precisa saber para tomar uma decisão informada.",
+    accent: {
+      chip: "bg-support text-on-support",
+      number: "text-support",
+      edge: "before:bg-support",
+    },
+  },
+  {
     icon: MousePointerClick,
     title: "Candidate-se",
     text: "Encontrou o programa ideal? Clique em \"Aplicar\" e vá direto para o formulário de inscrição no site oficial da empresa. A Pratka não é intermediária — somos o atalho. Você se candidata diretamente, sem burocracia adicional, sem criar mais uma conta em mais uma plataforma.",
     accent: {
-      chip: "bg-support text-on-inverse",
-      number: "text-support",
-      edge: "before:bg-support",
+      chip: "bg-inverse text-on-inverse",
+      number: "text-ink",
+      edge: "before:bg-inverse",
     },
   },
 ];
@@ -83,7 +88,7 @@ function StepPanel({
 
   return (
     <article
-      className={`panel relative flex flex-col justify-center overflow-hidden rounded-card border border-ink/8 bg-surface-2 shadow-card before:absolute before:inset-y-0 before:left-0 before:w-1.5 ${
+      className={`panel relative flex flex-col justify-center overflow-hidden rounded-card shadow-block before:absolute before:inset-y-0 before:left-0 before:w-2.5 ${
         accent.edge
       } ${
         horizontal
@@ -101,7 +106,7 @@ function StepPanel({
       </span>
 
       <div
-        className={`relative flex items-center justify-center rounded-control ${accent.chip} ${
+        className={`relative flex items-center justify-center rounded-pill ${accent.chip} ${
           horizontal ? "h-14 w-14" : "h-11 w-11"
         }`}
       >
@@ -198,16 +203,24 @@ export default function HowItWorks() {
   );
 
   return (
+    // O bloco de verde folha. Um campo de cor inteiro em que os três painéis
+    // de papel deslizam — a cor é a seção, não um detalhe dentro dela. Só a
+    // manchete pousa direto no verde, em areia (4.51 AA).
     <section
       id="como-funciona"
       ref={rootRef}
-      className={horizontal ? "scroll-mt-24 overflow-hidden" : "scroll-mt-24"}
+      data-nav-theme="dark"
+      className={
+        horizontal
+          ? "relative scroll-mt-24 overflow-hidden bg-signal"
+          : "relative scroll-mt-24 bg-signal"
+      }
     >
       <div
         className={
           horizontal
-            ? "flex h-screen flex-col justify-center"
-            : "mx-auto max-w-6xl px-6 py-28"
+            ? "relative z-10 flex h-screen flex-col justify-center"
+            : "relative z-10 mx-auto max-w-6xl px-6 py-28"
         }
         style={
           horizontal
@@ -222,8 +235,11 @@ export default function HowItWorks() {
               : "mx-auto max-w-2xl text-center"
           }
         >
-          <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
-            Como <span className="text-accent-emphasis">funciona</span>
+          <h2 className="font-display text-4xl font-bold text-on-signal sm:text-5xl">
+            Como{" "}
+            <span className="rounded-panel bg-surface px-3 pb-1 text-ink">
+              funciona
+            </span>
           </h2>
         </AnimatedSection>
 

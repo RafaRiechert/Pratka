@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUp, MapPin } from "lucide-react";
 import { areaProgrammes, type AreaProgrammes } from "@/lib/area-programmes";
 import AnimatedSection from "@/components/ui/animated-section";
+import { Arch, ArcField } from "@/components/ui/arc";
 import { useSectorFilter } from "@/components/home/sector-filter-context";
 import { duration, ease, springPop, stagger } from "@/lib/motion";
 
@@ -64,7 +65,7 @@ function FloatingProgrammes({
           initial={reduced ? false : { opacity: 0, y: 14, rotate: 0 }}
           animate={{ opacity: 1, y: 0, rotate: i % 2 === 0 ? -2 : 2.5 }}
           transition={{ ...springPop, delay: reduced ? 0 : i * stagger.tight }}
-          className="rounded-panel border border-ink/8 bg-surface-2 p-4 shadow-card"
+          className="rounded-panel border border-line-strong bg-surface-2 p-4 shadow-card"
         >
           <p className="font-display text-sm font-bold leading-tight text-ink">
             {company.name}
@@ -116,7 +117,9 @@ function AreaRow({
             animate={{ opacity: 1, x: 0 }}
             exit={reduced ? undefined : { opacity: 0, x: -8 }}
             transition={{ duration: duration.fast, ease: ease.soft }}
-            className="font-script text-xl leading-none text-accent-deep sm:text-2xl"
+            // Era a voz manuscrita. Virou etiqueta de dado em caixa alta:
+            // mesma função (a "personalidade" da área), registro adulto.
+            className="label-meta leading-none text-accent-deep"
           >
             {area.pitch}
           </motion.span>
@@ -124,7 +127,7 @@ function AreaRow({
       </AnimatePresence>
 
       {!area.interactive && (
-        <span className="rounded-full bg-ink/8 px-2.5 py-1 text-xs font-semibold text-ink-soft">
+        <span className="rounded-pill bg-ink/10 px-2.5 py-1 text-xs font-semibold text-ink-soft">
           Em breve
         </span>
       )}
@@ -135,14 +138,14 @@ function AreaRow({
   // does nothing is worse for keyboard users than no control at all.
   if (!area.interactive) {
     return (
-      <li className="border-b border-ink/10">
+      <li className="border-b border-ink/15">
         <div className="min-w-0 py-5 opacity-70 lg:pr-[20rem]">{label}</div>
       </li>
     );
   }
 
   return (
-    <li className="relative border-b border-ink/10">
+    <li className="relative border-b border-ink/15">
       <button
         type="button"
         onClick={onActivate}
@@ -179,17 +182,32 @@ export default function AreaDiscovery() {
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
-    <section id="areas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
-      <AnimatedSection className="mx-auto max-w-2xl text-center">
-        <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
-          Descubra por área
-        </h2>
-        <p className="mt-5 text-lg text-ink-soft">
-          Doze áreas do mercado, os programas que combinam com cada uma.
-        </p>
-      </AnimatedSection>
+    // Bloco de areia escura. É o único degrau TONAL do esquema (areia sobre
+    // areia, não uma cor nova): depois do verde e antes da tinta, mais uma
+    // cor saturada aqui empilharia três campos fortes seguidos.
+    <section
+      id="areas"
+      className="relative scroll-mt-24 overflow-hidden bg-surface-3 py-28"
+    >
+      <ArcField>
+        <Arch
+          tone="surface"
+          side="top"
+          className="-right-[14%] bottom-0 h-40 w-[60vw] max-w-[28rem]"
+        />
+      </ArcField>
 
-      <ul className="mt-14 min-w-0 border-t border-ink/10">
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
+        <AnimatedSection className="mx-auto max-w-2xl text-center">
+          <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
+            Descubra por área
+          </h2>
+          <p className="mt-5 text-lg text-ink-soft">
+            Doze áreas do mercado, os programas que combinam com cada uma.
+          </p>
+        </AnimatedSection>
+
+        <ul className="mt-14 min-w-0 border-t-2 border-ink/20">
         {areaProgrammes.map((area) => (
           <AreaRow
             key={area.code}
@@ -205,7 +223,8 @@ export default function AreaDiscovery() {
             }}
           />
         ))}
-      </ul>
+        </ul>
+      </div>
     </section>
   );
 }

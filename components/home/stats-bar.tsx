@@ -31,27 +31,34 @@ const lastUpdated = `${new Intl.DateTimeFormat("pt-BR", { month: "short" })
   .format(buildDate)
   .replace(".", "")}/${buildDate.getFullYear()}`;
 
+/*
+ * A faixa deixou de ser um painel de papel e virou o primeiro BLOCO DE COR
+ * da página: uma barra de azul profundo que ancora o herói de areia. Números
+ * em areia sobre azul (9.66) e rótulos em areia/75 (6.17) — os dois AA. O
+ * azul é o contrapeso "de dentro" logo depois do laranja: é o que impede a
+ * abertura de virar só calor.
+ */
 export default function StatsBar() {
   return (
-    <section className="relative -mt-16 px-6">
+    <section data-nav-theme="dark" className="relative -mt-14 px-6 pb-20">
       <AnimatedSection className="mx-auto max-w-6xl">
-        <div className="panel grid grid-cols-2 gap-8 rounded-card px-8 py-10 shadow-card sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 rounded-card bg-support px-8 py-10 text-on-support shadow-block sm:grid-cols-4">
           <div className="text-center">
-            <div className="font-display text-4xl font-bold text-accent-deep sm:text-5xl">
+            <div className="font-display text-4xl font-bold tabular-nums text-on-support sm:text-5xl">
               {/* The "+" only makes sense alongside a real count. */}
               <CountUp value={companyCount} suffix={companyCount > 0 ? "+" : ""} />
             </div>
-            <p className="mt-2 text-sm text-ink-soft">
+            <p className="mt-2 text-sm text-on-support/75">
               {companyCount === 1 ? "empresa mapeada" : "empresas mapeadas"}
             </p>
           </div>
 
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-accent-deep sm:text-3xl">
+            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-on-support sm:text-3xl">
               <MapPin size={22} className="shrink-0" aria-hidden="true" />
               {coverage}
             </div>
-            <p className="mt-2 text-sm text-ink-soft">cobertura principal</p>
+            <p className="mt-2 text-sm text-on-support/75">cobertura principal</p>
           </div>
 
           <div className="text-center">
@@ -61,21 +68,21 @@ export default function StatsBar() {
               deixou de ser verdadeira. Esta conta é derivada do mesmo dado
               que alimenta os cards, então acompanha a lista sozinha.
             */}
-            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-accent-deep sm:text-3xl">
+            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold tabular-nums text-on-support sm:text-3xl">
               <Link2 size={22} className="shrink-0" aria-hidden="true" />
               <CountUp value={openCount} />
             </div>
-            <p className="mt-2 text-sm text-ink-soft">
+            <p className="mt-2 text-sm text-on-support/75">
               {openCount === 1 ? "com inscrição aberta" : "com inscrições abertas"}
             </p>
           </div>
 
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold text-accent-deep sm:text-3xl">
+            <div className="flex items-center justify-center gap-1.5 font-mono text-xl font-bold uppercase text-on-support sm:text-2xl">
               <RefreshCw size={22} className="shrink-0" aria-hidden="true" />
               {lastUpdated}
             </div>
-            <p className="mt-2 text-sm text-ink-soft">última atualização</p>
+            <p className="mt-2 text-sm text-on-support/75">última atualização</p>
           </div>
         </div>
       </AnimatedSection>

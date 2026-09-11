@@ -40,7 +40,7 @@ export default function CompanyDetailModal({
             <button
               onClick={onClose}
               aria-label="Fechar"
-              className="absolute right-6 top-6 text-ink/50 transition-colors hover:text-ink"
+              className="focus-ring absolute right-6 top-6 rounded-pill p-1 text-ink-soft transition-colors hover:bg-ink/8 hover:text-ink"
             >
               <X size={22} />
             </button>
@@ -63,16 +63,16 @@ export default function CompanyDetailModal({
 
             <div className="mt-6 space-y-2.5 text-sm text-ink-soft">
               <div className="flex items-center gap-2">
-                <MapPin size={15} className="shrink-0 text-ink/40" />
+                <MapPin size={15} className="shrink-0 text-ink-soft" />
                 {company.cities.join(", ")}
               </div>
               <div className="flex items-center gap-2">
-                <Users2 size={15} className="shrink-0 text-ink/40" />
+                <Users2 size={15} className="shrink-0 text-ink-soft" />
                 {company.target}
               </div>
               {company.duration && (
                 <div className="flex items-center gap-2">
-                  <Clock size={15} className="shrink-0 text-ink/40" />
+                  <Clock size={15} className="shrink-0 text-ink-soft" />
                   {company.duration}
                 </div>
               )}
@@ -83,7 +83,7 @@ export default function CompanyDetailModal({
                 {company.areas.map((area) => (
                   <div
                     key={area.area}
-                    className="rounded-panel border border-surface-inset bg-surface-2/60 p-4"
+                    className="rounded-panel border-2 border-surface-inset bg-surface p-4"
                   >
                     <h4 className="font-display text-base font-bold text-ink">
                       {area.area}
@@ -105,7 +105,7 @@ export default function CompanyDetailModal({
                 ))}
               </div>
             ) : company.status === "em-breve" ? (
-              <p className="mt-8 w-full rounded-panel border border-dashed border-accent/40 bg-accent/8 px-4 py-3 text-center text-sm font-medium text-accent-deep">
+              <p className="mt-8 w-full rounded-panel border-2 border-dashed border-accent bg-accent/12 px-4 py-3 text-center text-sm font-semibold text-accent-deep">
                 {company.opensWhen ?? "Inscrições abrem em breve"}
               </p>
             ) : (

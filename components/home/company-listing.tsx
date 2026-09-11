@@ -86,6 +86,10 @@ export default function CompanyListing() {
         <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
           Programas de Summer Internship no Brasil
         </h2>
+        <span
+          aria-hidden="true"
+          className="mx-auto mt-6 block h-1.5 w-20 rounded-pill bg-accent"
+        />
         <p className="mt-5 text-lg text-ink-soft">
           Todas as empresas que oferecem oportunidades de verão para
           universitários, atualizadas e com link direto.
@@ -105,14 +109,20 @@ export default function CompanyListing() {
               type="button"
               aria-pressed={selected}
               onClick={() => setStatus(chip.value)}
-              className={`pop focus-ring rounded-full px-4 py-2 text-sm font-semibold ${
+              className={`pop focus-ring rounded-pill px-5 py-2 text-sm font-semibold ${
                 selected
                   ? "bg-inverse text-on-inverse"
-                  : "border border-ink/15 bg-surface-2/60 text-ink-soft hover:border-ink/30"
+                  : "border-2 border-line-strong bg-surface-2 text-ink-soft hover:border-ink/45 hover:text-ink"
               }`}
             >
               {chip.label}
-              <span className={selected ? "ml-1.5 text-on-inverse/60" : "ml-1.5 text-ink/35"}>
+              <span
+                className={
+                  selected
+                    ? "ml-1.5 font-mono tabular-nums text-on-inverse/75"
+                    : "ml-1.5 font-mono tabular-nums text-ink-soft"
+                }
+              >
                 {chip.count}
               </span>
             </button>
@@ -132,7 +142,7 @@ export default function CompanyListing() {
 
       {filtered.length === 0 ? (
         <div className="panel flex flex-col items-center gap-3 rounded-card px-8 py-20 text-center">
-          <Building2 size={28} className="text-ink/30" />
+          <Building2 size={28} className="text-ink-soft" aria-hidden="true" />
           <p className="text-ink-soft">
             Nenhuma empresa encontrada com esses filtros.
           </p>
@@ -140,7 +150,11 @@ export default function CompanyListing() {
       ) : (
         <Stagger
           scrollTrigger={false}
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          // `[&>*]:min-w-0`: uma coluna de grid não encolhe abaixo do
+          // min-content do que está dentro dela. Sem isso um cartão com uma
+          // linha longa define a largura da coluna e abre rolagem
+          // horizontal no telefone.
+          className="grid gap-6 [&>*]:min-w-0 sm:grid-cols-2 lg:grid-cols-3"
         >
           {filtered.map((company) => (
             <StaggerItem key={company.id}>

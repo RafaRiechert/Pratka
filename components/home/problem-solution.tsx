@@ -1,5 +1,6 @@
 import { CircleAlert } from "lucide-react";
 import AnimatedSection from "@/components/ui/animated-section";
+import { Arch, ArcField, Ring } from "@/components/ui/arc";
 import BenefitPills from "@/components/ui/benefit-pills";
 
 const problemParagraphs = [
@@ -16,11 +17,29 @@ const solutionParagraphs = [
 export default function ProblemSolution() {
   return (
     <section id="problema-solucao" className="scroll-mt-24">
-      <div data-nav-theme="dark" className="border-b border-on-inverse/5 bg-inverse py-24">
-        <div className="mx-auto max-w-3xl px-6">
+      {/*
+        O PAR DE BLOCOS. Tinta e laranja queimado, encostados um no outro sem
+        nada entre eles: o corte seco entre os dois campos é o argumento
+        visual da seção. A curva de areia atravessa a fronteira, costurando
+        os dois — é o momento em que o modernismo desta direção fica mais
+        explícito.
+      */}
+      <div
+        data-nav-theme="dark"
+        className="relative overflow-hidden bg-inverse py-24"
+      >
+        <ArcField>
+          <Ring
+            tone="inverse-2"
+            weight={16}
+            className="-left-[12%] -top-[30%] w-[46vw] max-w-[28rem]"
+          />
+        </ArcField>
+
+        <div className="relative z-10 mx-auto max-w-3xl px-6">
           <AnimatedSection className="mb-10 flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-control bg-on-inverse/10 text-on-inverse/60">
-              <CircleAlert size={20} />
+            <div className="flex h-11 w-11 items-center justify-center rounded-pill bg-on-inverse/15 text-on-inverse">
+              <CircleAlert size={20} aria-hidden="true" />
             </div>
             <h2 className="font-display text-4xl font-bold text-on-inverse sm:text-5xl">
               O Problema
@@ -29,17 +48,29 @@ export default function ProblemSolution() {
           <div className="space-y-5">
             {problemParagraphs.map((p, i) => (
               <AnimatedSection key={i} delay={i * 0.05}>
-                <p className="text-lg leading-relaxed text-on-inverse/65">{p}</p>
+                <p className="text-lg leading-relaxed text-on-inverse/75">{p}</p>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Sem o amarelo emprestado e sem o gradiente radial: a seção agora
-          usa uma superfície do próprio sistema. O ícone de sparkle saiu
-          junto com a badge do herói — mesmo motivo. */}
-      <div className="relative overflow-hidden bg-surface-3 py-24">
+      {/* Sem o amarelo emprestado e sem o gradiente radial: a seção é um
+          campo de laranja queimado com texto tinta (4.68 AA, calculado — é
+          por isso que o texto aqui é tinta cheia e não tinta/85, que cairia
+          para 3.97). O ícone de sparkle saiu junto com a badge do herói. */}
+      <div
+        data-nav-theme="dark"
+        className="relative overflow-hidden bg-accent py-24"
+      >
+        <ArcField>
+          <Arch
+            tone="surface"
+            side="bottom"
+            className="-right-[10%] -top-8 h-32 w-[52vw] max-w-[26rem]"
+          />
+        </ArcField>
+
         <div className="relative z-10 mx-auto max-w-3xl px-6">
           <AnimatedSection className="mb-10">
             <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
@@ -49,7 +80,7 @@ export default function ProblemSolution() {
           <div className="space-y-5">
             {solutionParagraphs.map((p, i) => (
               <AnimatedSection key={i} delay={i * 0.05}>
-                <p className="text-lg leading-relaxed text-ink/85">{p}</p>
+                <p className="text-lg leading-relaxed text-ink">{p}</p>
               </AnimatedSection>
             ))}
           </div>

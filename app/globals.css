@@ -4,101 +4,133 @@
  * ============================================================================
  * DESIGN TOKENS — a camada única de identidade
  * ============================================================================
+ * DIREÇÃO "VERÃO" — modernismo brasileiro.
+ *
+ * Areia, tinta, azul profundo, laranja queimado e verde folha. A página é
+ * lida como uma sequência de BLOCOS DE COR CHAPADA: cada seção ocupa uma cor
+ * inteira, sem degradê, sem mesh, sem orb. A curva — arcos generosos, cantos
+ * muito arredondados, botões em cápsula — é o que carrega o calor; a cor é
+ * saturada mas grave, e a tipografia é de caixa alta curta e peso alto, para
+ * que "quente" nunca vire "infantil".
+ *
  * Nenhum componente escolhe cor, raio ou fonte por conta própria: todos
- * consomem os tokens semânticos abaixo. Trocar a identidade do site inteiro
- * é trocar os VALORES deste bloco (mais os componentes de forma), nunca
- * caçar hex espalhado pelos componentes.
+ * consomem os tokens semânticos abaixo.
  *
  * Papéis, e o contrato de contraste de cada um (tudo AA, 4.5:1, no mínimo):
- *   surface / surface-2 / surface-3  fundos; sempre com texto `ink`
- *   inverse / inverse-2              o bloco de contraste; texto `on-inverse`
+ *   surface / surface-2 / surface-3  fundos de areia; sempre com texto `ink`
+ *   inverse / inverse-2              o bloco de tinta; texto `on-inverse`
  *   ink / ink-2 / ink-soft           texto sobre surface
  *   line / line-strong               fios, bordas, réguas
- *   accent                           SUPERFÍCIE de acento; texto `ink` em cima
+ *   accent                           SUPERFÍCIE laranja; texto `ink` em cima
  *   accent-deep                      TEXTO e CTA preenchido; `on-accent` em cima
  *   accent-soft                      tinta decorativa; nunca carrega texto
- *   support / support-deep           acento frio; texto `on-support` em cima
- *   signal / signal-deep             prazos e urgência; texto `on-signal`
+ *   accent-on-inverse                TEXTO de acento sobre bloco escuro
+ *   support / support-deep           azul profundo; texto `on-support` em cima
+ *   signal / signal-deep             verde folha: prazos e status; `on-signal`
  *   danger                           erro de formulário
+ *
+ * Contrastes medidos (WCAG 2.1, calculados, não estimados):
+ *   tinta #1A1A1A      sobre areia #F2EDE4 ....... 14.93  AA
+ *   ink-soft #5C5347   sobre areia ............... 6.47   AA
+ *   ink-soft           sobre areia-3 #E7DFCF ..... 5.70   AA
+ *   accent-deep #A83E12 sobre areia .............. 5.36   AA
+ *   accent-deep        sobre branco .............. 6.24   AA
+ *   accent-deep        sobre areia-3 ............. 4.71   AA
+ *   accent #E25822     sobre areia ............... 3.19   só texto grande
+ *   accent             sobre branco .............. 3.72   só texto grande
+ *   tinta              sobre accent (laranja) .... 4.68   AA
+ *   support #1B3A6B    sobre areia ............... 9.66   AA
+ *   support            sobre branco .............. 11.27  AA
+ *   areia              sobre support ............. 9.66   AA
+ *   signal #1F7A5C     sobre areia ............... 4.51   AA
+ *   signal-deep #165A44 sobre areia .............. 6.98   AA
+ *   areia              sobre signal .............. 4.51   AA
+ *   accent-on-inverse #F0A882 sobre tinta ........ 8.81   AA
+ *   accent-on-inverse  sobre support ............. 5.70   AA
+ *   danger #B3261E     sobre areia ............... 5.61   AA
+ *
+ * Por isso o laranja CHAPADO (`accent`) só aparece como superfície com texto
+ * tinta em cima, nunca como texto sobre areia — para texto existe
+ * `accent-deep`. E sobre os blocos escuros o acento vira `accent-on-inverse`.
  */
 
 @theme {
-  /* --- superfícies ------------------------------------------------------ */
-  --color-surface: #fdf6ec;
-  --color-surface-2: #fffbf3;
-  --color-surface-3: #f5e7d0;
-  --color-surface-inset: #ead9bd;
+  /* --- superfícies: areia ------------------------------------------------ */
+  --color-surface: #f2ede4;
+  --color-surface-2: #fbf8f2;
+  --color-surface-3: #e7dfcf;
+  --color-surface-inset: #dad0bc;
 
-  /* --- bloco de contraste ----------------------------------------------- */
-  --color-inverse: #241a12;
-  --color-inverse-2: #34251a;
-  --color-on-inverse: #fdf6ec;
+  /* --- bloco de contraste: tinta ----------------------------------------- */
+  --color-inverse: #1a1a1a;
+  --color-inverse-2: #2b2724;
+  --color-on-inverse: #f2ede4;
 
-  /* --- texto ------------------------------------------------------------ */
-  --color-ink: #241a12;
-  --color-ink-2: #34251a;
-  --color-ink-soft: #6b5642;
+  /* --- texto ------------------------------------------------------------- */
+  --color-ink: #1a1a1a;
+  --color-ink-2: #3a342c;
+  --color-ink-soft: #5c5347;
 
-  /* --- fios ------------------------------------------------------------- */
-  --color-line: rgba(36, 26, 18, 0.1);
-  --color-line-strong: rgba(36, 26, 18, 0.24);
+  /* --- fios -------------------------------------------------------------- */
+  --color-line: rgba(26, 26, 26, 0.12);
+  --color-line-strong: rgba(26, 26, 26, 0.3);
 
-  /* --- acento principal ------------------------------------------------- */
-  --color-accent: #ff5a1f;
-  --color-accent-deep: #b8380f;
-  --color-accent-soft: #ff8b66;
-  --color-on-accent: #fdf6ec;
+  /* --- acento principal: laranja queimado -------------------------------- */
+  --color-accent: #e25822;
+  --color-accent-deep: #a83e12;
+  --color-accent-soft: #f0a882;
+  /* O acento quando o fundo é escuro. Claro o bastante para carregar texto
+     sobre tinta (8.81) e sobre azul profundo (5.70). */
+  --color-accent-on-inverse: #f0a882;
+  --color-on-accent: #f2ede4;
 
-  /* --- acento de apoio (o contrapeso frio) ------------------------------ */
-  --color-support: #0f4c4a;
-  --color-support-deep: #0b3b42;
-  --color-on-support: #fdf6ec;
+  /* --- acento de apoio: azul profundo ------------------------------------ */
+  --color-support: #1b3a6b;
+  --color-support-deep: #12294d;
+  --color-on-support: #f2ede4;
 
-  /* --- sinal: prazos, urgência, contagem -------------------------------- */
-  --color-signal: #ffc53d;
-  --color-signal-deep: #8a5a00;
-  --color-on-signal: #241a12;
+  /* --- sinal: verde folha — status, prazos, contagem --------------------- */
+  --color-signal: #1f7a5c;
+  --color-signal-deep: #165a44;
+  --color-on-signal: #f2ede4;
 
-  --color-danger: #c43d3d;
+  --color-danger: #b3261e;
 
-  /* --- tipografia ------------------------------------------------------- */
-  /* Três slots no máximo: display (títulos), body (leitura) e mono (dado). */
+  /* --- tipografia -------------------------------------------------------- */
+  /*
+   * Duas vozes + a mono funcional. A serifada (Fraunces) e a manuscrita
+   * (Caveat) da identidade anterior saíram: o modernismo brasileiro é
+   * geométrico, e um wordmark manuscrito puxava a marca para o lado
+   * "caderninho". O wordmark agora é a própria display, em caixa alta e
+   * peso 700 — mais "de dentro" e mais consistente com as manchetes.
+   */
   --font-display: var(--font-clash), "Clash Display", ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-work-sans), "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  /* Terceiro slot, e só porque é funcional: janela de inscrição, contagem,
+     cidade — dado tabular na linha do tempo. */
   --font-mono: var(--font-mono-stack), ui-monospace, SFMono-Regular, Menlo, monospace;
-  /* Vozes extras da identidade atual — cada direção decide se sobrevivem. */
-  --font-editorial: var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
-  --font-script: var(--font-caveat), "Caveat", ui-serif, cursive;
 
-  /* --- forma ------------------------------------------------------------ */
-  --radius-card: 1.5rem;
-  --radius-panel: 1rem;
-  --radius-control: 0.75rem;
+  /* --- forma: curva generosa --------------------------------------------- */
+  --radius-card: 2rem;
+  --radius-panel: 1.5rem;
+  --radius-control: 999px;
+  --radius-input: 1.25rem;
   --radius-tag: 999px;
   --radius-pill: 999px;
 
-  /* --- elevação --------------------------------------------------------- */
-  --shadow-card: 0 20px 50px -22px rgba(36, 26, 18, 0.35), 0 1px 0 0 rgba(255, 255, 255, 0.5) inset;
-  --shadow-glow-accent: 0 0 0 1px rgba(255, 90, 31, 0.28), 0 10px 32px -8px rgba(255, 90, 31, 0.45);
-  --shadow-glow-signal: 0 0 0 1px rgba(255, 197, 61, 0.32), 0 10px 30px -8px rgba(255, 197, 61, 0.4);
-  --shadow-glow-support: 0 0 0 1px rgba(15, 76, 74, 0.3), 0 10px 30px -8px rgba(15, 76, 74, 0.45);
+  /* --- elevação: sombra curta e seca, nada de halo ----------------------- */
+  --shadow-card: 0 16px 34px -26px rgba(26, 26, 18, 0.5);
+  --shadow-block: 0 22px 44px -30px rgba(26, 26, 18, 0.55);
+  --shadow-glow-accent: 0 0 0 2px var(--color-accent-deep);
+  --shadow-glow-signal: 0 0 0 2px var(--color-signal-deep);
+  --shadow-glow-support: 0 0 0 2px var(--color-support-deep);
 
   --animate-float-slow: float 9s ease-in-out infinite;
   --animate-float-slower: float 14s ease-in-out infinite;
-  --animate-shimmer: shimmer 2.4s linear infinite;
-  --animate-pulse-glow: pulse-glow 3.2s ease-in-out infinite;
 
   @keyframes float {
     0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
     50% { transform: translate3d(0, -22px, 0) scale(1.03); }
-  }
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-  @keyframes pulse-glow {
-    0%, 100% { opacity: 0.45; }
-    50% { opacity: 0.85; }
   }
 }
 
@@ -123,30 +155,55 @@
    * ------------------------------------------------------------------
    */
 
-  /* Textura de fundo. Grão, nunca gradiente. Uma direção pode zerar. */
-  --grain-opacity: 0.045;
+  /* Papel de areia. Grão, nunca gradiente. */
+  --grain-opacity: 0.05;
   --grain-blend: multiply;
 
-  /* Superfície elevada (.panel): vidro, papel chapado ou painel de borda. */
-  --panel-bg: color-mix(in srgb, var(--color-surface-2) 78%, transparent);
-  --panel-border: var(--color-line);
-  --panel-filter: blur(16px);
+  /*
+   * Nesta direção o painel é PAPEL CHAPADO, não vidro: o blur do vidro
+   * deixava a cor do bloco vazar para dentro do cartão e sujava o esquema de
+   * uma-cor-por-seção. Fundo opaco, fio de tinta visível.
+   */
+  --panel-bg: var(--color-surface-2);
+  --panel-border: var(--color-line-strong);
+  --panel-filter: none;
   --panel-glow-bg: var(--color-accent);
 
-  /* Brilho que segue o cursor. Alpha 0 desliga o efeito por completo. */
-  --cursor-glow-color: color-mix(in srgb, var(--color-accent) 14%, transparent);
-  --cursor-glow-blend: multiply;
+  /* Brilho de cursor DESLIGADO: é um orb desfocado, exatamente o que esta
+     rodada proíbe. */
+  --cursor-glow-color: transparent;
+  --cursor-glow-blend: normal;
 }
 
-* {
-  border-color: var(--color-line);
-}
+/*
+ * Estas três regras VIVEM EM @layer base de propósito.
+ *
+ * CSS escrito fora de qualquer camada ganha de CSS dentro de uma camada,
+ * independentemente de especificidade — e as utilities do Tailwind v4 são
+ * uma camada. Enquanto `* { border-color }` estava sem camada, ele
+ * sobrescrevia TODA classe `border-*` do site: um `border-accent` virava o
+ * fio cinza padrão. Numa direção em que o fio de cor é metade do desenho
+ * (filtros, campos, cartões, o anel do sol), isso não era um detalhe.
+ */
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
 
-/* Scrolling is driven by Lenis (see components/providers/smooth-scroll.tsx).
-   Native smooth-scroll would fight it, so it stays off; under reduced motion
-   Lenis never starts and the browser's instant jump is exactly what we want. */
-html {
-  scroll-behavior: auto;
+  /* Scrolling is driven by Lenis (see components/providers/smooth-scroll.tsx).
+     Native smooth-scroll would fight it, so it stays off; under reduced motion
+     Lenis never starts and the browser's instant jump is exactly what we want. */
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -163,27 +220,24 @@ html {
   }
 }
 
-body {
-  background: var(--color-surface);
-  color: var(--color-ink);
-  font-family: var(--font-body);
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-}
-
 /* Clash Display is drawn tight already — Tailwind's tracking-tight on top of
    it closes the word spaces at display sizes. Optical correction lives here
    so every headline gets it without per-heading tuning. Clash ships no
-   italic: never set italic on .font-display or the browser fakes an oblique
-   (use .font-editorial, which has a real one). */
+   italic: never set italic on .font-display — the browser would fake an
+   oblique, and this direction has no serif face to fall back on. */
 .font-display {
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   word-spacing: 0.06em;
   font-synthesis: none;
 }
 
-.font-editorial {
-  font-variation-settings: "SOFT" 40, "WONK" 0;
+/* Wordmark. Caixa alta curta e travada — a assinatura geométrica da marca. */
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-synthesis: none;
 }
 
 /* Metadados em caixa alta — setor, cidade, status, rótulo de painel. */
@@ -196,7 +250,7 @@ body {
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-on-accent);
+  color: var(--color-ink);
 }
 
 ::-webkit-scrollbar {
@@ -228,9 +282,9 @@ body {
 }
 
 /*
- * Superfície elevada padrão do site. Cada direção redefine as três
- * variáveis abaixo — vidro fosco, papel chapado ou painel de borda — sem
- * que nenhum componente precise saber qual identidade está no ar.
+ * Superfície elevada padrão do site — aqui, papel chapado sobre o bloco de
+ * cor. Cada direção redefine as variáveis acima sem que nenhum componente
+ * precise saber qual identidade está no ar.
  */
 .panel {
   background: var(--panel-bg, var(--color-surface-2));
@@ -247,7 +301,7 @@ body {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  padding: 1px;
+  padding: 2px;
   background: var(--panel-glow-bg, var(--color-accent));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
@@ -261,22 +315,16 @@ body {
 }
 
 /*
- * Ênfase tipográfica do acento. A identidade atual pinta com gradiente de
- * texto; direções que não querem gradiente nenhum sobrescrevem para cor
- * chapada e o markup não muda.
+ * Ênfase tipográfica do acento — cor chapada, nunca gradiente de texto.
+ * Duas variantes porque o contraste do laranja depende do bloco: sobre
+ * areia o acento precisa ser o laranja escuro (5.36); sobre tinta ou azul
+ * ele precisa ser o laranja claro (8.81 / 5.70).
  */
 .text-accent-emphasis {
   color: var(--color-accent-deep);
 }
-
-.shimmer-bg {
-  background-image: linear-gradient(
-    100deg,
-    rgba(255, 251, 243, 0) 35%,
-    rgba(255, 251, 243, 0.5) 50%,
-    rgba(255, 251, 243, 0) 65%
-  );
-  background-size: 200% 100%;
+.text-accent-emphasis-inverse {
+  color: var(--color-accent-on-inverse);
 }
 
 /*
@@ -285,6 +333,15 @@ body {
  */
 .bg-hero {
   background-color: var(--color-surface);
+}
+
+/*
+ * Régua modernista: um fio grosso de cor chapada que abre uma seção ou
+ * separa dois blocos escuros vizinhos.
+ */
+.rule-accent {
+  height: 6px;
+  background: var(--color-accent);
 }
 
 /*
@@ -334,9 +391,16 @@ body {
   }
 }
 
-/* One focus ring for the whole site, on every accent background. */
+/* One focus ring for the whole site. Azul profundo lê sobre areia (9.66),
+   sobre laranja (3.03 — é um fio grosso, não texto) e sobre verde; sobre os
+   blocos escuros o anel inverte para areia. */
 .focus-ring:focus-visible {
   outline: 3px solid var(--color-support);
   outline-offset: 3px;
   border-radius: inherit;
+}
+
+[data-nav-theme="dark"] .focus-ring:focus-visible,
+.on-dark .focus-ring:focus-visible {
+  outline-color: var(--color-on-inverse);
 }

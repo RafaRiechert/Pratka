@@ -60,7 +60,7 @@ export default function QuizResult({
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="mx-auto w-full max-w-2xl text-center"
     >
-      <span className="text-sm font-semibold uppercase tracking-widest text-accent-deep">
+      <span className="label-meta text-accent-deep">
         Seu resultado
       </span>
       <motion.h2
@@ -85,7 +85,7 @@ export default function QuizResult({
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.45 }}
-          className="mx-auto mt-8 max-w-xl rounded-card border border-surface-inset bg-surface-2/60 p-6 text-left"
+          className="mx-auto mt-8 max-w-xl rounded-card border-2 border-surface-inset bg-surface-2 p-6 text-left"
         >
           <h3 className="font-display text-base font-bold text-ink">
             Por que essa área combina com você
@@ -107,18 +107,18 @@ export default function QuizResult({
         className="mx-auto mt-6 flex max-w-xl flex-col gap-3 sm:flex-row"
       >
         {secondaryInfo && (
-          <div className="flex-1 rounded-panel border border-surface-inset bg-surface-2/60 p-5 text-left">
+          <div className="flex-1 rounded-panel border-2 border-surface-inset bg-surface-2 p-5 text-left">
             <p className="text-sm text-ink-soft">
               Você também tem perfil para{" "}
               <span className="font-semibold text-ink">{secondaryInfo.name}</span>.
             </p>
-            <p className="mt-1.5 text-xs text-ink-soft/80">
+            <p className="mt-1.5 text-xs text-ink-soft">
               {secondaryInfo.description.split(".")[0]}.
             </p>
           </div>
         )}
         {tertiaryInfo && (
-          <div className="flex-1 rounded-panel border border-surface-inset bg-surface-2/40 p-5 text-left">
+          <div className="flex-1 rounded-panel border-2 border-surface-inset bg-surface-2 p-5 text-left">
             <p className="text-sm text-ink-soft">
               Outra área para ficar de olho:{" "}
               <span className="font-semibold text-ink">{tertiaryInfo.name}</span>.

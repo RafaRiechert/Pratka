@@ -11,13 +11,13 @@ export default function QuizProgress({
 
   return (
     <div className="mx-auto w-full max-w-xl">
-      <div className="flex items-center justify-between text-sm font-medium text-ink-soft">
+      <div className="label-meta flex items-center justify-between text-ink-soft">
         <span>Pergunta {current} de {total}</span>
-        <span>{Math.round(percent)}%</span>
+        <span className="font-mono tabular-nums">{Math.round(percent)}%</span>
       </div>
-      <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-ink/10">
+      <div className="mt-2.5 h-3 w-full overflow-hidden rounded-pill bg-ink/10">
         <motion.div
-          className="h-full rounded-full bg-accent"
+          className="h-full rounded-pill bg-accent"
           initial={false}
           animate={{ width: `${percent}%` }}
           transition={{ type: "spring", stiffness: 120, damping: 20 }}

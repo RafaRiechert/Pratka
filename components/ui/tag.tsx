@@ -17,8 +17,11 @@ export function Tag({
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-wide",
-        variant === "accent" && "bg-accent/15 text-accent-deep",
+        "inline-flex items-center rounded-tag px-3 py-1 text-xs font-semibold tracking-wide",
+        // Laranja a 18% sobre areia continua claro o bastante para o
+        // accent-deep (5.36 sobre areia pura) — a pílula é um campo de cor,
+        // não um filtro que escurece o fundo.
+        variant === "accent" && "bg-accent/18 text-accent-deep",
         variant === "ink" && "bg-ink/10 text-ink-soft",
         className
       )}
