@@ -3,8 +3,9 @@ import Hero from "@/components/home/hero";
 import StatsBar from "@/components/home/stats-bar";
 import HowItWorks from "@/components/home/how-it-works";
 import QuizCta from "@/components/home/quiz-cta";
-import AreaDiscovery from "@/components/home/area-discovery";
 import CompanyListing from "@/components/home/company-listing";
+import AreaDiscovery from "@/components/home/area-discovery";
+import { SectorFilterProvider } from "@/components/home/sector-filter-context";
 import ProblemSolution from "@/components/home/problem-solution";
 import Faq from "@/components/home/faq";
 import FinalCta from "@/components/home/final-cta";
@@ -23,8 +24,10 @@ export default function Home() {
       <StatsBar />
       <HowItWorks />
       <QuizCta />
-      <AreaDiscovery />
-      <CompanyListing />
+      <SectorFilterProvider>
+        <CompanyListing />
+        <AreaDiscovery />
+      </SectorFilterProvider>
       <ProblemSolution />
       <Faq />
       <FinalCta />

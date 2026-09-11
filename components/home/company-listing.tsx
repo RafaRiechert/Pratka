@@ -12,6 +12,7 @@ import CompanyFilters, {
   type FilterState,
 } from "@/components/empresas/company-filters";
 import type { Company, Sector } from "@/lib/types";
+import { useSectorFilter } from "@/components/home/sector-filter-context";
 
 function SectorFromQuery({ onSector }: { onSector: (sector: Sector) => void }) {
   const searchParams = useSearchParams();
@@ -28,7 +29,21 @@ function SectorFromQuery({ onSector }: { onSector: (sector: Sector) => void }) {
 }
 
 export default function CompanyListing() {
-  const [filters, setFilters] = useState<FilterState>(EMPTY_FILTERS);
+  // Sector lives in shared state because "Descubra por área" drives the same
+  // filter from further down the page; city and audience stay local.
+  const { sector, setSector } = useSectorFilter();
+  const [localFilters, setLocalFilters] = useState<FilterState>(EMPTY_FILTERS);
+
+  const filters: FilterState = useMemo(
+    () => ({ ...localFilters, sector }),
+    [localFilters, sector]
+  );
+
+  const handleFilterChange = (next: FilterState) => {
+    setSector(next.sector);
+    setLocalFilters(next);
+  };
+
   const [detailCompany, setDetailCompany] = useState<Company | null>(null);
 
   const filtered = useMemo(() => {
@@ -43,9 +58,7 @@ export default function CompanyListing() {
   return (
     <section id="empresas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
       <Suspense fallback={null}>
-        <SectorFromQuery
-          onSector={(sector) => setFilters((f) => ({ ...f, sector }))}
-        />
+        <SectorFromQuery onSector={(next) => setSector(next)} />
       </Suspense>
 
       <AnimatedSection className="mx-auto max-w-2xl text-center">
@@ -64,7 +77,7 @@ export default function CompanyListing() {
           cities={cities}
           audiences={audiences}
           value={filters}
-          onChange={setFilters}
+          onChange={handleFilterChange}
         />
       </div>
 

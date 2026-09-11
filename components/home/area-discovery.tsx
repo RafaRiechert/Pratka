@@ -1,26 +1,28 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowUpRight, MapPin, Sparkles } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ArrowUp, MapPin } from "lucide-react";
 import { areaProgrammes, type AreaProgrammes } from "@/lib/area-programmes";
 import AnimatedSection from "@/components/ui/animated-section";
-import { duration, ease, springPop, springSoft, stagger } from "@/lib/motion";
+import { useSectorFilter } from "@/components/home/sector-filter-context";
+import { duration, ease, springPop, stagger } from "@/lib/motion";
 
 /**
- * Discovery through hover — the section adapted from the reference's genre
- * hover. Hovering an área morphs its label into the área's own pitch and
- * floats in the programmes that actually match it.
+ * Discovery through hover, adapted from the reference's genre hover.
  *
- * Two deliberate departures from the reference:
+ * Hovering an área lifts its label into the accent colour, writes its
+ * personality line beside it in the script face, and floats in the
+ * programmes that match. Activating it drives the listing's own sector
+ * filter and travels back up to the (now filtered) list.
  *
- *   - The preview is anchored in its own column rather than following the
- *     cursor. Cursor-chasing panels can't be reached by keyboard and read
- *     as a gimmick to the recruiters and universities judging this page;
- *     an anchored panel gives hover, focus and touch the identical result.
- *   - On coarse pointers there is no hidden state at all: every row shows
- *     its pitch and its matches inline, because hover doesn't exist there.
+ * Where faithful-to-Aardvark and sober-for-a-careers-product disagreed:
+ *
+ *   - The floating cards are anchored to the row rather than chasing the
+ *     cursor. Keyboard focus then produces exactly the same reveal, which a
+ *     cursor-tethered panel can never do.
+ *   - On coarse pointers nothing hides behind hover: every personality line
+ *     is permanently visible, and a tap does what a click does.
  */
 
 function useFinePointer() {
@@ -38,64 +40,146 @@ function useFinePointer() {
   return fine;
 }
 
-/** Where an área row should take you: its filtered listing, or the quiz. */
-function hrefFor(area: AreaProgrammes) {
-  return area.info.sector
-    ? `/?sector=${encodeURIComponent(area.info.sector)}#empresas`
-    : "/quiz";
-}
-
-function ProgrammeCard({ company, index }: { company: AreaProgrammes["matches"][number]; index: number }) {
+function FloatingProgrammes({
+  area,
+  reduced,
+}: {
+  area: AreaProgrammes;
+  reduced: boolean;
+}) {
   return (
-    <motion.li
-      initial={{ opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ ...springPop, delay: index * stagger.tight }}
-      className="rounded-2xl border border-ink/8 bg-paper p-4 shadow-card"
+    <motion.ul
+      // Decorative: the same programmes are a click away in the listing
+      // above, and the button already says where it goes.
+      aria-hidden="true"
+      className="pointer-events-none absolute top-1/2 right-0 z-20 hidden w-72 -translate-y-1/2 space-y-2 lg:block"
+      initial={reduced ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={reduced ? undefined : { opacity: 0 }}
+      transition={{ duration: duration.fast, ease: ease.soft }}
     >
-      <div className="flex items-start justify-between gap-3">
-        <h4 className="font-display text-base font-bold leading-tight text-ink">
-          {company.name}
-        </h4>
-        <span className="mt-0.5 shrink-0 rounded-full bg-sol px-2 py-0.5 text-[10px] font-semibold text-ink">
-          {company.type}
-        </span>
-      </div>
-      <p className="mt-2 flex items-center gap-1.5 text-xs text-ink-soft">
-        <MapPin size={12} aria-hidden="true" />
-        {company.cities.join(", ")}
-      </p>
-    </motion.li>
+      {area.matches.slice(0, 3).map((company, i) => (
+        <motion.li
+          key={company.id}
+          initial={reduced ? false : { opacity: 0, y: 14, rotate: 0 }}
+          animate={{ opacity: 1, y: 0, rotate: i % 2 === 0 ? -2 : 2.5 }}
+          transition={{ ...springPop, delay: reduced ? 0 : i * stagger.tight }}
+          className="rounded-2xl border border-ink/8 bg-paper p-4 shadow-card"
+        >
+          <p className="font-display text-sm font-bold leading-tight text-ink">
+            {company.name}
+          </p>
+          <p className="mt-1.5 flex items-center gap-1.5 text-xs text-ink-soft">
+            <MapPin size={11} aria-hidden="true" />
+            {company.cities.join(", ")}
+          </p>
+        </motion.li>
+      ))}
+    </motion.ul>
   );
 }
 
-/** Shown for áreas we don't list programmes for yet. Says so, plainly. */
-function EmptyPreview() {
+function AreaRow({
+  area,
+  finePointer,
+  reduced,
+  active,
+  onActivate,
+  onHoverChange,
+}: {
+  area: AreaProgrammes;
+  finePointer: boolean;
+  reduced: boolean;
+  active: boolean;
+  onActivate: () => void;
+  onHoverChange: (hovering: boolean) => void;
+}) {
+  const showPitch = !finePointer || active;
+
+  const label = (
+    <span className="relative z-10 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+      <span
+        className={`font-display text-2xl font-bold transition-colors duration-300 sm:text-3xl ${
+          active ? "text-tangerine-deep" : "text-ink"
+        }`}
+      >
+        {area.info.name}
+      </span>
+
+      {/* The personality line in the script face — the one "handwritten"
+          moment, and permanently visible where hover doesn't exist. */}
+      <AnimatePresence initial={false}>
+        {showPitch && (
+          <motion.span
+            key="pitch"
+            initial={reduced || !finePointer ? false : { opacity: 0, x: -8 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={reduced ? undefined : { opacity: 0, x: -8 }}
+            transition={{ duration: duration.fast, ease: ease.soft }}
+            className="font-script text-xl leading-none text-tangerine-deep sm:text-2xl"
+          >
+            {area.pitch}
+          </motion.span>
+        )}
+      </AnimatePresence>
+
+      {!area.interactive && (
+        <span className="rounded-full bg-ink/8 px-2.5 py-1 text-xs font-semibold text-ink-soft">
+          Em breve
+        </span>
+      )}
+    </span>
+  );
+
+  // Áreas with nothing to filter stay static text: a focusable control that
+  // does nothing is worse for keyboard users than no control at all.
+  if (!area.interactive) {
+    return (
+      <li className="border-b border-ink/10">
+        <div className="min-w-0 py-5 opacity-70 lg:pr-[20rem]">{label}</div>
+      </li>
+    );
+  }
+
   return (
-    <motion.li
-      initial={{ opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={springPop}
-      className="list-none rounded-2xl border border-dashed border-ink/20 bg-cream-deep/40 p-5"
-    >
-      <p className="text-sm leading-relaxed text-ink-soft">
-        Ainda não mapeamos programas dessa área. O quiz te mostra o caminho —
-        e a gente inclui novas empresas toda temporada.
-      </p>
-    </motion.li>
+    <li className="relative border-b border-ink/10">
+      <button
+        type="button"
+        onClick={onActivate}
+        onMouseEnter={() => onHoverChange(true)}
+        onMouseLeave={() => onHoverChange(false)}
+        onFocus={() => onHoverChange(true)}
+        onBlur={() => onHoverChange(false)}
+        aria-label={`Ver programas de ${area.info.name} na lista`}
+        className="focus-ring group flex w-full min-w-0 items-center justify-between gap-4 py-5 text-left lg:pr-[20rem]"
+      >
+        {label}
+        <ArrowUp
+          size={20}
+          aria-hidden="true"
+          className={`pop-nudge relative z-10 shrink-0 transition-colors duration-300 ${
+            active ? "text-tangerine-deep" : "text-ink-soft"
+          }`}
+        />
+      </button>
+
+      <AnimatePresence>
+        {active && finePointer && (
+          <FloatingProgrammes area={area} reduced={reduced} />
+        )}
+      </AnimatePresence>
+    </li>
   );
 }
 
 export default function AreaDiscovery() {
   const finePointer = useFinePointer();
-  // `hovered` drives the row morph, `active` drives the preview. Keeping
-  // them separate means the list rests with every name legible while the
-  // panel still has something to show before the first hover.
-  const [hovered, setHovered] = useState<number | null>(null);
-  const active = areaProgrammes[hovered ?? 0];
+  const reduced = useReducedMotion() ?? false;
+  const { selectSectorAndReveal } = useSectorFilter();
+  const [hovered, setHovered] = useState<string | null>(null);
 
   return (
-    <section id="areas" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-28">
+    <section id="areas" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
       <AnimatedSection className="mx-auto max-w-2xl text-center">
         <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
           Descubra por área
@@ -105,117 +189,23 @@ export default function AreaDiscovery() {
         </p>
       </AnimatedSection>
 
-      <div className="mt-14 grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-        <ul className="min-w-0 border-t border-ink/10">
-          {areaProgrammes.map((area, i) => {
-            const isActive = finePointer && i === hovered;
-
-            return (
-              <li key={area.code} className="border-b border-ink/10">
-                <Link
-                  href={hrefFor(area)}
-                  className="focus-ring group flex items-center justify-between gap-4 py-5"
-                  onMouseEnter={() => setHovered(i)}
-                  onFocus={() => setHovered(i)}
-                >
-                  <span className="min-w-0">
-                    {finePointer ? (
-                      // The text morph: name and pitch ride the same rail,
-                      // one clipped box, so the label swaps rather than
-                      // pushing the row's height around.
-                      <span className="relative block h-9 overflow-hidden sm:h-11">
-                        <motion.span
-                          className="block"
-                          animate={{ y: isActive ? "-100%" : "0%" }}
-                          transition={{ duration: duration.base, ease: ease.soft }}
-                        >
-                          <span className="block truncate font-display text-2xl font-bold leading-9 text-ink sm:text-3xl sm:leading-11">
-                            {area.info.name}
-                          </span>
-                          <span className="block truncate text-base leading-9 text-tangerine-deep sm:leading-11">
-                            {area.pitch}
-                          </span>
-                        </motion.span>
-                      </span>
-                    ) : (
-                      <>
-                        <span className="block font-display text-2xl font-bold text-ink">
-                          {area.info.name}
-                        </span>
-                        <span className="mt-1 block text-sm text-ink-soft">
-                          {area.pitch}
-                        </span>
-                        <span className="mt-2 block text-xs font-semibold text-tangerine-deep">
-                          {area.matches.length > 0
-                            ? `${area.matches.length} ${
-                                area.matches.length === 1
-                                  ? "programa"
-                                  : "programas"
-                              }`
-                            : "Faça o quiz"}
-                        </span>
-                      </>
-                    )}
-                  </span>
-
-                  <ArrowUpRight
-                    size={20}
-                    aria-hidden="true"
-                    className="pop-nudge shrink-0 text-ink-soft group-hover:text-tangerine-deep"
-                  />
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* Anchored preview. Desktop only — the coarse-pointer rows above
-            already carry the same information inline. */}
-        {finePointer && (
-          <div className="hidden min-w-0 lg:block">
-            <div className="sticky top-28">
-              <motion.p
-                key={`${active.code}-label`}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: duration.fast, ease: ease.soft }}
-                className="flex items-center gap-2 text-sm font-semibold text-ink-soft"
-              >
-                <Sparkles size={14} className="text-tangerine-deep" aria-hidden="true" />
-                {active.matches.length > 0
-                  ? `${active.matches.length} ${
-                      active.matches.length === 1 ? "programa" : "programas"
-                    } em ${active.info.sector ?? active.info.name}`
-                  : active.info.name}
-              </motion.p>
-
-              {/*
-                A keyed remount rather than AnimatePresence. Exit-based swaps
-                stalled here: per-card exits orphaned old cards in the panel,
-                and mode="wait" never mounted the incoming group at all, so
-                the preview froze on whichever área happened to be first.
-                Changing the key re-mounts the list and the enter animation
-                carries the swap — no exit to get stuck on.
-              */}
-              <motion.ul
-                key={active.code}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={springSoft}
-                className="mt-4 space-y-3"
-              >
-                {active.matches.length > 0 ? (
-                  active.matches.slice(0, 3).map((company, i) => (
-                    <ProgrammeCard key={company.id} company={company} index={i} />
-                  ))
-                ) : (
-                  <EmptyPreview />
-                )}
-              </motion.ul>
-            </div>
-          </div>
-        )}
-      </div>
+      <ul className="mt-14 min-w-0 border-t border-ink/10">
+        {areaProgrammes.map((area) => (
+          <AreaRow
+            key={area.code}
+            area={area}
+            finePointer={finePointer}
+            reduced={reduced}
+            active={hovered === area.code}
+            onHoverChange={(hovering) =>
+              setHovered(hovering ? area.code : null)
+            }
+            onActivate={() => {
+              if (area.sector) selectSectorAndReveal(area.sector);
+            }}
+          />
+        ))}
+      </ul>
     </section>
   );
 }
